@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:medical_devices_management_system/core/theme_manager/theme_manager.dart';
+import 'package:resume_app/core/theme_manager/theme_manager.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      theme: getTheme(context),
+      theme: getTheme(),
       home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
@@ -100,7 +100,10 @@ class _MyHomePageState extends State<MyHomePage> {
       floatingActionButton: FloatingActionButton(
         onPressed: _incrementCounter,
         tooltip: 'Increment',
-        child: const Icon(Icons.add),
+        child: Icon(
+          Icons.add,
+          color: Theme.of(context).iconTheme.color,
+        ),
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }

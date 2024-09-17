@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "499141305081",
+    "project_id": "resumeapp-506e0",
+    "storage_bucket": "resumeapp-506e0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:499141305081:android:0e4b52f41cc32d54f8b828",
+        "android_client_info": {
+          "package_name": "com.example.resume_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBOssna_8jNxbvsr6i9FKvwfLdx7W6f9mw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

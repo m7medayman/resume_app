@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:medical_devices_management_system/core/theme_manager/font/font_size_wight_manager.dart';
+import 'package:resume_app/core/theme_manager/font/font_size_wight_manager.dart';
+
 class FontConstants {
   static const String fontFamily = "Montserrat";
 }
@@ -35,8 +36,7 @@ TextStyle getLightStyle(
 
 // bold style
 
-TextStyle getBoldStyle(
-    {double fontSize = FontSize.s12, required Color color}) {
+TextStyle getBoldStyle({double fontSize = FontSize.s12, required Color color}) {
   return _getTextStyle(fontSize, FontWeightManager.bold, color);
 }
 
