@@ -1,4 +1,5 @@
-import 'package:resume_app/core/resources/failure.dart';
+import 'package:resume_app/core/resources/failure/failure_handler.dart';
+import 'package:resume_app/core/resources/failure/failure_model.dart';
 
 class InvalidEmailFailureHandle extends BaseFailureHandle {
   InvalidEmailFailureHandle()
@@ -7,6 +8,9 @@ class InvalidEmailFailureHandle extends BaseFailureHandle {
           failure: Failure(id: 1, message: 'The email address is not valid.'),
         );
 }
+
+BaseFailureHandle failure = BaseFailureHandle(
+    code: 'test', failure: Failure(id: 1000, message: "test"));
 
 class UserDisabledFailureHandle extends BaseFailureHandle {
   UserDisabledFailureHandle()
@@ -117,6 +121,13 @@ class UserMismatchFailureHandle extends BaseFailureHandle {
               message:
                   'The credential does not correspond to the logged-in user.'),
         );
+}
+
+class InvalidCredential extends BaseFailureHandle {
+  InvalidCredential()
+      : super(
+            code: "invalid-credential",
+            failure: Failure(id: 012, message: "invalid Email or password"));
 }
 
 class AccountExistsWithDifferentCredentialFailureHandle
@@ -285,4 +296,38 @@ class NullAuthDataDoc extends BaseFailureHandle {
           code: 'Null Auth User  Doc',
           failure: Failure(id: 29, message: 'Null Auth User Doc'),
         );
+}
+
+void initAllAuthFailureHandles() {
+  // Initializing all the failure handle classes
+  InvalidEmailFailureHandle();
+  UserDisabledFailureHandle();
+  UserNotFoundFailureHandle();
+  WrongPasswordFailureHandle();
+  TooManyRequestsFailureHandle();
+  OperationNotAllowedFailureHandle();
+  EmailAlreadyInUseFailureHandle();
+  WeakPasswordFailureHandle();
+  NetworkRequestFailedFailureHandle();
+  CredentialAlreadyInUseFailureHandle();
+  InvalidCredentialFailureHandle();
+  UserMismatchFailureHandle();
+  AccountExistsWithDifferentCredentialFailureHandle();
+  InternalErrorFailureHandle();
+  PermissionDeniedFailureHandle();
+  NotFoundFailureHandle();
+  AlreadyExistsFailureHandle();
+  CancelledFailureHandle();
+  DeadlineExceededFailureHandle();
+  ResourceExhaustedFailureHandle();
+  FailedPreconditionFailureHandle();
+  AbortedFailureHandle();
+  OutOfRangeFailureHandle();
+  UnimplementedFailureHandle();
+  UnavailableFailureHandle();
+  DataLossFailureHandle();
+  UnauthenticatedFailureHandle();
+  NullAuth();
+  NullAuthData();
+  NullAuthDataDoc();
 }

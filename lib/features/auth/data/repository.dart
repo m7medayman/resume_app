@@ -1,8 +1,7 @@
-import 'dart:convert';
-
 import 'package:either_dart/src/either.dart';
 
-import 'package:resume_app/core/resources/failure.dart';
+import 'package:resume_app/core/resources/failure/failure_handler.dart';
+import 'package:resume_app/core/resources/failure/failure_model.dart';
 import 'package:resume_app/features/auth/data/Response.dart';
 import 'package:resume_app/features/auth/data/mapper.dart';
 import 'package:resume_app/features/auth/data/network_service_provider.dart';

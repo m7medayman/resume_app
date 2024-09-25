@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 
 class ColorManager {
+  static const Color textColorInput = Color(0xff535360);
+  static const Color textColorInputBackGround = Color(0xff393946);
+  static const Color textColor = Color(0xffF3F4F6);
   static Color primaryColor = const Color(0xFF00D763);
   static Color onPrimaryColor = const Color(0xFFF9FAFB);
   static Color secondaryColor = const Color(0xFFF9FAFB);
@@ -29,8 +32,6 @@ class ColorManager {
       onSecondary: onSecondaryColor,
       error: errorColor,
       onError: onErrorColor,
-      background: backgroundColor,
-      onBackground: onBackground,
       surface: surface,
       onSurface: onSurface,
     );

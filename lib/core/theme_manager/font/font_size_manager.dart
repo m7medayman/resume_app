@@ -1,33 +1,32 @@
-import 'package:flutter/material.dart';
-import 'package:profile/App/device_manager.dart';
+import 'package:resume_app/core/resources/device_manager.dart/device_manager.dart';
 
 class FontSizeManager {
   //DeskTop Font Sizes
-  static const int heading1DeskTop = 60;
-  static const int heading2DeskTop = 36;
-  static const int heading3DeskTop = 30;
-  static const int subtitleDeskTop = 20;
-  static const int body1DeskTop = 18;
-  static const int body2DeskTop = 16;
-  static const int body3DeskTop = 16;
+  static const double heading1DeskTop = 60;
+  static const double heading2DeskTop = 36;
+  static const double heading3DeskTop = 30;
+  static const double subtitleDeskTop = 20;
+  static const double body1DeskTop = 18;
+  static const double body2DeskTop = 16;
+  static const double body3DeskTop = 16;
 
   // Tablet Font Sizes
-  static const int heading1Tablet = 48;
-  static const int heading2Tablet = 24;
-  static const int heading3Tablet = 18;
-  static const int subtitleTablet = 18;
-  static const int body1Tablet = 16;
-  static const int body2Tablet = 14;
-  static const int body3Tablet = 14;
+  static const double heading1Tablet = 48;
+  static const double heading2Tablet = 30;
+  static const double heading3Tablet = 18;
+  static const double subtitleTablet = 18;
+  static const double body1Tablet = 16;
+  static const double body2Tablet = 14;
+  static const double body3Tablet = 14;
 
 //Mobile Font Sizes
-  static const int heading1Mobile = 36;
-  static const int heading2Mobile = 24;
-  static const int heading3Mobile = 18;
-  static const int subtitleMobile = 18;
-  static const int body1Mobile = 16;
-  static const int body2Mobile = 16;
-  static const int body3Mobile = 14;
+  static const double heading1Mobile = 36;
+  static const double heading2Mobile = 24;
+  static const double heading3Mobile = 18;
+  static const double subtitleMobile = 18;
+  static const double body1Mobile = 16;
+  static const double body2Mobile = 16;
+  static const double body3Mobile = 14;
 }
 
 enum Sizes { heading1, heading2, heading3, subtitle, body1, body2, body3 }

@@ -1,61 +1,34 @@
-abstract class InputField<T> {
-  String? value;
-  String _message = "";
-  InputField({
-    required this.value,
-  });
-  bool publicValidation() {
-    if (value == null) {
-      _message = "Field is null ";
-      return false;
+class InputValidator {
+  // Static method to validate email
+  static String? validateEmail(String? value) {
+    if (value == null || value.isEmpty) {
+      return "Email is required";
     }
-    if (value == "") {
-      _message = "Field is empty";
-      return false;
+    if (value.length < 3) {
+      return "Invalid email: too short";
     }
-
-    return privateValidation();
+    if (!value.contains("@")) {
+      return "Email must contain '@'";
+    }
+    return validateRegularField(value);
   }
 
-  bool privateValidation();
-  get validationMessage => _message;
-}
-
-class EmailInputFiled extends InputField {
-  EmailInputFiled({required super.value});
-
-  @override
-  bool privateValidation() {
-    if (value!.length < 3) {
-      super._message = "inValid email";
-      return false;
+  // Static method to validate password
+  static String? validatePassword(String? value) {
+    if (value == null || value.isEmpty) {
+      return "Password is required";
     }
-    if (!value!.contains("@")) {
-      super._message = "email must contains @";
-      return false;
+    if (value.length < 6) {
+      return "Password must be at least 6 characters long";
     }
-    return true;
+    return validateRegularField(value);
   }
-}
 
-class PassWordInputField extends InputField {
-  PassWordInputField({required super.value});
-
-  @override
-  bool privateValidation() {
-    if (value!.length < 3) {
-      super._message = "invalid password";
-      return false;
+  // Static method to validate a regular (generic) input field
+  static String? validateRegularField(String? value) {
+    if (value == null || value.isEmpty) {
+      return "This field is required";
     }
-    return true;
-  }
-}
-
-class RegularInputFiled extends InputField {
-  RegularInputFiled({required super.value});
-
-  @override
-  bool privateValidation() {
-    return true;
+    return null; // valid input
   }
 }

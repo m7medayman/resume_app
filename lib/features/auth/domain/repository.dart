@@ -1,5 +1,5 @@
 import 'package:either_dart/either.dart';
-import 'package:resume_app/core/resources/failure.dart';
+import 'package:resume_app/core/resources/failure/failure_model.dart';
 import 'package:resume_app/features/auth/domain/entity.dart';
 import 'package:resume_app/features/auth/domain/use_case.dart';
 

@@ -1,5 +1,3 @@
-import 'package:either_dart/either.dart';
-import 'package:resume_app/core/resources/failure.dart';
 import 'package:resume_app/features/auth/data/Response.dart';
 import 'package:resume_app/features/auth/data/request.dart';
 

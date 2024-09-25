@@ -1,10 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:either_dart/src/either.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/widgets.dart';
-import 'package:resume_app/core/resources/failure.dart';
+import 'package:resume_app/core/resources/failure/failure_handler.dart';
 import 'package:resume_app/features/auth/data/Response.dart';
-import 'package:resume_app/features/auth/data/fire_base_auth/failure_handler.dart';
 import 'package:resume_app/features/auth/data/network_service_provider.dart';
 import 'package:resume_app/features/auth/data/request.dart';
 
@@ -19,13 +16,13 @@ class AuthService extends NetworkServiceProvider {
   @override
   Future<AuthResponse> login(LoginRequest request) async {
     try {
-      UserCredential _userCredential = await _auth.signInWithEmailAndPassword(
+      UserCredential userCredential = await _auth.signInWithEmailAndPassword(
           email: request.email, password: request.password);
-      if (_userCredential.credential == null) {
+      if (userCredential.credential == null) {
         throw Exception("Null Auth USer");
       }
-      String _userId = _userCredential.credential!.providerId;
-      return getUserAuthInfoWithId(_userId);
+      String userId = userCredential.credential!.providerId;
+      return getUserAuthInfoWithId(userId);
     } catch (e) {
       if (e is FirebaseAuthException) {
         throw Exception(e.code);
@@ -37,14 +34,14 @@ class AuthService extends NetworkServiceProvider {
   @override
   Future<AuthResponse> signUp(SignUpRequest request,
       SignUpRequestUserDetails userDetailsRequest) async {
-    UserCredential _userCredential = await _auth.createUserWithEmailAndPassword(
+    UserCredential userCredential = await _auth.createUserWithEmailAndPassword(
         email: request.email, password: request.password);
-    if (_userCredential.credential == null) {
+    if (userCredential.credential == null) {
       throw Exception("Null Auth USer");
     }
-    String _id = _userCredential.credential!.providerId;
-    setUserAuthInfoWithId(_id, userDetailsRequest);
-    return getUserAuthInfoWithId(_id);
+    String id = userCredential.credential!.providerId;
+    setUserAuthInfoWithId(id, userDetailsRequest);
+    return getUserAuthInfoWithId(id);
   }
 
   Future setUserAuthInfoWithId(
