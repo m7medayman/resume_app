@@ -10,6 +10,7 @@ import 'package:resume_app/core/constants/app_sizes_constants.dart';
 import 'package:resume_app/core/constants/app_string_constats.dart';
 import 'package:resume_app/core/constants/widget_dimensions.dart';
 import 'package:resume_app/core/resources/helpers/input_fields.dart';
+import 'package:resume_app/core/routing/routes_manager.dart';
 import 'package:resume_app/core/theme_manager/color_manager.dart';
 import 'package:resume_app/features/auth/domain/use_case.dart';
 import 'package:resume_app/features/auth/presentation/lognin/cubit/login_cubit.dart';
@@ -105,8 +106,8 @@ class LoginBody extends StatelessWidget {
                 // email input field
                 SizedBox(
                     child: EmailInputFiled(
-                        emailFormKey: _emailFormKey, fieldInput: emailInput)),
-                Separator(height: screenHeight),
+                        fieldFormKey: _emailFormKey, fieldInput: emailInput)),
+                FormSeparator(screenHeight: screenHeight),
                 //password input field
                 SizedBox(
                     child: PasswordInputFiled(
@@ -114,7 +115,7 @@ class LoginBody extends StatelessWidget {
                   inputController: passwordInput,
                   label: AppStrings.password,
                 )),
-                Separator(height: screenHeight),
+                FormSeparator(screenHeight: screenHeight),
                 ElevatedButton(
                     onPressed: () {
                       bool passwordCheck =
@@ -127,10 +128,13 @@ class LoginBody extends StatelessWidget {
                         loginCubit.login();
                       }
                     },
-                    child: Text(AppStrings.login)),
-                Separator(height: screenHeight),
+                    child: const Text(AppStrings.login)),
+                FormSeparator(screenHeight: screenHeight),
                 TextButton(
-                    onPressed: () {}, child: Text(AppStrings.createNewUser))
+                    onPressed: () {
+                      Navigator.pushNamed(context, Routes.signUP);
+                    },
+                    child: const Text(AppStrings.createNewUser))
               ],
             ),
           ),

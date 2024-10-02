@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:injectable/injectable.dart';
 
 import 'package:resume_app/core/theme_manager/color_manager.dart';
 import 'package:resume_app/core/theme_manager/font/font_color.dart';

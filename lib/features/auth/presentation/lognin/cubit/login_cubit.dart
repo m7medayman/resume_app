@@ -29,7 +29,7 @@ class LoginCubit extends Cubit<FormLoginState> {
 
     res.fold((Failure f) {
       print(" failure");
-      print("${f.message}");
+      print(f.message);
       emit(state.copyWith(loginState: LogInFailure(failure: f)));
       emit(state.copyWith(loginState: LoginInitial()));
     },

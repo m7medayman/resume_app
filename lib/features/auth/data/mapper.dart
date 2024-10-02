@@ -15,7 +15,7 @@ extension LoginMapper on LoginParameter {
 extension SignUpRequestUserDetailsMapper on SignUpParameter {
   SignUpRequestUserDetails toSignUpRequestUserDetails() {
     return SignUpRequestUserDetails(
-        email: email,
+        contactEmail: email,
         userName: userName,
         phone: phone,
         address: address,
@@ -32,7 +32,7 @@ extension SignUpAuthMapper on SignUpParameter {
 extension AuthEntityMapper on AuthResponse {
   AuthUserEntity toEntity() {
     return AuthUserEntity(
-        email: email.nullSafety(),
+        contactEmail: email.nullSafety(),
         name: userName.nullSafety(),
         phone: phone.nullSafety(),
         address: address.nullSafety(),

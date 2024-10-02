@@ -13,14 +13,14 @@ class SignUpRequest {
 
 @JsonSerializable()
 class SignUpRequestUserDetails {
-  String email;
+  String contactEmail;
   String userName;
   String phone;
   String address;
   Map<String, String> contactInfo;
 
   SignUpRequestUserDetails({
-    required this.email,
+    required this.contactEmail,
     required this.userName,
     required this.phone,
     required this.address,

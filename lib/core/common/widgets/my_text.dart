@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class AppBarText extends StatelessWidget {
   final String content;
-  AppBarText({super.key, required this.content});
+  const AppBarText({super.key, required this.content});
 
   @override
   Widget build(BuildContext context) {

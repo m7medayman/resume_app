@@ -37,8 +37,8 @@ void initThemeModule(double screenWidth) {
 bool isInitModule = false;
 void initModule() {
   if (!isInitModule) {
-    final FirebaseAuth _auth = FirebaseAuth.instance;
-    instance.registerLazySingleton(() => _auth);
+    final FirebaseAuth auth = FirebaseAuth.instance;
+    instance.registerLazySingleton(() => auth);
     instance.registerLazySingleton(() => FailureHandler());
     initAllAuthFailureHandles();
     FailureRegistry.initializeAll(instance<FailureHandler>());

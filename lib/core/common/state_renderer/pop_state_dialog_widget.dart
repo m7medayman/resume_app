@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:resume_app/core/constants/app_string_constats.dart';
 
 class MyAlertDialogPopUp extends StatefulWidget {

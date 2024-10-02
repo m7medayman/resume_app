@@ -9,6 +9,7 @@ import 'package:resume_app/core/routing/routes_manager.dart';
 import 'package:resume_app/core/screen_manager/screen_service_manager.dart';
 import 'package:resume_app/core/theme_manager/theme_manager.dart';
 import 'package:resume_app/features/auth/presentation/lognin/presentation/login_screen.dart';
+import 'package:resume_app/features/auth/presentation/signup/presentation/singup_presentation.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -33,12 +34,12 @@ class MyApp extends StatelessWidget {
     ScreenSizeService screenSizeService = instance<ScreenSizeService>();
     screenSizeService.updateScreenSize(screenWidth);
     return MaterialApp(
-      initialRoute: Routes.login, // Set the initial route
-      onGenerateRoute: RouteManager.generateRoute,
+      // initialRoute: Routes.login, // Set the initial route
+      // onGenerateRoute: RouteManager.generateRoute,
       debugShowCheckedModeBanner: false,
       theme: myThemeManager.getTheme(),
       title: 'Flutter Demo',
-      home: LoginScreenPresentation(),
+      home: const SignUpPresentation(),
     );
   }
 }
