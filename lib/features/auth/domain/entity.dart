@@ -1,3 +1,5 @@
+import 'package:resume_app/core/data_classes/data_classes.dart';
+
 class Auth {
   String email;
   String password;
@@ -24,42 +26,3 @@ class AuthUserEntity {
   });
 }
 
-class ContactExtraDetails {
-  String? extraPhone;
-  String? linkedIn;
-  String? website;
-  ContactExtraDetails({
-    this.extraPhone,
-    this.linkedIn,
-    this.website,
-  });
-}
-
-class EducationInfo {
-  List<Degree>? degrees;
-  List<Course>? courses;
-  EducationInfo({
-    this.degrees,
-    this.courses,
-  });
-}
-
-class Degree {
-  DateTime startDate;
-  DateTime endDate;
-  String school;
-  Degree({
-    required this.startDate,
-    required this.endDate,
-    required this.school,
-  });
-}
-
-class Course {
-  DateTime startDate;
-  DateTime endDate;
-  Course({
-    required this.startDate,
-    required this.endDate,
-  });
-}

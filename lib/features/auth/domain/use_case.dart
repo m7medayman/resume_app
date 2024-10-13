@@ -1,5 +1,6 @@
 import 'package:either_dart/src/either.dart';
 
+import 'package:resume_app/core/data_classes/data_classes.dart';
 import 'package:resume_app/core/resources/base_usecase/base_use_case.dart';
 import 'package:resume_app/core/resources/failure/failure_model.dart';
 import 'package:resume_app/features/auth/domain/entity.dart';
@@ -39,16 +40,20 @@ class LoginParameter {
 class SignUpParameter {
   String email;
   String password;
-  String userName;
+  String name;
   String phone;
   String address;
-  Map<String, String> contactInfo;
+  String contactEmail;
+  ContactExtraDetails contactDetails;
+  EducationInfo educationInfo;
   SignUpParameter({
     required this.email,
     required this.password,
-    required this.userName,
+    required this.name,
     required this.phone,
     required this.address,
-    required this.contactInfo,
+    required this.contactEmail,
+    required this.contactDetails,
+    required this.educationInfo,
   });
 }

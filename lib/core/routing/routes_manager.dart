@@ -15,6 +15,7 @@ class RouteManager {
   static Route<String> generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case Routes.signUP:
+        initSignupModule();
         return MaterialPageRoute(builder: (_) => const SignUpPresentation());
       case Routes.login:
         initLoginModule();

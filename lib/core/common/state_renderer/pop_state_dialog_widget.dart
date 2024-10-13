@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:resume_app/core/constants/app_string_constats.dart';
+import 'package:resume_app/core/theme_manager/color_manager.dart';
 
 class MyAlertDialogPopUp extends StatefulWidget {
   final String title;
@@ -34,13 +35,24 @@ class _MyAlertDialogPopUpState extends State<MyAlertDialogPopUp> {
   }
 }
 
-class LoadingPopUpDialog extends MyAlertDialogPopUp {
-  const LoadingPopUpDialog({super.key, required super.context})
-      : super(
-          title: AppStrings.loading,
-          content: AppStrings.loadingContent,
-          actions: const [],
-        );
+class LoadingDialog extends StatelessWidget {
+  const LoadingDialog({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      title: Text("loading"),
+      content: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          CircularProgressIndicator(
+            strokeWidth: 10,
+            color: ColorManager.primaryColor,
+          ),
+        ],
+      ),
+    );
+  }
 }
 
 class ErrorPopUpDialog extends MyAlertDialogPopUp {

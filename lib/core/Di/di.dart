@@ -1,5 +1,8 @@
+import 'dart:ffi';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get_it/get_it.dart';
+import 'package:resume_app/core/Di/injection.dart';
 
 import 'package:resume_app/core/resources/device_manager.dart/device_manager.dart';
 import 'package:resume_app/core/resources/failure/failure_handler.dart';
@@ -46,17 +49,38 @@ void initModule() {
   isInitModule = true;
 }
 
+bool isAuthReoInit = false;
+void authRepoInit() {
+  if (isAuthReoInit) {
+    return;
+  }
+  isAuthReoInit = true;
+  instance.registerFactory(() => AuthService(
+      auth: instance<FirebaseAuth>(),
+      failureHandler: instance<FailureHandler>()));
+  instance.registerFactory(() => AuthRepositoryImp(
+      serviceProvider: instance<AuthService>(),
+      failureHandler: instance<FailureHandler>()));
+}
+
 bool isLoginModule = false;
 void initLoginModule() {
   if (!isLoginModule) {
-    instance.registerFactory(() => AuthService(
-        auth: instance<FirebaseAuth>(),
-        failureHandler: instance<FailureHandler>()));
-    instance.registerFactory(() => AuthRepositoryImp(
-        serviceProvider: instance<AuthService>(),
-        failureHandler: instance<FailureHandler>()));
+    authRepoInit();
     instance.registerFactory(
         () => LoginUseCase(authRepository: instance<AuthRepositoryImp>()));
   }
   isLoginModule = true;
+}
+
+bool isSignupMoudleInit = false;
+
+void initSignupModule() {
+  if (isSignupMoudleInit) {
+    return;
+  }
+  isSignupMoudleInit = true;
+  authRepoInit();
+  getIt.registerFactory(
+      () => SignUpUseCase(authRepository: getIt<AuthRepositoryImp>()));
 }

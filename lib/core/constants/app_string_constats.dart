@@ -59,7 +59,9 @@ class AppStrings {
   static const String contactInfo = "Contact Information ";
   static const String address = "Address";
   // add new fields
-  static const String addPhone = "+phone";
-  static const String addLinkedin = "+Linkedin Url";
-  static const String addWebsite = "+Website";
+  static const String addPhone = "phone";
+  static const String addLinkedin = "Linkedin";
+  static const String addWebsite = "Website";
+  // add education information
+  static const String addEducationInfo = "Add Education and certification";
 }

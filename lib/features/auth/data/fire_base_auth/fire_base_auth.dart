@@ -18,10 +18,11 @@ class AuthService extends NetworkServiceProvider {
     try {
       UserCredential userCredential = await _auth.signInWithEmailAndPassword(
           email: request.email, password: request.password);
-      if (userCredential.credential == null) {
+      if (userCredential.user == null) {
         throw Exception("Null Auth USer");
       }
-      String userId = userCredential.credential!.providerId;
+      String userId = userCredential.user!.uid;
+      print(userId);
       return getUserAuthInfoWithId(userId);
     } catch (e) {
       if (e is FirebaseAuthException) {
@@ -36,10 +37,10 @@ class AuthService extends NetworkServiceProvider {
       SignUpRequestUserDetails userDetailsRequest) async {
     UserCredential userCredential = await _auth.createUserWithEmailAndPassword(
         email: request.email, password: request.password);
-    if (userCredential.credential == null) {
+    if (userCredential.user == null) {
       throw Exception("Null Auth USer");
     }
-    String id = userCredential.credential!.providerId;
+    String id = userCredential.user!.uid;
     setUserAuthInfoWithId(id, userDetailsRequest);
     return getUserAuthInfoWithId(id);
   }

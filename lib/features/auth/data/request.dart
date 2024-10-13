@@ -1,5 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
 
+import 'package:resume_app/core/data_classes/data_classes.dart';
+
 part 'request.g.dart';
 
 class SignUpRequest {
@@ -13,19 +15,21 @@ class SignUpRequest {
 
 @JsonSerializable()
 class SignUpRequestUserDetails {
-  String contactEmail;
-  String userName;
+  String name;
   String phone;
   String address;
-  Map<String, String> contactInfo;
-
+  String contactEmail;
+  ContactExtraDetails contactDetails;
+  EducationInfo educationInfo;
   SignUpRequestUserDetails({
-    required this.contactEmail,
-    required this.userName,
+    required this.name,
     required this.phone,
     required this.address,
-    required this.contactInfo,
+    required this.contactEmail,
+    required this.contactDetails,
+    required this.educationInfo,
   });
+
   factory SignUpRequestUserDetails.fromJson(Map<String, dynamic> json) =>
       _$SignUpRequestUserDetailsFromJson(json);
   Map<String, dynamic> toJson() => _$SignUpRequestUserDetailsToJson(this);

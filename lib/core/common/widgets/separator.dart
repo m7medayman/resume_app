@@ -21,9 +21,9 @@ class FormSeparator extends StatelessWidget {
 class BigFormSeparator extends StatelessWidget {
   final double screenHeight;
   const BigFormSeparator({
-    Key? key,
+    super.key,
     required this.screenHeight,
-  }) : super(key: key);
+  });
   @override
   Widget build(BuildContext context) {
     return SizedBox(

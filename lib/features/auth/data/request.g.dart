@@ -9,21 +9,25 @@ part of 'request.dart';
 SignUpRequestUserDetails _$SignUpRequestUserDetailsFromJson(
         Map<String, dynamic> json) =>
     SignUpRequestUserDetails(
-      contactEmail: json['email'] as String,
-      userName: json['userName'] as String,
+      name: json['name'] as String,
       phone: json['phone'] as String,
       address: json['address'] as String,
-      contactInfo: Map<String, String>.from(json['contactInfo'] as Map),
+      contactEmail: json['contactEmail'] as String,
+      contactDetails: ContactExtraDetails.fromJson(
+          json['contactDetails'] as Map<String, dynamic>),
+      educationInfo:
+          EducationInfo.fromJson(json['educationInfo'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$SignUpRequestUserDetailsToJson(
         SignUpRequestUserDetails instance) =>
     <String, dynamic>{
-      'email': instance.contactEmail,
-      'userName': instance.userName,
+      'name': instance.name,
       'phone': instance.phone,
       'address': instance.address,
-      'contactInfo': instance.contactInfo,
+      'contactEmail': instance.contactEmail,
+      'contactDetails': instance.contactDetails.toJson(),
+      'educationInfo': instance.educationInfo.toJson(),
     };
 
 LoginRequest _$LoginRequestFromJson(Map<String, dynamic> json) => LoginRequest(

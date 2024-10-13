@@ -1,18 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:resume_app/core/Di/di.dart';
 import 'package:resume_app/core/common/state_renderer/pop_state_dialog_widget.dart';
 import 'package:resume_app/core/common/widgets/my_inputField.dart';
 import 'package:resume_app/core/common/widgets/my_text.dart';
 import 'package:resume_app/core/common/widgets/separator.dart';
-import 'package:resume_app/core/constants/app_sizes_constants.dart';
 import 'package:resume_app/core/constants/app_string_constats.dart';
 import 'package:resume_app/core/constants/widget_dimensions.dart';
-import 'package:resume_app/core/resources/helpers/input_fields.dart';
 import 'package:resume_app/core/routing/routes_manager.dart';
-import 'package:resume_app/core/theme_manager/color_manager.dart';
-import 'package:resume_app/features/auth/domain/use_case.dart';
 import 'package:resume_app/features/auth/presentation/lognin/cubit/login_cubit.dart';
 import 'package:resume_app/features/auth/presentation/lognin/cubit/login_state.dart';
 
@@ -29,7 +24,8 @@ class _LoginScreenPresentationState extends State<LoginScreenPresentation> {
   TextEditingController passwordInput = TextEditingController();
   final _emailFormKey = GlobalKey<FormState>();
   final _passwordFormKey = GlobalKey<FormState>();
-
+  final loadingKey = GlobalKey();
+  bool isLoadingDialog = false;
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
@@ -37,13 +33,21 @@ class _LoginScreenPresentationState extends State<LoginScreenPresentation> {
     return BlocProvider(
       create: (context) => LoginCubit(instance()),
       child: Scaffold(
-          appBar: AppBar(title: AppBarText(content: AppStrings.login)),
+          appBar: AppBar(title: const AppBarText(content: AppStrings.login)),
           body: BlocListener<LoginCubit, FormLoginState>(
             listener: (context, state) {
               if (state.loginState is LogInFailure) {
                 LogInFailure logInFailure = state.loginState as LogInFailure;
+                if (isLoadingDialog) {
+                  Navigator.of(context).pop();
+                  isLoadingDialog = false;
+                }
                 _showFailurePopUpDialog(
                     context, logInFailure.getFailureMessage);
+              }
+              if (state.loginState is LogInLoading) {
+                isLoadingDialog = true;
+                _showLoadingPopUpDialog(context);
               }
             },
             child: BlocBuilder<LoginCubit, FormLoginState>(
@@ -60,6 +64,14 @@ class _LoginScreenPresentationState extends State<LoginScreenPresentation> {
           )),
     );
   }
+}
+
+void _showLoadingPopUpDialog(context) {
+  showDialog(
+      context: context,
+      builder: (_) {
+        return LoadingDialog();
+      });
 }
 
 void _showFailurePopUpDialog(context, String content) {

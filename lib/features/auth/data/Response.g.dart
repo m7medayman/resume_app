@@ -7,20 +7,26 @@ part of 'Response.dart';
 // **************************************************************************
 
 AuthResponse _$AuthResponseFromJson(Map<String, dynamic> json) => AuthResponse(
-      address: json['address'] as String?,
-      connectDetails: (json['connectDetails'] as Map<String, dynamic>?)?.map(
-        (k, e) => MapEntry(k, e as String?),
-      ),
-      email: json['email'] as String?,
+      name: json['name'] as String?,
       phone: json['phone'] as String?,
-      userName: json['userName'] as String?,
+      address: json['address'] as String?,
+      contactEmail: json['contactEmail'] as String?,
+      contactDetails: json['contactDetails'] == null
+          ? null
+          : ContactExtraDetails.fromJson(
+              json['contactDetails'] as Map<String, dynamic>),
+      educationInfo: json['educationInfo'] == null
+          ? null
+          : EducationInfo.fromJson(
+              json['educationInfo'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$AuthResponseToJson(AuthResponse instance) =>
     <String, dynamic>{
-      'email': instance.email,
-      'userName': instance.userName,
+      'name': instance.name,
       'phone': instance.phone,
       'address': instance.address,
-      'connectDetails': instance.connectDetails,
+      'contactEmail': instance.contactEmail,
+      'contactDetails': instance.contactDetails,
+      'educationInfo': instance.educationInfo,
     };

@@ -46,6 +46,8 @@ dependencies:
   intl_phone_field: ^3.2.0
   csc_picker: ^0.2.7
   country_state_city_pro: ^0.0.6
+  equatable: ^2.0.5
+  intl_phone_number_input: ^0.7.4
 
 dev_dependencies:
   flutter_test:

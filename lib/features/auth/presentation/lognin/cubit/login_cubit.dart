@@ -24,6 +24,7 @@ class LoginCubit extends Cubit<FormLoginState> {
   Future login() async {
     print(state.email);
     print(state.password);
+    emit(state.copyWith(loginState: LogInLoading()));
     Either<Failure, AuthUserEntity> res = await loginUseCase
         .execute(LoginParameter(email: state.email, password: state.password));
 

@@ -1,14 +1,9 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:get_it/get_it.dart';
 import 'package:resume_app/core/Di/di.dart';
-import 'package:resume_app/core/Di/injection.dart';
-import 'package:resume_app/core/resources/device_manager.dart/device_manager.dart';
 import 'package:resume_app/core/routing/routes_manager.dart';
 import 'package:resume_app/core/screen_manager/screen_service_manager.dart';
 import 'package:resume_app/core/theme_manager/theme_manager.dart';
-import 'package:resume_app/features/auth/presentation/lognin/presentation/login_screen.dart';
 import 'package:resume_app/features/auth/presentation/signup/presentation/singup_presentation.dart';
 
 void main() async {
@@ -34,12 +29,12 @@ class MyApp extends StatelessWidget {
     ScreenSizeService screenSizeService = instance<ScreenSizeService>();
     screenSizeService.updateScreenSize(screenWidth);
     return MaterialApp(
-      // initialRoute: Routes.login, // Set the initial route
-      // onGenerateRoute: RouteManager.generateRoute,
+      initialRoute: Routes.login, // Set the initial route
+      onGenerateRoute: RouteManager.generateRoute,
       debugShowCheckedModeBanner: false,
       theme: myThemeManager.getTheme(),
       title: 'Flutter Demo',
-      home: const SignUpPresentation(),
+      // home: const SignUpPresentation(),
     );
   }
 }
