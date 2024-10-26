@@ -5,6 +5,7 @@ import 'package:resume_app/core/routing/routes_manager.dart';
 import 'package:resume_app/core/screen_manager/screen_service_manager.dart';
 import 'package:resume_app/core/theme_manager/theme_manager.dart';
 import 'package:resume_app/features/auth/presentation/signup/presentation/singup_presentation.dart';
+import 'package:resume_app/features/resume_dialog/presentation/job_application_view_screen/job_application_view_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -25,16 +26,16 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     initThemeModule(screenWidth);
-    MyTheme myThemeManager = instance<MyTheme>();
-    ScreenSizeService screenSizeService = instance<ScreenSizeService>();
+    MyTheme myThemeManager = getIt<MyTheme>();
+    ScreenSizeService screenSizeService = getIt<ScreenSizeService>();
     screenSizeService.updateScreenSize(screenWidth);
     return MaterialApp(
-      initialRoute: Routes.login, // Set the initial route
+      initialRoute: Routes.resumeApplication, // Set the initial route
       onGenerateRoute: RouteManager.generateRoute,
       debugShowCheckedModeBanner: false,
       theme: myThemeManager.getTheme(),
       title: 'Flutter Demo',
-      // home: const SignUpPresentation(),
+      // home: const JobApplicationViewScreen(),
     );
   }
 }

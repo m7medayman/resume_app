@@ -69,3 +69,23 @@ class ErrorPopUpDialog extends MyAlertDialogPopUp {
           ],
         );
 }
+
+void showLoadingPopUpDialog(context) {
+  showDialog(
+      barrierDismissible: false,
+      context: context,
+      builder: (_) {
+        return LoadingDialog();
+      });
+}
+
+void showFailurePopUpDialog(context, String content) {
+  showDialog(
+      context: context,
+      builder: (_) {
+        return ErrorPopUpDialog(
+          content: content,
+          context: context,
+        );
+      });
+}

@@ -11,6 +11,7 @@ import 'package:resume_app/core/theme_manager/font/font_size_wight_manager.dart'
 class GeneralInputFiled extends StatelessWidget {
   const GeneralInputFiled(
       {super.key,
+      this.minLines,
       this.hintText,
       this.keyboardType,
       this.onTap,
@@ -30,12 +31,14 @@ class GeneralInputFiled extends StatelessWidget {
   final bool readonly;
   final String? hintText;
   final TextInputType? keyboardType;
+  final int? minLines;
   final void Function()? onTap;
   @override
   Widget build(BuildContext context) {
     return Form(
       key: _emailFormKey,
       child: TextFormField(
+        maxLines: minLines,
         keyboardType: keyboardType,
         readOnly: readonly,
         onTap: onTap,

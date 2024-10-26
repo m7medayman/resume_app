@@ -8,8 +8,8 @@ class ScreenSizeService {
   ScreenSizeService(this.screenWidth);
   void updateScreenSize(double newScreenWidth) {
     screenWidth = newScreenWidth;
-    instance<DeviceManager>().updateDevice(screenWidth);
-    instance<FontStyleManager>().updateDeviceManger(instance<DeviceManager>());
-    instance<MyTheme>().updateFontStyleManager(instance<FontStyleManager>());
+    getIt<DeviceManager>().updateDevice(screenWidth);
+    getIt<FontStyleManager>().updateDeviceManger(getIt<DeviceManager>());
+    getIt<MyTheme>().updateFontStyleManager(getIt<FontStyleManager>());
   }
 }

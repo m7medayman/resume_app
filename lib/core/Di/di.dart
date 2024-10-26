@@ -14,23 +14,26 @@ import 'package:resume_app/features/auth/data/fire_base_auth/failure_handler.dar
 import 'package:resume_app/features/auth/data/fire_base_auth/fire_base_auth.dart';
 import 'package:resume_app/features/auth/data/repository.dart';
 import 'package:resume_app/features/auth/domain/use_case.dart';
+import 'package:resume_app/features/resume_dialog/data/gemini_repo/job_details_service_provider.dart';
+import 'package:resume_app/features/resume_dialog/data/repo_impelement.dart';
+import 'package:resume_app/features/resume_dialog/domain/use_case.dart';
 
-final instance = GetIt.instance;
+final getIt = GetIt.instance;
 bool isInitThemeModule = false;
 void initThemeModule(double screenWidth) {
   if (!isInitThemeModule) {
     DeviceManager deviceManager = DeviceManager(screenWidth: screenWidth);
     print("device done");
 
-    instance.registerLazySingleton<DeviceManager>(() => deviceManager);
+    getIt.registerLazySingleton<DeviceManager>(() => deviceManager);
     print("device done regist");
-    instance.registerLazySingleton<FontStyleManager>(
-        () => FontStyleManager(instance<DeviceManager>()));
+    getIt.registerLazySingleton<FontStyleManager>(
+        () => FontStyleManager(getIt<DeviceManager>()));
     print("font done regist");
-    instance.registerLazySingleton<MyTheme>(
-        () => MyTheme(fontStyleManager: instance<FontStyleManager>()));
+    getIt.registerLazySingleton<MyTheme>(
+        () => MyTheme(fontStyleManager: getIt<FontStyleManager>()));
     print("theme done regist");
-    instance.registerLazySingleton(() => ScreenSizeService(screenWidth));
+    getIt.registerLazySingleton(() => ScreenSizeService(screenWidth));
   } else {
     //
   }
@@ -41,10 +44,10 @@ bool isInitModule = false;
 void initModule() {
   if (!isInitModule) {
     final FirebaseAuth auth = FirebaseAuth.instance;
-    instance.registerLazySingleton(() => auth);
-    instance.registerLazySingleton(() => FailureHandler());
+    getIt.registerLazySingleton(() => auth);
+    getIt.registerLazySingleton(() => FailureHandler());
     initAllAuthFailureHandles();
-    FailureRegistry.initializeAll(instance<FailureHandler>());
+    FailureRegistry.initializeAll(getIt<FailureHandler>());
   }
   isInitModule = true;
 }
@@ -55,20 +58,19 @@ void authRepoInit() {
     return;
   }
   isAuthReoInit = true;
-  instance.registerFactory(() => AuthService(
-      auth: instance<FirebaseAuth>(),
-      failureHandler: instance<FailureHandler>()));
-  instance.registerFactory(() => AuthRepositoryImp(
-      serviceProvider: instance<AuthService>(),
-      failureHandler: instance<FailureHandler>()));
+  getIt.registerFactory(() => AuthService(
+      auth: getIt<FirebaseAuth>(), failureHandler: getIt<FailureHandler>()));
+  getIt.registerFactory(() => AuthRepositoryImp(
+      serviceProvider: getIt<AuthService>(),
+      failureHandler: getIt<FailureHandler>()));
 }
 
 bool isLoginModule = false;
 void initLoginModule() {
   if (!isLoginModule) {
     authRepoInit();
-    instance.registerFactory(
-        () => LoginUseCase(authRepository: instance<AuthRepositoryImp>()));
+    getIt.registerFactory(
+        () => LoginUseCase(authRepository: getIt<AuthRepositoryImp>()));
   }
   isLoginModule = true;
 }
@@ -83,4 +85,16 @@ void initSignupModule() {
   authRepoInit();
   getIt.registerFactory(
       () => SignUpUseCase(authRepository: getIt<AuthRepositoryImp>()));
+}
+
+bool isResumeDialogModelInit = false;
+void initResumeDialogModel() {
+  if (isResumeDialogModelInit) {
+    return;
+  }
+  isResumeDialogModelInit = true;
+  getIt.registerFactory(() => JobDetailsServiceProvider());
+  getIt.registerFactory(() => JobRepImp(serviceProvider: getIt()));
+  getIt.registerFactory(
+      () => JobDescriptionUseCases(repository: getIt<JobRepImp>()));
 }

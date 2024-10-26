@@ -48,6 +48,8 @@ dependencies:
   country_state_city_pro: ^0.0.6
   equatable: ^2.0.5
   intl_phone_number_input: ^0.7.4
+  google_generative_ai: ^0.4.6
+  responsive_grid: ^2.4.4
 
 dev_dependencies:
   flutter_test:

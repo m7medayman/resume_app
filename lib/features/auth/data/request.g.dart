@@ -26,8 +26,8 @@ Map<String, dynamic> _$SignUpRequestUserDetailsToJson(
       'phone': instance.phone,
       'address': instance.address,
       'contactEmail': instance.contactEmail,
-      'contactDetails': instance.contactDetails.toJson(),
-      'educationInfo': instance.educationInfo.toJson(),
+      'contactDetails': instance.contactDetails,
+      'educationInfo': instance.educationInfo,
     };
 
 LoginRequest _$LoginRequestFromJson(Map<String, dynamic> json) => LoginRequest(

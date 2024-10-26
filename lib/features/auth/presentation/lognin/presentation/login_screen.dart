@@ -31,7 +31,7 @@ class _LoginScreenPresentationState extends State<LoginScreenPresentation> {
     double screenWidth = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
     return BlocProvider(
-      create: (context) => LoginCubit(instance()),
+      create: (context) => LoginCubit(getIt()),
       child: Scaffold(
           appBar: AppBar(title: const AppBarText(content: AppStrings.login)),
           body: BlocListener<LoginCubit, FormLoginState>(
@@ -42,12 +42,11 @@ class _LoginScreenPresentationState extends State<LoginScreenPresentation> {
                   Navigator.of(context).pop();
                   isLoadingDialog = false;
                 }
-                _showFailurePopUpDialog(
-                    context, logInFailure.getFailureMessage);
+                showFailurePopUpDialog(context, logInFailure.getFailureMessage);
               }
               if (state.loginState is LogInLoading) {
                 isLoadingDialog = true;
-                _showLoadingPopUpDialog(context);
+                showLoadingPopUpDialog(context);
               }
             },
             child: BlocBuilder<LoginCubit, FormLoginState>(
@@ -64,25 +63,6 @@ class _LoginScreenPresentationState extends State<LoginScreenPresentation> {
           )),
     );
   }
-}
-
-void _showLoadingPopUpDialog(context) {
-  showDialog(
-      context: context,
-      builder: (_) {
-        return LoadingDialog();
-      });
-}
-
-void _showFailurePopUpDialog(context, String content) {
-  showDialog(
-      context: context,
-      builder: (_) {
-        return ErrorPopUpDialog(
-          content: content,
-          context: context,
-        );
-      });
 }
 
 class LoginBody extends StatelessWidget {

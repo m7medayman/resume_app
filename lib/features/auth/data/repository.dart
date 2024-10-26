@@ -1,4 +1,5 @@
 import 'package:either_dart/src/either.dart';
+import 'package:resume_app/core/data_classes/user_info.dart';
 
 import 'package:resume_app/core/resources/failure/failure_handler.dart';
 import 'package:resume_app/core/resources/failure/failure_model.dart';
@@ -17,7 +18,7 @@ class AuthRepositoryImp extends AuthRepository {
     required this.failureHandler,
   });
   @override
-  Future<Either<Failure, AuthUserEntity>> login(
+  Future<Either<Failure, MyUserInfo>> login(
       LoginParameter loginParameter) async {
     try {
       AuthResponse response =
@@ -29,7 +30,7 @@ class AuthRepositoryImp extends AuthRepository {
   }
 
   @override
-  Future<Either<Failure, AuthUserEntity>> signUP(
+  Future<Either<Failure, MyUserInfo>> signUP(
       SignUpParameter signUpParameter) async {
     try {
       AuthResponse response = await serviceProvider.signUp(

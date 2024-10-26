@@ -1,29 +1,30 @@
 import 'package:either_dart/src/either.dart';
 
 import 'package:resume_app/core/data_classes/data_classes.dart';
+import 'package:resume_app/core/data_classes/user_info.dart';
 import 'package:resume_app/core/resources/base_usecase/base_use_case.dart';
 import 'package:resume_app/core/resources/failure/failure_model.dart';
 import 'package:resume_app/features/auth/domain/entity.dart';
 import 'package:resume_app/features/auth/domain/repository.dart';
 
-class LoginUseCase extends BaseUseCase<LoginParameter, AuthUserEntity> {
+class LoginUseCase extends BaseUseCase<LoginParameter, MyUserInfo> {
   AuthRepository authRepository;
   LoginUseCase({
     required this.authRepository,
   });
   @override
-  Future<Either<Failure, AuthUserEntity>> execute(LoginParameter input) async {
+  Future<Either<Failure, MyUserInfo>> execute(LoginParameter input) async {
     return await authRepository.login(input);
   }
 }
 
-class SignUpUseCase extends BaseUseCase<SignUpParameter, AuthUserEntity> {
+class SignUpUseCase extends BaseUseCase<SignUpParameter, MyUserInfo> {
   AuthRepository authRepository;
   SignUpUseCase({
     required this.authRepository,
   });
   @override
-  Future<Either<Failure, AuthUserEntity>> execute(SignUpParameter input) async {
+  Future<Either<Failure, MyUserInfo>> execute(SignUpParameter input) async {
     return authRepository.signUP(input);
   }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/widgets.dart';
+import 'package:resume_app/core/data_classes/user_info.dart';
 import 'package:resume_app/core/resources/failure/failure_model.dart';
 
 import 'package:resume_app/features/auth/domain/entity.dart';
@@ -9,7 +10,7 @@ sealed class LoginState {}
 class LoginInitial extends LoginState {}
 
 final class LogInSuccess extends LoginState {
-  final AuthUserEntity data;
+  final MyUserInfo data;
   LogInSuccess({required this.data});
   get getData => data;
 }

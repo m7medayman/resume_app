@@ -33,12 +33,8 @@ EducationInfo _$EducationInfoFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$EducationInfoToJson(EducationInfo instance) =>
     <String, dynamic>{
-      'degrees': instance.degrees!.map((degree) {
-        return degree.toJson();
-      }).toList(),
-      'courses': instance.courses!.map((course) {
-        return course.toJson();
-      }).toList(),
+      'degrees': instance.degrees,
+      'courses': instance.courses,
     };
 
 Degree _$DegreeFromJson(Map<String, dynamic> json) => Degree(

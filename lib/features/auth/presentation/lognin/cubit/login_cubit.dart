@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:either_dart/either.dart';
+import 'package:resume_app/core/data_classes/user_info.dart';
 import 'package:resume_app/core/resources/failure/failure_model.dart';
 import 'package:resume_app/features/auth/domain/entity.dart';
 import 'package:resume_app/features/auth/domain/use_case.dart';
@@ -25,7 +26,7 @@ class LoginCubit extends Cubit<FormLoginState> {
     print(state.email);
     print(state.password);
     emit(state.copyWith(loginState: LogInLoading()));
-    Either<Failure, AuthUserEntity> res = await loginUseCase
+    Either<Failure, MyUserInfo> res = await loginUseCase
         .execute(LoginParameter(email: state.email, password: state.password));
 
     res.fold((Failure f) {
@@ -34,7 +35,7 @@ class LoginCubit extends Cubit<FormLoginState> {
       emit(state.copyWith(loginState: LogInFailure(failure: f)));
       emit(state.copyWith(loginState: LoginInitial()));
     },
-        (AuthUserEntity entity) =>
+        (MyUserInfo entity) =>
             emit(state.copyWith(loginState: LogInSuccess(data: entity))));
   }
 }

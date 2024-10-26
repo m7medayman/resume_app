@@ -1,6 +1,7 @@
 // request mapper is mapping the parameter to request
 
 import 'package:resume_app/core/data_classes/data_classes.dart';
+import 'package:resume_app/core/data_classes/user_info.dart';
 import 'package:resume_app/core/resources/helpers/null_type_extension.dart';
 import 'package:resume_app/features/auth/data/Response.dart';
 import 'package:resume_app/features/auth/data/request.dart';
@@ -32,8 +33,8 @@ extension SignUpAuthMapper on SignUpParameter {
 }
 
 extension AuthEntityMapper on AuthResponse {
-  AuthUserEntity toEntity() {
-    return AuthUserEntity(
+  MyUserInfo toEntity() {
+    return MyUserInfo(
         contactEmail: contactEmail.nullSafety(),
         name: name.nullSafety(),
         phone: phone.nullSafety(),
