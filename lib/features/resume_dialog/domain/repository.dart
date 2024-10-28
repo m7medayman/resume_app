@@ -4,4 +4,6 @@ import 'package:resume_app/features/resume_dialog/domain/entities/job_info.dart'
 
 abstract class JobDialogRepository {
   Future<Either<Failure, JobInfo>> getJobDescription(String jobDescription);
+  Future<Either<Failure, String>> getJobSummary(
+      String jobSummary, List<String> keyWords);
 }

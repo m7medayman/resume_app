@@ -8,6 +8,7 @@ import 'package:resume_app/core/common/widgets/separator.dart';
 import 'package:resume_app/features/resume_dialog/presentation/cubit/resume_dialog_cubit.dart';
 import 'package:resume_app/features/resume_dialog/presentation/cubit/resume_form_state.dart';
 import 'package:resume_app/features/resume_dialog/presentation/job_description/job_description.dart';
+import 'package:resume_app/features/resume_dialog/presentation/job_summary/job_summary.dart';
 import 'package:resume_app/features/resume_dialog/presentation/skills_picker/skills_picker.dart';
 
 class JobApplicationViewScreen extends StatefulWidget {
@@ -27,6 +28,10 @@ class _JobApplicationViewScreenState extends State<JobApplicationViewScreen>
       TextEditingController();
   GlobalKey<FormState> formKeyJobTitle = GlobalKey();
   TextEditingController textEditingControllerJobTitle = TextEditingController();
+
+  GlobalKey<FormState> formKeyJobSummary = GlobalKey();
+  TextEditingController textEditingControllerJobSummary =
+      TextEditingController();
   int _currentPageIndex = 0;
   @override
   void initState() {
@@ -57,13 +62,15 @@ class _JobApplicationViewScreenState extends State<JobApplicationViewScreen>
     }
   }
 
+  bool isLoading = false;
   @override
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;
 
     return BlocProvider(
-      create: (context) => ResumeDialogCubit(getIt()),
+      create: (context) => ResumeDialogCubit(
+          jobDescriptionUseCases: getIt(), jobSummaryUseCase: getIt()),
       child: Scaffold(
         appBar: AppBar(
           title: const Text("Job Application"),
@@ -73,13 +80,20 @@ class _JobApplicationViewScreenState extends State<JobApplicationViewScreen>
             var resumeFormState = state.resumeFormState;
             if (resumeFormState is LoadingResumeFormState) {
               showLoadingPopUpDialog(context);
+              isLoading = true;
+            } else {
+              if (isLoading) {
+                Navigator.of(context).pop();
+                isLoading = false;
+              }
             }
-            if (resumeFormState is ErrorResumeFormState) {
+            if (resumeFormState is FailureResumeFormState) {
               showFailurePopUpDialog(context, resumeFormState.errorMessage);
             }
+            if (resumeFormState is SuccessResumeFormStateJobSummary) {
+              textEditingControllerJobSummary.text = resumeFormState.jobSummary;
+            }
             if (resumeFormState is SuccessResumeFormState) {
-              print("=++++++++++++++++++++++++++++++++++++ success");
-              Navigator.of(context).pop();
               _currentPageIndex++;
               _pageViewController.nextPage(
                   duration: const Duration(milliseconds: 400),
@@ -129,7 +143,14 @@ class _JobApplicationViewScreenState extends State<JobApplicationViewScreen>
                                 fieldFormKey: formKeyJobTitle,
                                 fieldInput: textEditingControllerJobTitle,
                                 cubit: context.read<ResumeDialogCubit>(),
-                                state: state)
+                                state: state),
+                            JobSummary(
+                                cubit: context.read<ResumeDialogCubit>(),
+                                onFinished: () {},
+                                screenHeight: screenHeight,
+                                formKey: formKeyJobSummary,
+                                jobDescriptionTextController:
+                                    textEditingControllerJobSummary),
                           ],
                         ),
                       ],

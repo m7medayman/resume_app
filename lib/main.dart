@@ -30,60 +30,12 @@ class MyApp extends StatelessWidget {
     ScreenSizeService screenSizeService = getIt<ScreenSizeService>();
     screenSizeService.updateScreenSize(screenWidth);
     return MaterialApp(
-      initialRoute: Routes.resumeApplication, // Set the initial route
+      initialRoute: Routes.login, // Set the initial route
       onGenerateRoute: RouteManager.generateRoute,
       debugShowCheckedModeBanner: false,
       theme: myThemeManager.getTheme(),
       title: 'Flutter Demo',
       // home: const JobApplicationViewScreen(),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-  final String title;
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(
-          Icons.add,
-          color: Theme.of(context).iconTheme.color,
-        ),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }

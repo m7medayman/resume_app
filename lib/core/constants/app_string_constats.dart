@@ -10,7 +10,7 @@ class AppStrings {
   static const String no = "No";
   static const String submit = "Submit";
   static const String success = "Success!";
-  static const String reEnterPassword = "reEnter password";
+  static const String reEnterPassword = "Re-enter password";
   static const String contactEmail = "Contact Email";
   // Authentication
   static const String login = "Login";

@@ -8,7 +8,7 @@ class SchemaManager {
         "response": Schema(
           SchemaType.object,
           properties: {
-            "heardSkills": Schema(
+            "hardSkills": Schema(
               SchemaType.array,
               items: Schema(SchemaType.string),
             ),
@@ -29,5 +29,13 @@ class SchemaManager {
         ),
       },
     );
+  }
+
+  static Schema getJobSummarySchema() {
+    return Schema(SchemaType.object, properties: {
+      "response": Schema(SchemaType.object, properties: {
+        "jobSummary": Schema(SchemaType.string),
+      })
+    });
   }
 }

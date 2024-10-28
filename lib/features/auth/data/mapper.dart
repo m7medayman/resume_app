@@ -21,8 +21,8 @@ extension SignUpRequestUserDetailsMapper on SignUpParameter {
         name: name,
         phone: phone,
         address: address,
-        contactDetails: contactDetails,
-        educationInfo: educationInfo);
+        contactDetails: contactDetails.toJson(),
+        educationInfo: educationInfo.toJson());
   }
 }
 
@@ -39,7 +39,7 @@ extension AuthEntityMapper on AuthResponse {
         name: name.nullSafety(),
         phone: phone.nullSafety(),
         address: address.nullSafety(),
-        contactDetails: contactDetails ?? ContactExtraDetails(),
-        educationInfo: educationInfo ?? EducationInfo());
+        contactDetails: ContactExtraDetails.fromJson(contactDetails),
+        educationInfo: EducationInfo.fromJson(educationInfo));
   }
 }

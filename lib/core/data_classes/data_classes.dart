@@ -1,3 +1,4 @@
+import 'package:flutter/widgets.dart';
 import 'package:json_annotation/json_annotation.dart';
 part 'data_classes.g.dart';
 
@@ -26,7 +27,10 @@ class EducationInfo {
   });
   factory EducationInfo.fromJson(Map<String, dynamic> json) =>
       _$EducationInfoFromJson(json);
-  Map<String, dynamic> toJson() => _$EducationInfoToJson(this);
+  Map<String, dynamic> toJson() => <String, dynamic>{
+        'degrees': degrees?.map((e) => e.toJson()).toList(),
+        'courses': courses?.map((e) => e.toJson()).toList(),
+      };
   EducationInfo copyWith({
     List<Degree>? degrees,
     List<Course>? courses,

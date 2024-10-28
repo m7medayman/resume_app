@@ -1,4 +1,5 @@
 import 'package:either_dart/src/either.dart';
+import 'package:resume_app/core/Di/di.dart';
 import 'package:resume_app/core/data_classes/user_info.dart';
 
 import 'package:resume_app/core/resources/failure/failure_handler.dart';
@@ -23,7 +24,11 @@ class AuthRepositoryImp extends AuthRepository {
     try {
       AuthResponse response =
           await serviceProvider.login(loginParameter.toLoginRequest());
-      return Right(response.toEntity());
+      var userInfo = response.toEntity();
+      getIt.registerLazySingleton(
+        () => userInfo,
+      );
+      return Right(userInfo);
     } catch (e) {
       return Left(failureHandler.handleFailure(e.toString()));
     }
@@ -36,7 +41,11 @@ class AuthRepositoryImp extends AuthRepository {
       AuthResponse response = await serviceProvider.signUp(
           signUpParameter.toSignUpRequest(),
           signUpParameter.toSignUpRequestUserDetails());
-      return Right(response.toEntity());
+      var userInfo = response.toEntity();
+      getIt.registerLazySingleton(
+        () => userInfo,
+      );
+      return Right(userInfo);
     } catch (e) {
       Failure failure = failureHandler.handleFailure(e.toString());
       return Left(failure);

@@ -12,7 +12,7 @@ JobDescriptionResponseModel _$JobDescriptionResponseModelFromJson(
       softSkills: (json['softSkills'] as List<dynamic>?)
           ?.map((e) => e as String)
           .toList(),
-      hardSkills: (json['heardSkills'] as List<dynamic>?)
+      hardSkills: (json['hardSkills'] as List<dynamic>?)
           ?.map((e) => e as String)
           .toList(),
       jobTitle: json['jobTitle'] as String?,
@@ -28,7 +28,7 @@ Map<String, dynamic> _$JobDescriptionResponseModelToJson(
         JobDescriptionResponseModel instance) =>
     <String, dynamic>{
       'softSkills': instance.softSkills,
-      'heardSkills': instance.hardSkills,
+      'hardSkills': instance.hardSkills,
       'jobTitle': instance.jobTitle,
       'punchOfJobRequirement': instance.punchOfJobRequirement,
       'punchOfKeyWords': instance.punchOfKeyWords,
@@ -48,4 +48,14 @@ Map<String, dynamic> _$RequiredSkillsToJson(RequiredSkills instance) =>
     <String, dynamic>{
       'punchOfSoftSkills': instance.punchOfSoftSkills,
       'punchOfHardSkills': instance.punchOfHardSkills,
+    };
+
+JobSummaryResponse _$JobSummaryResponseFromJson(Map<String, dynamic> json) =>
+    JobSummaryResponse(
+      jobSummary: json['jobSummary'] as String,
+    );
+
+Map<String, dynamic> _$JobSummaryResponseToJson(JobSummaryResponse instance) =>
+    <String, dynamic>{
+      'jobSummary': instance.jobSummary,
     };

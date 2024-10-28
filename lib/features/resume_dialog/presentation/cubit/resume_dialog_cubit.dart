@@ -3,6 +3,7 @@ import 'package:equatable/equatable.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:resume_app/core/Di/injection.dart';
+import 'package:resume_app/core/data_classes/data_classes.dart';
 import 'package:resume_app/core/data_classes/job_application_data_class.dart';
 import 'package:resume_app/core/data_classes/user_info.dart';
 import 'package:resume_app/core/data_classes/user_info.dart';
@@ -17,9 +18,12 @@ part 'resume_dialog_state.dart';
 
 class ResumeDialogCubit extends Cubit<ResumeDialogState> {
   JobDescriptionUseCases jobDescriptionUseCases;
+  JobSummaryUseCase jobSummaryUseCase;
   ResumeDialogCubit(
-    this.jobDescriptionUseCases,
-  ) : super(ResumeDialogState(
+      {required this.jobDescriptionUseCases, required this.jobSummaryUseCase})
+      : super(ResumeDialogState(
+            selectedEducationInfo: EducationInfo(degrees: [], courses: []),
+            language: {},
             jobInfoAi: JobInfo(
                 softSkills: [], hardSkills: [], jobTitle: "", keyWords: []),
             resumeFormState: InitResumeFormState(),
@@ -28,7 +32,74 @@ class ResumeDialogCubit extends Cubit<ResumeDialogState> {
             selectedHardSkills: {},
             selectedSoftSkills: {},
             punchOfWorkExperiences: [],
-            userInfo: null));
+            userInfo: getIt<MyUserInfo>()));
+
+  void addDegree(Degree degree) {
+    final updatedDegree =
+        List<Degree>.from(state.selectedEducationInfo.degrees!);
+    updatedDegree.add(degree);
+    emit(state.copyWith(
+        selectedEducationInfo:
+            state.selectedEducationInfo.copyWith(degrees: updatedDegree)));
+  }
+
+  void deleteDegree(Degree degree) {
+    // Create a new list and remove the degree from it
+    final updatedDegrees =
+        List<Degree>.from(state.selectedEducationInfo.degrees!);
+    updatedDegrees.remove(degree);
+
+    // Emit the new state with the updated list
+    emit(state.copyWith(
+      selectedEducationInfo:
+          state.selectedEducationInfo.copyWith(degrees: updatedDegrees),
+    ));
+  }
+
+  void addCourse(Course course) {
+    final updatedCourse =
+        List<Course>.from(state.selectedEducationInfo.courses!);
+    updatedCourse.add(course);
+    emit(state.copyWith(
+        selectedEducationInfo:
+            state.selectedEducationInfo.copyWith(courses: updatedCourse)));
+  }
+
+  void deleteCourse(Course course) {
+    // Create a new list and remove the degree from it
+    final updatedCourse =
+        List<Course>.from(state.selectedEducationInfo.courses!);
+    updatedCourse.remove(course);
+
+    // Emit the new state with the updated list
+    emit(state.copyWith(
+      selectedEducationInfo:
+          state.selectedEducationInfo.copyWith(courses: updatedCourse),
+    ));
+  }
+
+  void getSummary(String jobSummary) async {
+    emit(state.copyWith(resumeFormState: LoadingResumeFormState()));
+    var resposne = await jobSummaryUseCase.execute(JobSummaryInput(
+        jobSummary: jobSummary, keyWords: state.jobInfoAi.keyWords));
+    resposne.fold((error) {
+      emit(state.copyWith(
+          resumeFormState:
+              FailureResumeFormState(errorMessage: error.message)));
+      emit(state.copyWith(resumeFormState: InitResumeFormState()));
+    }, (success) {
+      emit(state.copyWith(
+          resumeFormState:
+              SuccessResumeFormStateJobSummary(jobSummary: success)));
+      emit(state.copyWith(resumeFormState: InitResumeFormState()));
+    });
+  }
+
+  void getNextPage() {
+    emit(state.copyWith(resumeFormState: SuccessResumeFormState()));
+    emit(state.copyWith(resumeFormState: InitResumeFormState()));
+  }
+
   void addAiJobHardSkill(String skill) {
     state.jobInfoAi.hardSkills.add(skill);
   }
@@ -81,7 +152,8 @@ class ResumeDialogCubit extends Cubit<ResumeDialogState> {
     var response = await jobDescriptionUseCases.execute(jobDescription);
     response.fold((error) {
       emit(state.copyWith(
-          resumeFormState: ErrorResumeFormState(errorMessage: error.message)));
+          resumeFormState:
+              FailureResumeFormState(errorMessage: error.message)));
     }, (data) {
       print(data);
       emit(state.copyWith(

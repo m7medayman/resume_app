@@ -18,13 +18,24 @@ class JobRepImp implements JobDialogRepository {
       JobDescriptionResponseModel responseModel =
           await serviceProvider.getSkills(jobDescription);
       return Right(JobInfo(
-          softSkills: responseModel.softSkills ?? ["empty"],
-          hardSkills: responseModel.hardSkills ?? ["empty"],
+          softSkills: responseModel.softSkills ?? [],
+          hardSkills: responseModel.hardSkills ?? [],
           jobTitle: responseModel.jobTitle ?? "empty",
           keyWords: responseModel.punchOfKeyWords ?? ["empty"]));
     } catch (e) {
       print("error at JobRepo");
       return Left(Failure(id: 110, message: e.toString()));
+    }
+  }
+
+  Future<Either<Failure, String>> getJobSummary(
+      String inputJobSummary, List<String> keyWords) async {
+    try {
+      JobSummaryResponse responseModel =
+          await serviceProvider.getJobSummary(inputJobSummary, keyWords);
+      return (Right(responseModel.jobSummary));
+    } catch (e) {
+      return Left(Failure(id: 111, message: e.toString()));
     }
   }
 }

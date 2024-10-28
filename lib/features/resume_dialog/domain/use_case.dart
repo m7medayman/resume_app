@@ -15,3 +15,25 @@ class JobDescriptionUseCases extends BaseUseCase<String, JobInfo> {
     return await repository.getJobDescription(jobDescription);
   }
 }
+
+class JobSummaryUseCase extends BaseUseCase<JobSummaryInput, String> {
+  JobDialogRepository repository;
+  JobSummaryUseCase({
+    required this.repository,
+  });
+
+  @override
+  Future<Either<Failure, String>> execute(JobSummaryInput input) async {
+    // TODO: implement execute
+    return await repository.getJobSummary(input.jobSummary, input.keyWords);
+  }
+}
+
+class JobSummaryInput {
+  String jobSummary;
+  List<String> keyWords;
+  JobSummaryInput({
+    required this.jobSummary,
+    required this.keyWords,
+  });
+}

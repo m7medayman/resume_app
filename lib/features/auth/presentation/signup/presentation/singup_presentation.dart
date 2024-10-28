@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:resume_app/core/common/state_renderer/pop_state_dialog_widget.dart';
 import 'package:resume_app/core/common/widgets/course_certification_input.dart';
+import 'package:resume_app/core/common/widgets/course_view_widget.dart';
+import 'package:resume_app/core/common/widgets/degree_view_widget.dart';
 import 'package:resume_app/core/common/widgets/devider_with_label.dart';
 
 import 'package:resume_app/core/common/widgets/education_certification_input.dart';
@@ -16,6 +18,7 @@ import 'package:resume_app/core/constants/app_string_constats.dart';
 import 'package:resume_app/core/constants/widget_dimensions.dart';
 import 'package:resume_app/core/data_classes/data_classes.dart';
 import 'package:resume_app/core/resources/helpers/input_fields.dart';
+import 'package:resume_app/core/routing/routes_manager.dart';
 import 'package:resume_app/core/theme_manager/color_manager.dart';
 import 'package:resume_app/features/auth/presentation/signup/cubit/signup_cubit.dart';
 import 'package:resume_app/features/auth/presentation/signup/cubit/signup_form_state.dart';
@@ -101,6 +104,10 @@ class _SignUpPresentationState extends State<SignUpPresentation> {
                       FailureSignupFormState formState =
                           state.signupFormState as FailureSignupFormState;
                       _showFailurePopUpDialog(context, formState.errorMessage);
+                    }
+                    if (state.signupFormState is SuccessSignupFormState) {
+                      Navigator.of(context)
+                          .pushReplacementNamed(Routes.resumeApplication);
                     }
                   },
                   child: getBody(),
@@ -226,49 +233,54 @@ class _SignUpPresentationState extends State<SignUpPresentation> {
                         InputValidator.validateRegularField),
                 screenHeight: screenHeight),
 
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                HiddenButton(
-                  screenHeight: screenHeight,
-                  isHidden: state.extraPhoneFlag,
-                  childWidget: Text(AppStrings.addPhone),
-                  onPressed: () {
-                    extraFields["extraPhone"] = extraPhoneKey;
-                    context
-                        .read<SignupCubit>()
-                        .changeExtraPhoneFiledVisibility();
-                  },
-                ),
-                SizedBox(
-                  width: screenWidth * 0.02,
-                ),
-                HiddenButton(
-                  screenHeight: screenHeight,
-                  isHidden: state.linkedInFlag,
-                  childWidget: Text(AppStrings.addLinkedin),
-                  onPressed: () {
-                    extraFields["linkedIn"] = linkeInKey;
-                    context.read<SignupCubit>().changeLinkedInFiledVisibility();
-                  },
-                ),
-                SizedBox(
-                  width: screenWidth * 0.02,
-                ),
-                HiddenButton(
-                  screenHeight: screenHeight,
-                  isHidden: state.websiteFlag,
-                  childWidget: Text(AppStrings.addWebsite),
-                  onPressed: () {
-                    extraFields["website"] = websiteKey;
+            Center(
+              child: Wrap(
+                children: [
+                  HiddenButton(
+                    screenHeight: screenHeight,
+                    isHidden: state.extraPhoneFlag,
+                    childWidget: Text(AppStrings.addPhone),
+                    onPressed: () {
+                      extraFields["extraPhone"] = extraPhoneKey;
+                      context
+                          .read<SignupCubit>()
+                          .changeExtraPhoneFiledVisibility();
+                    },
+                  ),
+                  SizedBox(
+                    width: screenWidth * 0.02,
+                  ),
+                  HiddenButton(
+                    screenHeight: screenHeight,
+                    isHidden: state.linkedInFlag,
+                    childWidget: Text(AppStrings.addLinkedin),
+                    onPressed: () {
+                      extraFields["linkedIn"] = linkeInKey;
+                      context
+                          .read<SignupCubit>()
+                          .changeLinkedInFiledVisibility();
+                    },
+                  ),
+                  SizedBox(
+                    width: screenWidth * 0.02,
+                  ),
+                  HiddenButton(
+                    screenHeight: screenHeight,
+                    isHidden: state.websiteFlag,
+                    childWidget: Text(AppStrings.addWebsite),
+                    onPressed: () {
+                      extraFields["website"] = websiteKey;
 
-                    context.read<SignupCubit>().changeWebsiteFiledVisibility();
-                  },
-                ),
-                SizedBox(
-                  width: screenWidth * 0.02,
-                ),
-              ],
+                      context
+                          .read<SignupCubit>()
+                          .changeWebsiteFiledVisibility();
+                    },
+                  ),
+                  SizedBox(
+                    width: screenWidth * 0.02,
+                  ),
+                ],
+              ),
             ),
             FormSeparator(screenHeight: screenHeight),
             const DividerWithLabel(
@@ -308,13 +320,16 @@ class _SignUpPresentationState extends State<SignUpPresentation> {
             const DividerWithLabel(label: AppStrings.addEducationInfo),
             FormSeparator(screenHeight: screenHeight),
             DegreeView(
-                state: state,
+                onDelete: context.read<SignupCubit>().deleteDegree,
+                degrees: state.educationInfo.degrees!,
                 screenWidth: screenWidth,
                 screenHeight: screenHeight),
             CourseView(
-                screenWidth: screenWidth,
-                screenHeight: screenHeight,
-                state: state),
+              courses: state.educationInfo.courses!,
+              screenWidth: screenWidth,
+              screenHeight: screenHeight,
+              onDelete: context.read<SignupCubit>().deleteCourse,
+            ),
             FormSeparator(screenHeight: screenHeight),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -396,140 +411,5 @@ class _SignUpPresentationState extends State<SignUpPresentation> {
       ;
     }
     return checkKey;
-  }
-}
-
-class DegreeView extends StatelessWidget {
-  const DegreeView(
-      {super.key,
-      required this.screenWidth,
-      required this.screenHeight,
-      required this.state});
-
-  final double screenWidth;
-  final double screenHeight;
-  final SighupState state;
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: state.educationInfo.degrees!.map((element) {
-        return Column(
-          children: [
-            Container(
-              color: ColorManager.textColorInputBackGround,
-              child: Row(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Container(
-                      width: screenWidth * 0.7,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "${element.title}",
-                            style: Theme.of(context)
-                                .textTheme
-                                .headlineLarge!
-                                .copyWith(color: ColorManager.textColor),
-                          ),
-                          Text("from: ${element.school}",
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodySmall!
-                                  .copyWith(color: ColorManager.textColor)),
-                          Text(
-                              "${element.startDate.year}-${element.startDate.month} to ${element.endDate.year}-${element.endDate.month}",
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodySmall!
-                                  .copyWith(color: ColorManager.textColorInput))
-                        ],
-                      ),
-                    ),
-                  ),
-                  Spacer(),
-                  IconButton(
-                      onPressed: () {
-                        context.read<SignupCubit>().deleteDegree(element);
-                      },
-                      icon: Icon(
-                        Icons.cancel_rounded,
-                        color: ColorManager.primaryColor,
-                      ))
-                ],
-              ),
-            ),
-            FormSeparator(screenHeight: screenHeight)
-          ],
-        );
-      }).toList(),
-    );
-  }
-}
-
-class CourseView extends StatelessWidget {
-  const CourseView(
-      {super.key,
-      required this.screenWidth,
-      required this.screenHeight,
-      required this.state});
-
-  final double screenWidth;
-  final double screenHeight;
-  final SighupState state;
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: state.educationInfo.courses!.map((element) {
-        return Column(
-          children: [
-            Container(
-              color: ColorManager.textColorInputBackGround,
-              child: Row(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Container(
-                      width: screenWidth * 0.7,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "${element.title}",
-                            style: Theme.of(context)
-                                .textTheme
-                                .headlineLarge!
-                                .copyWith(color: ColorManager.textColor),
-                          ),
-                          Text(
-                              "${element.startDate.year}-${element.startDate.month} to ${element.endDate.year}-${element.endDate.month}",
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodySmall!
-                                  .copyWith(color: ColorManager.textColorInput))
-                        ],
-                      ),
-                    ),
-                  ),
-                  Spacer(),
-                  IconButton(
-                      onPressed: () {
-                        context.read<SignupCubit>().deleteCourse(element);
-                      },
-                      icon: Icon(
-                        Icons.cancel_rounded,
-                        color: ColorManager.primaryColor,
-                      ))
-                ],
-              ),
-            ),
-            FormSeparator(screenHeight: screenHeight)
-          ],
-        );
-      }).toList(),
-    );
   }
 }

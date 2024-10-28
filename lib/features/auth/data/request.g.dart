@@ -13,10 +13,8 @@ SignUpRequestUserDetails _$SignUpRequestUserDetailsFromJson(
       phone: json['phone'] as String,
       address: json['address'] as String,
       contactEmail: json['contactEmail'] as String,
-      contactDetails: ContactExtraDetails.fromJson(
-          json['contactDetails'] as Map<String, dynamic>),
-      educationInfo:
-          EducationInfo.fromJson(json['educationInfo'] as Map<String, dynamic>),
+      contactDetails: json['contactDetails'] as Map<String, dynamic>,
+      educationInfo: json['educationInfo'] as Map<String, dynamic>,
     );
 
 Map<String, dynamic> _$SignUpRequestUserDetailsToJson(

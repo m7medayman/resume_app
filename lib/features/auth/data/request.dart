@@ -19,8 +19,8 @@ class SignUpRequestUserDetails {
   String phone;
   String address;
   String contactEmail;
-  ContactExtraDetails contactDetails;
-  EducationInfo educationInfo;
+  Map<String, dynamic> contactDetails;
+  Map<String, dynamic> educationInfo;
   SignUpRequestUserDetails({
     required this.name,
     required this.phone,

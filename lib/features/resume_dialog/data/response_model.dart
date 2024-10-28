@@ -40,3 +40,17 @@ class RequiredSkills {
 
   Map<String, dynamic> toJson() => _$RequiredSkillsToJson(this);
 }
+
+@JsonSerializable()
+class JobSummaryResponse {
+  String jobSummary;
+  JobSummaryResponse({
+    required this.jobSummary,
+  });
+
+  // Generated fromJson and toJson methods
+  factory JobSummaryResponse.fromJson(Map<String, dynamic> json) =>
+      _$JobSummaryResponseFromJson(json);
+
+  Map<String, dynamic> toJson() => _$JobSummaryResponseToJson(this);
+}

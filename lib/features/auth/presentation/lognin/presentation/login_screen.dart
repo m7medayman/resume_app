@@ -48,6 +48,10 @@ class _LoginScreenPresentationState extends State<LoginScreenPresentation> {
                 isLoadingDialog = true;
                 showLoadingPopUpDialog(context);
               }
+              if (state.loginState is LogInSuccess) {
+                Navigator.of(context)
+                    .pushReplacementNamed(Routes.resumeApplication);
+              }
             },
             child: BlocBuilder<LoginCubit, FormLoginState>(
               builder: (context, state) {

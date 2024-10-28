@@ -7,9 +7,16 @@ class LoadingResumeFormState extends ResumeFormState {
   LoadingResumeFormState({this.loadingContent});
 }
 
-class ErrorResumeFormState extends ResumeFormState {
+class FailureResumeFormState extends ResumeFormState {
   String errorMessage;
-  ErrorResumeFormState({required this.errorMessage});
+  FailureResumeFormState({required this.errorMessage});
 }
 
 class SuccessResumeFormState extends ResumeFormState {}
+
+class SuccessResumeFormStateJobSummary extends ResumeFormState {
+  String jobSummary;
+  SuccessResumeFormStateJobSummary({
+    required this.jobSummary,
+  });
+}

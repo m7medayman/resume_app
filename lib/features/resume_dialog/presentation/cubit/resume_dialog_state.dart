@@ -4,6 +4,8 @@ class ResumeDialogState extends Equatable {
   ResumeFormState resumeFormState;
   String jobTitle;
   String jobSummery;
+  Map<String, String> language;
+  EducationInfo selectedEducationInfo;
   MyUserInfo? userInfo;
   Map<String, bool> selectedHardSkills;
   Map<String, bool> selectedSoftSkills;
@@ -11,6 +13,8 @@ class ResumeDialogState extends Equatable {
   JobInfo jobInfoAi; // this is the information that got by AI
 
   ResumeDialogState({
+    required this.selectedEducationInfo,
+    required this.language,
     required this.resumeFormState,
     required this.jobTitle,
     required this.jobSummery,
@@ -22,17 +26,21 @@ class ResumeDialogState extends Equatable {
   });
 
   // Implement the copyWith method
-  ResumeDialogState copyWith({
-    ResumeFormState? resumeFormState,
-    String? jobTitle,
-    String? jobSummery,
-    Map<String, bool>? selectedHardSkills,
-    Map<String, bool>? selectedSoftSkills,
-    MyUserInfo? userInfo,
-    List<WorkExperience>? punchOfWorkExperiences,
-    JobInfo? jobInfoAi,
-  }) {
+  ResumeDialogState copyWith(
+      {ResumeFormState? resumeFormState,
+      String? jobTitle,
+      String? jobSummery,
+      Map<String, bool>? selectedHardSkills,
+      Map<String, bool>? selectedSoftSkills,
+      MyUserInfo? userInfo,
+      List<WorkExperience>? punchOfWorkExperiences,
+      JobInfo? jobInfoAi,
+      Map<String, String>? language,
+      EducationInfo? selectedEducationInfo}) {
     return ResumeDialogState(
+      selectedEducationInfo:
+          selectedEducationInfo ?? this.selectedEducationInfo,
+      language: language ?? this.language,
       resumeFormState: resumeFormState ?? this.resumeFormState,
       jobTitle: jobTitle ?? this.jobTitle,
       jobSummery: jobSummery ?? this.jobSummery,
@@ -47,6 +55,8 @@ class ResumeDialogState extends Equatable {
 
   @override
   List<Object?> get props => [
+        selectedEducationInfo,
+        language,
         resumeFormState,
         jobTitle,
         jobSummery,

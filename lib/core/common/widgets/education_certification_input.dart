@@ -89,12 +89,16 @@ class _EducationCertificationInputDialogState
                 DoubleDatePicker(
                   setEndDate: (value) {
                     if (value != null) {
-                      educationalDegree.endDate = value;
+                      setState(() {
+                        educationalDegree.endDate = value;
+                      });
                     }
                   },
                   setStartDate: (value) {
                     if (value != null) {
-                      educationalDegree.startDate = value;
+                      setState(() {
+                        educationalDegree.startDate = value;
+                      });
                     }
                   },
                   firstDateInput: firstDateInput,
