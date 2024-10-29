@@ -16,7 +16,7 @@ class JobSummary extends StatelessWidget {
   GlobalKey<FormState> formKey;
   double screenHeight;
   ResumeDialogCubit cubit;
-  final void Function()? onFinished;
+  final void Function() onFinished;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -43,20 +43,51 @@ class JobSummary extends StatelessWidget {
         FormSeparator(screenHeight: screenHeight),
         ElevatedButton(
             onPressed: () {
-              cubit.getSummary(jobDescriptionTextController.text);
+              if (formKey.currentState!.validate()) {
+                cubit.getSummary(jobDescriptionTextController.text);
+              }
             },
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [Icon(Icons.auto_fix_high), Text("Enhnce")],
             )),
         FormSeparator(screenHeight: screenHeight),
-        Row(
-          children: [
-            Spacer(),
-            ElevatedButton(onPressed: () {}, child: Text("Next")),
-          ],
-        )
+        Divider(),
+        FormSeparator(screenHeight: screenHeight),
+        GoBackAndForward(formKey: formKey, cubit: cubit)
       ],
     ));
+  }
+}
+
+class GoBackAndForward extends StatelessWidget {
+  const GoBackAndForward({
+    super.key,
+    required this.formKey,
+    required this.cubit,
+  });
+
+  final GlobalKey<FormState> formKey;
+  final ResumeDialogCubit cubit;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        ElevatedButton(
+            onPressed: () {
+              cubit.goBack();
+            },
+            child: const Text("Back")),
+        const Spacer(),
+        ElevatedButton(
+            onPressed: () {
+              if (formKey.currentState!.validate()) {
+                cubit.getNextPage();
+              }
+            },
+            child: const Text("Next")),
+      ],
+    );
   }
 }

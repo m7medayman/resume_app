@@ -22,7 +22,7 @@ class ResumeDialogCubit extends Cubit<ResumeDialogState> {
   ResumeDialogCubit(
       {required this.jobDescriptionUseCases, required this.jobSummaryUseCase})
       : super(ResumeDialogState(
-            selectedEducationInfo: EducationInfo(degrees: [], courses: []),
+            selectedEducationInfo: getIt<MyUserInfo>().educationInfo,
             language: {},
             jobInfoAi: JobInfo(
                 softSkills: [], hardSkills: [], jobTitle: "", keyWords: []),
@@ -33,6 +33,21 @@ class ResumeDialogCubit extends Cubit<ResumeDialogState> {
             selectedSoftSkills: {},
             punchOfWorkExperiences: [],
             userInfo: getIt<MyUserInfo>()));
+  void goBack() {
+    emit(state.copyWith(resumeFormState: GoBackFormState()));
+  }
+
+  addLanguage(String language, String level) {
+    final Map<String, String> updatedLanguage = Map.from(state.language);
+    updatedLanguage[language] = level;
+    emit(state.copyWith(language: updatedLanguage));
+  }
+
+  deleteLanguage(String language) {
+    final Map<String, String> updatedLanguage = Map.from(state.language);
+    updatedLanguage.remove(language);
+    emit(state.copyWith(language: updatedLanguage));
+  }
 
   void addDegree(Degree degree) {
     final updatedDegree =

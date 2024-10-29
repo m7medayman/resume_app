@@ -14,6 +14,8 @@ class FailureResumeFormState extends ResumeFormState {
 
 class SuccessResumeFormState extends ResumeFormState {}
 
+class GoBackFormState extends ResumeFormState {}
+
 class SuccessResumeFormStateJobSummary extends ResumeFormState {
   String jobSummary;
   SuccessResumeFormStateJobSummary({

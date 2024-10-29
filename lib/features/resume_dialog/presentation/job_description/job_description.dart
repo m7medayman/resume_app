@@ -18,29 +18,31 @@ class JobDescription extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        child: Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        Text(
-          "Job Description",
-          style: Theme.of(context)
-              .textTheme
-              .displayMedium!
-              .copyWith(fontWeight: FontWeight.bold),
-        ),
-        FormSeparator(screenHeight: screenHeight),
-        GeneralInputFiled(
-          fieldFormKey: formKey,
-          fieldInput: jobDescriptionTextController,
-          label: "",
-          validateMessageFunction: InputValidator.validateRegularField,
-          hintText:
-              "but job description by writing it or by copy and paste it in here",
-          minLines: 10,
-        ),
-        FormSeparator(screenHeight: screenHeight),
-        ElevatedButton(onPressed: onFinished, child: Text("Next"))
-      ],
+        child: SingleChildScrollView(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Text(
+            "Job Description",
+            style: Theme.of(context)
+                .textTheme
+                .displayMedium!
+                .copyWith(fontWeight: FontWeight.bold),
+          ),
+          FormSeparator(screenHeight: screenHeight),
+          GeneralInputFiled(
+            fieldFormKey: formKey,
+            fieldInput: jobDescriptionTextController,
+            label: "",
+            validateMessageFunction: InputValidator.validateRegularField,
+            hintText:
+                "but job description by writing it or by copy and paste it in here",
+            minLines: 10,
+          ),
+          FormSeparator(screenHeight: screenHeight),
+          ElevatedButton(onPressed: onFinished, child: Text("Next"))
+        ],
+      ),
     ));
   }
 }

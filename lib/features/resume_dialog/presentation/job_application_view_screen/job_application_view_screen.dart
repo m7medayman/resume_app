@@ -7,7 +7,9 @@ import 'package:resume_app/core/common/state_renderer/pop_state_dialog_widget.da
 import 'package:resume_app/core/common/widgets/separator.dart';
 import 'package:resume_app/features/resume_dialog/presentation/cubit/resume_dialog_cubit.dart';
 import 'package:resume_app/features/resume_dialog/presentation/cubit/resume_form_state.dart';
+import 'package:resume_app/features/resume_dialog/presentation/job_certification_and_cources/job_certification_and_courses.dart';
 import 'package:resume_app/features/resume_dialog/presentation/job_description/job_description.dart';
+import 'package:resume_app/features/resume_dialog/presentation/job_language/job_language_view.dart';
 import 'package:resume_app/features/resume_dialog/presentation/job_summary/job_summary.dart';
 import 'package:resume_app/features/resume_dialog/presentation/skills_picker/skills_picker.dart';
 
@@ -87,6 +89,12 @@ class _JobApplicationViewScreenState extends State<JobApplicationViewScreen>
                 isLoading = false;
               }
             }
+            if (resumeFormState is GoBackFormState) {
+              _pageViewController.previousPage(
+                  duration: const Duration(milliseconds: 400),
+                  curve: Curves.easeInOut);
+              _currentPageIndex--;
+            }
             if (resumeFormState is FailureResumeFormState) {
               showFailurePopUpDialog(context, resumeFormState.errorMessage);
             }
@@ -151,6 +159,17 @@ class _JobApplicationViewScreenState extends State<JobApplicationViewScreen>
                                 formKey: formKeyJobSummary,
                                 jobDescriptionTextController:
                                     textEditingControllerJobSummary),
+                            JobCertificationAndCourses(
+                              screenHeight: screenHeight,
+                              screenWidth: screenWidth,
+                              cubit: context.read<ResumeDialogCubit>(),
+                              state: state,
+                            ),
+                            JobLanguagesView(
+                                screenHeight: screenHeight,
+                                screenWidth: screenWidth,
+                                cubit: context.read<ResumeDialogCubit>(),
+                                state: state),
                           ],
                         ),
                       ],

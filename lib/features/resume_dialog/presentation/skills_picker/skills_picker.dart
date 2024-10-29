@@ -136,11 +136,23 @@ class JobSkillPicker extends StatelessWidget {
                       )),
                   FormSeparator(screenHeight: screenHeight),
                   // end of skill picker
-                  ElevatedButton(
-                      onPressed: () {
-                        cubit.getNextPage();
-                      },
-                      child: Text("Next")),
+                  const Divider(),
+                  FormSeparator(screenHeight: screenHeight),
+                  Row(
+                    children: [
+                      ElevatedButton(
+                          onPressed: () {
+                            cubit.goBack();
+                          },
+                          child: const Text("Back")),
+                      const Spacer(),
+                      ElevatedButton(
+                          onPressed: () {
+                            cubit.getNextPage();
+                          },
+                          child: const Text("Next")),
+                    ],
+                  ),
                 ],
               ),
       ),

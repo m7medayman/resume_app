@@ -267,7 +267,7 @@ class _SignUpPresentationState extends State<SignUpPresentation> {
                   HiddenButton(
                     screenHeight: screenHeight,
                     isHidden: state.websiteFlag,
-                    childWidget: Text(AppStrings.addWebsite),
+                    childWidget: const Text(AppStrings.addWebsite),
                     onPressed: () {
                       extraFields["website"] = websiteKey;
 
@@ -291,21 +291,6 @@ class _SignUpPresentationState extends State<SignUpPresentation> {
               width: screenWidth * WidgetDimensions.percent90,
               child: Column(
                 children: [
-                  // CSCPicker(
-                  //   onCountryChanged: (value) {},
-                  //   onStateChanged: (value) {},
-                  //   onCityChanged: (value) {},
-                  //   dropdownItemStyle: Theme.of(context)
-                  //       .textTheme
-                  //       .bodyMedium!
-                  //       .copyWith(
-                  //           color: ColorManager.backgroundColor),
-                  //   dropdownDecoration:
-                  //       BoxDecoration(color: ColorManager.layer),
-                  //   disabledDropdownDecoration:
-                  //       BoxDecoration(color: ColorManager.layer),
-                  // ),
-                  // FormSeparator(screenHeight: screenHeight),
                   GeneralInputFiled(
                       hintText: "Egypt,Giza,ELshak zaid",
                       fieldFormKey: locationFormKey,
@@ -376,13 +361,10 @@ class _SignUpPresentationState extends State<SignUpPresentation> {
             ),
             ElevatedButton(
                 onPressed: () {
-                  print("++++++++++++++++++++++++++++++++");
-                  print(extraPhoneInput.text);
                   List<GlobalKey<FormState>> extraKeys =
                       extraFields.values.toList();
                   if (checkAllKeys(checkPrimaryKeys) &
                       checkAllKeys(extraKeys)) {
-                    print("check done");
                     context.read<SignupCubit>().registerUser(
                         emailRegisterController.text,
                         passwordController.text,
