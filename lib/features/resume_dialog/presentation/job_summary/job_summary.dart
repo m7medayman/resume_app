@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:resume_app/core/common/widgets/enhance_button.dart';
 import 'package:resume_app/core/common/widgets/my_inputField.dart';
 import 'package:resume_app/core/common/widgets/separator.dart';
 import 'package:resume_app/core/resources/helpers/input_fields.dart';
@@ -41,16 +42,12 @@ class JobSummary extends StatelessWidget {
           minLines: 10,
         ),
         FormSeparator(screenHeight: screenHeight),
-        ElevatedButton(
-            onPressed: () {
-              if (formKey.currentState!.validate()) {
-                cubit.getSummary(jobDescriptionTextController.text);
-              }
-            },
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [Icon(Icons.auto_fix_high), Text("Enhnce")],
-            )),
+        EnhanceButton(
+          onPressed: () {
+            cubit.getSummary(jobDescriptionTextController.text);
+          },
+          formKey: formKey,
+        ),
         FormSeparator(screenHeight: screenHeight),
         Divider(),
         FormSeparator(screenHeight: screenHeight),

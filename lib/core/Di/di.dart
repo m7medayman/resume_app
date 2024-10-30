@@ -99,4 +99,6 @@ void initResumeDialogModel() {
       () => JobDescriptionUseCases(repository: getIt<JobRepImp>()));
   getIt
       .registerFactory(() => JobSummaryUseCase(repository: getIt<JobRepImp>()));
+  getIt.registerFactory(
+      () => JobExperienceEnhanceUseCase(repository: getIt<JobRepImp>()));
 }

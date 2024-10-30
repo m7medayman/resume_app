@@ -38,4 +38,12 @@ class SchemaManager {
       })
     });
   }
+
+  static Schema getJobExperience() {
+    return Schema(SchemaType.object, properties: {
+      "response": Schema(SchemaType.object, properties: {
+        "jobExperience": Schema(SchemaType.string),
+      })
+    });
+  }
 }

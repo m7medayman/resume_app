@@ -59,3 +59,15 @@ Map<String, dynamic> _$JobSummaryResponseToJson(JobSummaryResponse instance) =>
     <String, dynamic>{
       'jobSummary': instance.jobSummary,
     };
+
+JobExperienceResponse _$JobExperienceResponseFromJson(
+        Map<String, dynamic> json) =>
+    JobExperienceResponse(
+      jobExperience: json['jobExperience'] as String,
+    );
+
+Map<String, dynamic> _$JobExperienceResponseToJson(
+        JobExperienceResponse instance) =>
+    <String, dynamic>{
+      'jobExperience': instance.jobExperience,
+    };

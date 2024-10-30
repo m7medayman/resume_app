@@ -19,8 +19,11 @@ part 'resume_dialog_state.dart';
 class ResumeDialogCubit extends Cubit<ResumeDialogState> {
   JobDescriptionUseCases jobDescriptionUseCases;
   JobSummaryUseCase jobSummaryUseCase;
+  JobExperienceEnhanceUseCase jobExperienceEnhanceUseCase;
   ResumeDialogCubit(
-      {required this.jobDescriptionUseCases, required this.jobSummaryUseCase})
+      {required this.jobDescriptionUseCases,
+      required this.jobSummaryUseCase,
+      required this.jobExperienceEnhanceUseCase})
       : super(ResumeDialogState(
             selectedEducationInfo: getIt<MyUserInfo>().educationInfo,
             language: {},
@@ -37,6 +40,22 @@ class ResumeDialogCubit extends Cubit<ResumeDialogState> {
     emit(state.copyWith(resumeFormState: GoBackFormState()));
   }
 
+  Future<String> getJobExperienceEnhanced(String jobExperience) async {
+    emit(state.copyWith(resumeFormState: LoadingResumeFormState()));
+    var response = await jobExperienceEnhanceUseCase.execute(jobExperience);
+    String returned = jobExperience;
+    response.fold((error) {
+      emit(state.copyWith(
+          resumeFormState:
+              FailureResumeFormState(errorMessage: error.message)));
+      emit(state.copyWith(resumeFormState: InitResumeFormState()));
+    }, (success) {
+      emit(state.copyWith(resumeFormState: SuccessResumeFormState()));
+      returned = success;
+    });
+    return returned;
+  }
+
   addLanguage(String language, String level) {
     final Map<String, String> updatedLanguage = Map.from(state.language);
     updatedLanguage[language] = level;
@@ -47,6 +66,20 @@ class ResumeDialogCubit extends Cubit<ResumeDialogState> {
     final Map<String, String> updatedLanguage = Map.from(state.language);
     updatedLanguage.remove(language);
     emit(state.copyWith(language: updatedLanguage));
+  }
+
+  void addWorkExperience(WorkExperience workExperience) {
+    final updatedWorkExperience =
+        List<WorkExperience>.from(state.punchOfWorkExperiences);
+    updatedWorkExperience.add(workExperience);
+    emit(state.copyWith(punchOfWorkExperiences: updatedWorkExperience));
+  }
+
+  void deleteWorkExperience(WorkExperience workExperience) {
+    final updatedWorkExperience =
+        List<WorkExperience>.from(state.punchOfWorkExperiences);
+    updatedWorkExperience.remove(workExperience);
+    emit(state.copyWith(punchOfWorkExperiences: updatedWorkExperience));
   }
 
   void addDegree(Degree degree) {

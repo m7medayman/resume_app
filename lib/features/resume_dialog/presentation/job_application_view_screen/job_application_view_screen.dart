@@ -9,6 +9,7 @@ import 'package:resume_app/features/resume_dialog/presentation/cubit/resume_dial
 import 'package:resume_app/features/resume_dialog/presentation/cubit/resume_form_state.dart';
 import 'package:resume_app/features/resume_dialog/presentation/job_certification_and_cources/job_certification_and_courses.dart';
 import 'package:resume_app/features/resume_dialog/presentation/job_description/job_description.dart';
+import 'package:resume_app/features/resume_dialog/presentation/job_experiences/job_experiences.dart';
 import 'package:resume_app/features/resume_dialog/presentation/job_language/job_language_view.dart';
 import 'package:resume_app/features/resume_dialog/presentation/job_summary/job_summary.dart';
 import 'package:resume_app/features/resume_dialog/presentation/skills_picker/skills_picker.dart';
@@ -72,7 +73,9 @@ class _JobApplicationViewScreenState extends State<JobApplicationViewScreen>
 
     return BlocProvider(
       create: (context) => ResumeDialogCubit(
-          jobDescriptionUseCases: getIt(), jobSummaryUseCase: getIt()),
+          jobDescriptionUseCases: getIt(),
+          jobSummaryUseCase: getIt(),
+          jobExperienceEnhanceUseCase: getIt()),
       child: Scaffold(
         appBar: AppBar(
           title: const Text("Job Application"),
@@ -127,6 +130,12 @@ class _JobApplicationViewScreenState extends State<JobApplicationViewScreen>
                           physics: NeverScrollableScrollPhysics(),
                           controller: _pageViewController,
                           children: [
+                            JobExperiences(
+                              screenHeight: screenHeight,
+                              screenWidth: screenWidth,
+                              state: state,
+                              cubit: context.read<ResumeDialogCubit>(),
+                            ),
                             JobDescription(
                               onFinished: () {
                                 if (formKeyJobDescription.currentState!

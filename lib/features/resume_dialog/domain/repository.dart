@@ -6,4 +6,5 @@ abstract class JobDialogRepository {
   Future<Either<Failure, JobInfo>> getJobDescription(String jobDescription);
   Future<Either<Failure, String>> getJobSummary(
       String jobSummary, List<String> keyWords);
+  Future<Either<Failure, String>> getJobExperienceEnhance(String jobSummary);
 }

@@ -38,4 +38,16 @@ class JobRepImp implements JobDialogRepository {
       return Left(Failure(id: 111, message: e.toString()));
     }
   }
+
+  @override
+  Future<Either<Failure, String>> getJobExperienceEnhance(
+      String jobExperience) async {
+    try {
+      JobExperienceResponse responseModel =
+          await serviceProvider.getJobExperience(jobExperience);
+      return (Right(responseModel.jobExperience));
+    } catch (e) {
+      return Left(Failure(id: 112, message: e.toString()));
+    }
+  }
 }

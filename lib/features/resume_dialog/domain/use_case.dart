@@ -16,6 +16,18 @@ class JobDescriptionUseCases extends BaseUseCase<String, JobInfo> {
   }
 }
 
+class JobExperienceEnhanceUseCase extends BaseUseCase<String, String> {
+  JobDialogRepository repository;
+  JobExperienceEnhanceUseCase({
+    required this.repository,
+  });
+  @override
+  Future<Either<Failure, String>> execute(String input) async {
+    // TODO: implement execute
+    return await repository.getJobExperienceEnhance(input);
+  }
+}
+
 class JobSummaryUseCase extends BaseUseCase<JobSummaryInput, String> {
   JobDialogRepository repository;
   JobSummaryUseCase({
