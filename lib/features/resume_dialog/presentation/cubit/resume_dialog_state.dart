@@ -10,9 +10,11 @@ class ResumeDialogState extends Equatable {
   Map<String, bool> selectedHardSkills;
   Map<String, bool> selectedSoftSkills;
   List<WorkExperience> punchOfWorkExperiences;
+  List<ProjectExperience> punchOfProjectExperiences;
   JobInfo jobInfoAi; // this is the information that got by AI
 
   ResumeDialogState({
+    required this.punchOfProjectExperiences,
     required this.selectedEducationInfo,
     required this.language,
     required this.resumeFormState,
@@ -34,10 +36,13 @@ class ResumeDialogState extends Equatable {
       Map<String, bool>? selectedSoftSkills,
       MyUserInfo? userInfo,
       List<WorkExperience>? punchOfWorkExperiences,
+      List<ProjectExperience>? punchOfProjectExperiences,
       JobInfo? jobInfoAi,
       Map<String, String>? language,
       EducationInfo? selectedEducationInfo}) {
     return ResumeDialogState(
+      punchOfProjectExperiences:
+          punchOfProjectExperiences ?? this.punchOfProjectExperiences,
       selectedEducationInfo:
           selectedEducationInfo ?? this.selectedEducationInfo,
       language: language ?? this.language,
@@ -55,6 +60,7 @@ class ResumeDialogState extends Equatable {
 
   @override
   List<Object?> get props => [
+        punchOfProjectExperiences,
         selectedEducationInfo,
         language,
         resumeFormState,

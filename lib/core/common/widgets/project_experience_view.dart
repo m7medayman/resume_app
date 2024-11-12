@@ -49,7 +49,7 @@ class ProjectExperienceView extends StatelessWidget {
                             overflow: TextOverflow.ellipsis,
                           ),
                           Text(
-                            "Link: ${element.description}",
+                            "Link: ${element.link}",
                             style: Theme.of(context)
                                 .textTheme
                                 .bodySmall!

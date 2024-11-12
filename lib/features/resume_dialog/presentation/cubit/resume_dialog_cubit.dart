@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:resume_app/core/Di/injection.dart';
 import 'package:resume_app/core/data_classes/data_classes.dart';
 import 'package:resume_app/core/data_classes/job_application_data_class.dart';
+import 'package:resume_app/core/data_classes/project_experience.dart';
 import 'package:resume_app/core/data_classes/user_info.dart';
 import 'package:resume_app/core/data_classes/user_info.dart';
 import 'package:resume_app/core/data_classes/work_experience.dart';
@@ -25,6 +26,7 @@ class ResumeDialogCubit extends Cubit<ResumeDialogState> {
       required this.jobSummaryUseCase,
       required this.jobExperienceEnhanceUseCase})
       : super(ResumeDialogState(
+            punchOfProjectExperiences: [],
             selectedEducationInfo: getIt<MyUserInfo>().educationInfo,
             language: {},
             jobInfoAi: JobInfo(
@@ -50,10 +52,24 @@ class ResumeDialogCubit extends Cubit<ResumeDialogState> {
               FailureResumeFormState(errorMessage: error.message)));
       emit(state.copyWith(resumeFormState: InitResumeFormState()));
     }, (success) {
-      emit(state.copyWith(resumeFormState: SuccessResumeFormState()));
+      emit(state.copyWith(resumeFormState: InitResumeFormState()));
       returned = success;
     });
     return returned;
+  }
+
+  void addProjectExperience(ProjectExperience project) {
+    final updatedWorkExperience =
+        List<ProjectExperience>.from(state.punchOfProjectExperiences);
+    updatedWorkExperience.add(project);
+    emit(state.copyWith(punchOfProjectExperiences: updatedWorkExperience));
+  }
+
+  void deleteProjectExperience(ProjectExperience project) {
+    final updatedProjectExperience =
+        List<ProjectExperience>.from(state.punchOfProjectExperiences);
+    updatedProjectExperience.remove(project);
+    emit(state.copyWith(punchOfProjectExperiences: updatedProjectExperience));
   }
 
   addLanguage(String language, String level) {

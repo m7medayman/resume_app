@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:intl_phone_field/country_picker_dialog.dart';
-import 'package:intl_phone_field/intl_phone_field.dart';
-import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 
 import 'package:resume_app/core/constants/app_string_constats.dart';
 import 'package:resume_app/core/resources/helpers/input_fields.dart';
