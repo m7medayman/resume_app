@@ -28,13 +28,13 @@ class CourseView extends StatelessWidget {
                 children: [
                   Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: Container(
+                    child: SizedBox(
                       width: screenWidth * 0.7,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            "${element.title}",
+                            element.title,
                             style: Theme.of(context)
                                 .textTheme
                                 .headlineLarge!
@@ -50,7 +50,7 @@ class CourseView extends StatelessWidget {
                       ),
                     ),
                   ),
-                  Spacer(),
+                  const Spacer(),
                   IconButton(
                       onPressed: () {
                         onDelete(element);

@@ -113,9 +113,7 @@ class _EducationCertificationInputDialogState
                     onPressed: () async {
                       String? response = await widget
                           .enhanceFunction(descriptionInputController.text);
-                      if (response != null) {
-                        descriptionInputController.text = response;
-                      }
+                      descriptionInputController.text = response;
                     }),
 
                 // Spacer(),

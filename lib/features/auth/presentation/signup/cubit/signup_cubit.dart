@@ -1,10 +1,6 @@
-import 'dart:ffi';
-
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:meta/meta.dart';
 import 'package:resume_app/core/Di/injection.dart';
-import 'package:resume_app/core/resources/base_usecase/base_use_case.dart';
 import 'package:resume_app/core/resources/failure/failure_model.dart';
 import 'package:resume_app/features/auth/domain/use_case.dart';
 import 'signup_form_state.dart';

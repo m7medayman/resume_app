@@ -7,7 +7,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:resume_app/core/data_classes/data_classes.dart';
 import 'package:resume_app/features/resume_dialog/data/gemini_repo/job_details_service_provider.dart';
 
 import 'package:resume_app/main.dart';

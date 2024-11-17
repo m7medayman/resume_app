@@ -110,7 +110,7 @@ class _JobApplicationViewScreenState extends State<JobApplicationViewScreen>
                   duration: const Duration(milliseconds: 400),
                   curve: Curves.easeInOut);
               _doBeforeGoingToPage(1, () {
-                textEditingControllerJobTitle.text = state.jobInfoAi!.jobTitle;
+                textEditingControllerJobTitle.text = state.jobInfoAi.jobTitle;
               });
             }
           },
@@ -127,7 +127,7 @@ class _JobApplicationViewScreenState extends State<JobApplicationViewScreen>
                       children: [
                         // Wrap the PageView with BlocBuilder to have access to the Cubit
                         PageView(
-                          physics: NeverScrollableScrollPhysics(),
+                          physics: const NeverScrollableScrollPhysics(),
                           controller: _pageViewController,
                           children: [
                             JobExperiences(

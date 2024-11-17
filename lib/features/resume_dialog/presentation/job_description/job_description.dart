@@ -40,7 +40,7 @@ class JobDescription extends StatelessWidget {
             minLines: 10,
           ),
           FormSeparator(screenHeight: screenHeight),
-          ElevatedButton(onPressed: onFinished, child: Text("Next"))
+          ElevatedButton(onPressed: onFinished, child: const Text("Next"))
         ],
       ),
     ));

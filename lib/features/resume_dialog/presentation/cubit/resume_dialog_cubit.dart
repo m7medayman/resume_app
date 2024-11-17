@@ -26,17 +26,17 @@ class ResumeDialogCubit extends Cubit<ResumeDialogState> {
       required this.jobSummaryUseCase,
       required this.jobExperienceEnhanceUseCase})
       : super(ResumeDialogState(
-            punchOfProjectExperiences: [],
+            punchOfProjectExperiences: const [],
             selectedEducationInfo: getIt<MyUserInfo>().educationInfo,
-            language: {},
+            language: const {},
             jobInfoAi: JobInfo(
                 softSkills: [], hardSkills: [], jobTitle: "", keyWords: []),
             resumeFormState: InitResumeFormState(),
             jobTitle: '',
             jobSummery: '',
-            selectedHardSkills: {},
-            selectedSoftSkills: {},
-            punchOfWorkExperiences: [],
+            selectedHardSkills: const {},
+            selectedSoftSkills: const {},
+            punchOfWorkExperiences: const [],
             userInfo: getIt<MyUserInfo>()));
   void goBack() {
     emit(state.copyWith(resumeFormState: GoBackFormState()));

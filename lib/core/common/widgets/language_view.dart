@@ -31,7 +31,7 @@ class LanguageView extends StatelessWidget {
                 children: [
                   Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: Container(
+                    child: SizedBox(
                       width: screenWidth * 0.7,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -54,7 +54,7 @@ class LanguageView extends StatelessWidget {
                       ),
                     ),
                   ),
-                  Spacer(),
+                  const Spacer(),
                   IconButton(
                     onPressed: () {
                       onDelete(language);

@@ -123,7 +123,7 @@ class _LanguageSelectionDialogState extends State<LanguageSelectionDialog> {
                         Navigator.of(context).pop({
                           languageInputController.text:
                               languageInputLevelController.text
-                        } as Map<String, String>);
+                        });
                       }
                     },
                     child: Text(

@@ -2,8 +2,6 @@ import 'package:flutter/widgets.dart';
 import 'package:resume_app/core/data_classes/user_info.dart';
 import 'package:resume_app/core/resources/failure/failure_model.dart';
 
-import 'package:resume_app/features/auth/domain/entity.dart';
-
 @immutable
 sealed class LoginState {}
 

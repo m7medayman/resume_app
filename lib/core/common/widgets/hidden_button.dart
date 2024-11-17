@@ -17,14 +17,14 @@ class HiddenButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return isHidden
         ? Container()
-        : Container(
+        : SizedBox(
             height: 0.07 * screenHeight,
             child: ElevatedButton(
                 onPressed: onPressed,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    Icon(
+                    const Icon(
                       Icons.add_circle_outline,
                       color: ColorManager.textColor,
                     ),

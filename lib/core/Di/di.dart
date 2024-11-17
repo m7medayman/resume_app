@@ -1,8 +1,5 @@
-import 'dart:ffi';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get_it/get_it.dart';
-import 'package:resume_app/core/Di/injection.dart';
 
 import 'package:resume_app/core/resources/device_manager.dart/device_manager.dart';
 import 'package:resume_app/core/resources/failure/failure_handler.dart';

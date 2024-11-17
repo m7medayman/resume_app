@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class ResponsiveGrid extends StatefulWidget {
   final List<String> texts; // List of strings passed to the widget
 
-  ResponsiveGrid({required this.texts});
+  const ResponsiveGrid({super.key, required this.texts});
 
   @override
   _ResponsiveGridState createState() => _ResponsiveGridState();
@@ -37,15 +37,15 @@ class _ResponsiveGridState extends State<ResponsiveGrid> {
         List<Widget> currentRowItems = [];
 
         for (String text in widget.texts) {
-          TextStyle buttonTextStyle = TextStyle(fontSize: 16);
+          TextStyle buttonTextStyle = const TextStyle(fontSize: 16);
           double buttonWidth =
               _calculateTextWidth(text, buttonTextStyle) + padding;
 
           if (currentRowWidth + buttonWidth > availableWidth) {
             // If adding this button exceeds the available width, start a new row
             buttons.add(Row(
-              children: currentRowItems,
               mainAxisAlignment: MainAxisAlignment.start,
+              children: currentRowItems,
             ));
             currentRowItems = []; // Start a new row
             currentRowWidth = 0;
@@ -58,8 +58,8 @@ class _ResponsiveGridState extends State<ResponsiveGrid> {
         // Add the last row if it's not empty
         if (currentRowItems.isNotEmpty) {
           buttons.add(Row(
-            children: currentRowItems,
             mainAxisAlignment: MainAxisAlignment.start,
+            children: currentRowItems,
           ));
         }
 

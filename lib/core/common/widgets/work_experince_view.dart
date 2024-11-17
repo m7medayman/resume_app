@@ -33,7 +33,7 @@ class WorkExperienceView extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            "${element.title}",
+                            element.title,
                             style: Theme.of(context)
                                 .textTheme
                                 .headlineLarge!

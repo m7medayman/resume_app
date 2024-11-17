@@ -21,7 +21,7 @@ class _InputDialogState extends State<InputDialog> {
     double screenHeight = MediaQuery.sizeOf(context).height;
     double screenWidth = MediaQuery.sizeOf(context).width;
     return Dialog(
-      child: Container(
+      child: SizedBox(
         height: screenHeight * 0.3,
         child: Padding(
           padding: EdgeInsets.symmetric(
@@ -42,7 +42,7 @@ class _InputDialogState extends State<InputDialog> {
                       Navigator.of(context).pop(textEditingController.text);
                     }
                   },
-                  child: Text("Add skill"))
+                  child: const Text("Add skill"))
             ],
           ),
         ),

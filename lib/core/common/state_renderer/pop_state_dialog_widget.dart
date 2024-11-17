@@ -41,7 +41,7 @@ class LoadingDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: Text("loading"),
+      title: const Text("loading"),
       content: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -75,7 +75,7 @@ void showLoadingPopUpDialog(context) {
       barrierDismissible: false,
       context: context,
       builder: (_) {
-        return LoadingDialog();
+        return const LoadingDialog();
       });
 }
 

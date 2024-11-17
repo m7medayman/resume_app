@@ -5,7 +5,6 @@ import 'package:resume_app/core/data_classes/user_info.dart';
 import 'package:resume_app/core/resources/helpers/null_type_extension.dart';
 import 'package:resume_app/features/auth/data/Response.dart';
 import 'package:resume_app/features/auth/data/request.dart';
-import 'package:resume_app/features/auth/domain/entity.dart';
 import 'package:resume_app/features/auth/domain/use_case.dart';
 
 extension LoginMapper on LoginParameter {

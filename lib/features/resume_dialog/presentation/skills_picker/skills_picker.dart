@@ -9,7 +9,7 @@ import 'package:resume_app/features/auth/presentation/lognin/presentation/login_
 import 'package:resume_app/features/resume_dialog/presentation/cubit/resume_dialog_cubit.dart';
 
 class JobSkillPicker extends StatelessWidget {
-  JobSkillPicker(
+  const JobSkillPicker(
       {super.key,
       required this.onFinished,
       required this.screenWidth,
@@ -177,7 +177,7 @@ class SoftSkillWrap extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Wrap(
-      children: state.jobInfoAi!.softSkills.map((softSkill) {
+      children: state.jobInfoAi.softSkills.map((softSkill) {
         return Padding(
           padding: EdgeInsets.symmetric(
               horizontal: screenWidth * 0.01, vertical: screenHeight * 0.01),
@@ -221,7 +221,7 @@ class HardSkillsWrap extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Wrap(
-      children: state.jobInfoAi!.hardSkills.map((hardSkill) {
+      children: state.jobInfoAi.hardSkills.map((hardSkill) {
         return Padding(
           padding: EdgeInsets.symmetric(
               horizontal: screenWidth * 0.01, vertical: screenHeight * 0.005),

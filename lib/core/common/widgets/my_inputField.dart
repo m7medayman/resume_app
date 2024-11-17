@@ -188,6 +188,7 @@ class _ReenterPasswordInputFiledState extends State<ReenterPasswordInputFiled> {
               widget.passwordINputController.text.trim()) {
             return "password doesn't match ";
           }
+          return null;
         },
         decoration: InputDecoration(
             suffixIcon: IconButton(

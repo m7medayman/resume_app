@@ -1,5 +1,3 @@
-import 'package:resume_app/features/resume_dialog/data/response_model.dart';
-
 class JobInfo {
   List<String> softSkills;
   List<String> hardSkills;

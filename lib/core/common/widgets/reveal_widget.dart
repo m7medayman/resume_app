@@ -3,12 +3,12 @@ import 'package:resume_app/core/common/widgets/separator.dart';
 
 class RevealField extends StatelessWidget {
   const RevealField({
-    Key? key,
+    super.key,
     required this.cancelFunction,
     required this.isHidden,
     required this.child,
     required this.screenHeight,
-  }) : super(key: key);
+  });
 
   final double screenHeight;
   final bool isHidden;
@@ -27,7 +27,7 @@ class RevealField extends StatelessWidget {
                   Expanded(child: child),
                   IconButton(
                       onPressed: cancelFunction,
-                      icon: Icon(Icons.cancel_outlined))
+                      icon: const Icon(Icons.cancel_outlined))
                 ],
               ),
               FormSeparator(screenHeight: screenHeight),

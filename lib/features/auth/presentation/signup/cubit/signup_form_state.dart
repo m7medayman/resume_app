@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 @immutable
 sealed class SignupFormState {
-  SignupFormState();
+  const SignupFormState();
 }
 
 class initSignupFormState extends SignupFormState {}

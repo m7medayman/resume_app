@@ -4,8 +4,6 @@ import 'package:resume_app/core/Di/di.dart';
 import 'package:resume_app/core/routing/routes_manager.dart';
 import 'package:resume_app/core/screen_manager/screen_service_manager.dart';
 import 'package:resume_app/core/theme_manager/theme_manager.dart';
-import 'package:resume_app/features/auth/presentation/signup/presentation/singup_presentation.dart';
-import 'package:resume_app/features/resume_dialog/presentation/job_application_view_screen/job_application_view_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

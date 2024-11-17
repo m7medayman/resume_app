@@ -48,7 +48,7 @@ class JobLanguagesView extends StatelessWidget {
                     showDialog(
                       context: context,
                       builder: (_) {
-                        return Dialog(
+                        return const Dialog(
                           child: LanguageSelectionDialog(),
                         );
                       },
@@ -63,7 +63,7 @@ class JobLanguagesView extends StatelessWidget {
               ],
             ),
             FormSeparator(screenHeight: screenHeight),
-            Divider(),
+            const Divider(),
             Row(
               children: [
                 ElevatedButton(

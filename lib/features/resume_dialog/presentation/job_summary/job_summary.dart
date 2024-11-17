@@ -49,7 +49,7 @@ class JobSummary extends StatelessWidget {
           formKey: formKey,
         ),
         FormSeparator(screenHeight: screenHeight),
-        Divider(),
+        const Divider(),
         FormSeparator(screenHeight: screenHeight),
         GoBackAndForward(formKey: formKey, cubit: cubit)
       ],

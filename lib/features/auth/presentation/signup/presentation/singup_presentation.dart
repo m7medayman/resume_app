@@ -135,7 +135,7 @@ class _SignUpPresentationState extends State<SignUpPresentation> {
     showDialog(
         context: context,
         builder: (_) {
-          return LoadingDialog();
+          return const LoadingDialog();
         });
   }
 
@@ -211,13 +211,13 @@ class _SignUpPresentationState extends State<SignUpPresentation> {
                   context.read<SignupCubit>().changeLinkedInFiledVisibility();
                 },
                 isHidden: !state.linkedInFlag,
+                screenHeight: screenHeight,
                 child: GeneralInputFiled(
                     fieldFormKey: linkeInKey,
                     fieldInput: linkeInInput,
                     label: AppStrings.addLinkedin,
                     validateMessageFunction:
-                        InputValidator.validateRegularField),
-                screenHeight: screenHeight),
+                        InputValidator.validateRegularField)),
             RevealField(
                 cancelFunction: () {
                   websiteInput.clear();
@@ -225,13 +225,13 @@ class _SignUpPresentationState extends State<SignUpPresentation> {
                   context.read<SignupCubit>().changeWebsiteFiledVisibility();
                 },
                 isHidden: !state.websiteFlag,
+                screenHeight: screenHeight,
                 child: GeneralInputFiled(
                     fieldFormKey: websiteKey,
                     fieldInput: websiteInput,
                     label: AppStrings.addWebsite,
                     validateMessageFunction:
-                        InputValidator.validateRegularField),
-                screenHeight: screenHeight),
+                        InputValidator.validateRegularField)),
 
             Center(
               child: Wrap(
@@ -239,7 +239,7 @@ class _SignUpPresentationState extends State<SignUpPresentation> {
                   HiddenButton(
                     screenHeight: screenHeight,
                     isHidden: state.extraPhoneFlag,
-                    childWidget: Text(AppStrings.addPhone),
+                    childWidget: const Text(AppStrings.addPhone),
                     onPressed: () {
                       extraFields["extraPhone"] = extraPhoneKey;
                       context
@@ -253,7 +253,7 @@ class _SignUpPresentationState extends State<SignUpPresentation> {
                   HiddenButton(
                     screenHeight: screenHeight,
                     isHidden: state.linkedInFlag,
-                    childWidget: Text(AppStrings.addLinkedin),
+                    childWidget: const Text(AppStrings.addLinkedin),
                     onPressed: () {
                       extraFields["linkedIn"] = linkeInKey;
                       context
@@ -390,7 +390,6 @@ class _SignUpPresentationState extends State<SignUpPresentation> {
       if (!i.currentState!.validate()) {
         checkKey = false;
       }
-      ;
     }
     return checkKey;
   }

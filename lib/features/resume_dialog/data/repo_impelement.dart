@@ -28,6 +28,7 @@ class JobRepImp implements JobDialogRepository {
     }
   }
 
+  @override
   Future<Either<Failure, String>> getJobSummary(
       String inputJobSummary, List<String> keyWords) async {
     try {
