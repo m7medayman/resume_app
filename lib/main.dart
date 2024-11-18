@@ -4,11 +4,13 @@ import 'package:resume_app/core/Di/di.dart';
 import 'package:resume_app/core/routing/routes_manager.dart';
 import 'package:resume_app/core/screen_manager/screen_service_manager.dart';
 import 'package:resume_app/core/theme_manager/theme_manager.dart';
+import 'package:resume_app/firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  await Firebase.initializeApp(    options: DefaultFirebaseOptions.currentPlatform
+);
   initModule();
 
   // configureDependencies(Env.dev);
