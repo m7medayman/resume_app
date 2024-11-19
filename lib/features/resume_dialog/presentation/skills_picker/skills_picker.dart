@@ -2,10 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:resume_app/core/common/widgets/input_dialog.dart';
 import 'package:resume_app/core/common/widgets/my_inputField.dart';
 import 'package:resume_app/core/common/widgets/separator.dart';
-import 'package:resume_app/core/constants/app_string_constats.dart';
 import 'package:resume_app/core/resources/helpers/input_fields.dart';
 import 'package:resume_app/core/theme_manager/color_manager.dart';
-import 'package:resume_app/features/auth/presentation/lognin/presentation/login_screen.dart';
 import 'package:resume_app/features/resume_dialog/presentation/cubit/resume_dialog_cubit.dart';
 
 class JobSkillPicker extends StatelessWidget {

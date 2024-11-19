@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:resume_app/core/common/widgets/separator.dart';
 import 'package:resume_app/core/data_classes/data_classes.dart';
 import 'package:resume_app/core/theme_manager/color_manager.dart';
-import 'package:resume_app/features/auth/presentation/signup/cubit/signup_cubit.dart';
 
 class DegreeView extends StatelessWidget {
   const DegreeView({

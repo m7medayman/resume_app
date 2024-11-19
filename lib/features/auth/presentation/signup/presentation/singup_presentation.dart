@@ -1,4 +1,3 @@
-import 'package:country_state_city_pro/country_state_city_pro.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -13,13 +12,11 @@ import 'package:resume_app/core/common/widgets/hidden_button.dart';
 import 'package:resume_app/core/common/widgets/my_inputField.dart';
 import 'package:resume_app/core/common/widgets/reveal_widget.dart';
 import 'package:resume_app/core/common/widgets/separator.dart';
-import 'package:resume_app/core/constants/app_sizes_constants.dart';
 import 'package:resume_app/core/constants/app_string_constats.dart';
 import 'package:resume_app/core/constants/widget_dimensions.dart';
 import 'package:resume_app/core/data_classes/data_classes.dart';
 import 'package:resume_app/core/resources/helpers/input_fields.dart';
 import 'package:resume_app/core/routing/routes_manager.dart';
-import 'package:resume_app/core/theme_manager/color_manager.dart';
 import 'package:resume_app/features/auth/presentation/signup/cubit/signup_cubit.dart';
 import 'package:resume_app/features/auth/presentation/signup/cubit/signup_form_state.dart';
 

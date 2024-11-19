@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:resume_app/core/constants/app_string_constats.dart';
 import 'package:resume_app/core/resources/helpers/input_fields.dart';
 import 'package:resume_app/core/theme_manager/color_manager.dart';
-import 'package:resume_app/core/theme_manager/font/font_size_wight_manager.dart';
 
 class GeneralInputFiled extends StatelessWidget {
   const GeneralInputFiled(

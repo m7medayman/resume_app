@@ -1,47 +1,52 @@
+import 'dart:typed_data';
+
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 
 import 'package:resume_app/core/data_classes/pdf_data_class.dart';
+import 'dart:typed_data';
+import 'package:pdf/widgets.dart' as pw;
 
 class PdfForm {
-  // PdfData data;
-  // PdfForm(
-  //   this.data,
-  // );
-  pw.Document getDocument() {
+  Future<Uint8List> getDocument() async {
     final pdf = pw.Document();
+
+    // Adding a page
     pdf.addPage(pw.MultiPage(
-        pageFormat: PdfPageFormat.a4,
-        build: (pw.Context context) {
-          return [
-            pw.Column(
-                mainAxisAlignment: pw.MainAxisAlignment.center,
-                crossAxisAlignment: pw.CrossAxisAlignment.start,
-                children: [
-                  pw.Center(
-                    child: pw.Text("Hello World"),
-                    // Example GridView
-                  ),
-                  pw.GridView(
-                    crossAxisCount: 3, // Number of columns
-                    childAspectRatio: 1, // Adjust the aspect ratio as needed
-                    children: List.generate(
-                      9, // Number of items in the grid
-                      (index) => pw.Container(
+      pageFormat: PdfPageFormat.a4,
+      build: (pw.Context context) {
+        return [
+          pw.Table(
+            defaultColumnWidth: pw.IntrinsicColumnWidth(),
+            children: List.generate(
+              105, // Rows
+              (rowIndex) {
+                return pw.TableRow(
+                  children: List.generate(
+                    3, // Columns
+                    (colIndex) {
+                      int index = rowIndex * 3 + colIndex;
+                      return pw.Container(
                         alignment: pw.Alignment.center,
                         margin: const pw.EdgeInsets.all(4),
-                        color: PdfColors.blue200,
                         child: pw.Text(
                           'Item ${index + 1}',
-                          style: pw.TextStyle(
-                              fontSize: 14, color: PdfColors.white),
+                          style: const pw.TextStyle(
+                            fontSize: 14,
+                          ),
                         ),
-                      ),
-                    ),
+                      );
+                    },
                   ),
-                ])
-          ]; // Center
-        })); // Page
-    return pdf;
+                );
+              },
+            ),
+          ),
+        ];
+      },
+    ));
+
+    // Return the generated PDF document as Uint8List
+    return pdf.save();
   }
 }

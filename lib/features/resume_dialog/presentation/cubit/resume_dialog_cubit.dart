@@ -1,17 +1,12 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:resume_app/core/Di/injection.dart';
 import 'package:resume_app/core/data_classes/data_classes.dart';
-import 'package:resume_app/core/data_classes/job_application_data_class.dart';
 import 'package:resume_app/core/data_classes/project_experience.dart';
 import 'package:resume_app/core/data_classes/user_info.dart';
-import 'package:resume_app/core/data_classes/user_info.dart';
 import 'package:resume_app/core/data_classes/work_experience.dart';
-import 'package:resume_app/features/auth/presentation/signup/cubit/signup_form_state.dart';
 import 'package:resume_app/features/resume_dialog/domain/entities/job_info.dart';
-import 'package:resume_app/features/resume_dialog/domain/repository.dart';
 import 'package:resume_app/features/resume_dialog/domain/use_case.dart';
 import 'package:resume_app/features/resume_dialog/presentation/cubit/resume_form_state.dart';
 

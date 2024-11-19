@@ -11,6 +11,9 @@ import 'package:resume_app/features/auth/data/fire_base_auth/failure_handler.dar
 import 'package:resume_app/features/auth/data/fire_base_auth/fire_base_auth.dart';
 import 'package:resume_app/features/auth/data/repository.dart';
 import 'package:resume_app/features/auth/domain/use_case.dart';
+import 'package:resume_app/features/pdf_creator/data/pdf_form.dart';
+import 'package:resume_app/features/pdf_creator/data/repo_imp.dart';
+import 'package:resume_app/features/pdf_creator/domain/pdf_creating_use_case.dart';
 import 'package:resume_app/features/resume_dialog/data/gemini_repo/job_details_service_provider.dart';
 import 'package:resume_app/features/resume_dialog/data/repo_impelement.dart';
 import 'package:resume_app/features/resume_dialog/domain/use_case.dart';
@@ -98,4 +101,15 @@ void initResumeDialogModel() {
       .registerFactory(() => JobSummaryUseCase(repository: getIt<JobRepImp>()));
   getIt.registerFactory(
       () => JobExperienceEnhanceUseCase(repository: getIt<JobRepImp>()));
+}
+
+bool isPdfViewerInit = false;
+void initPdfViewerModule() {
+  if (isPdfViewerInit) {
+    return;
+  }
+  getIt.registerFactory(() => PdfForm());
+  getIt.registerFactory(() => pdfRepoImp(pdfForm: getIt()));
+  getIt.registerFactory(() => PdfCreatingUseCase(repo: getIt<pdfRepoImp>()));
+  isPdfViewerInit = true;
 }

@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:either_dart/src/either.dart';
 import 'package:pdf/src/widgets/document.dart';
 
@@ -12,9 +14,9 @@ class pdfRepoImp implements PdfRepo {
     required this.pdfForm,
   });
   @override
-  Future<Either<Failure, Document>> getPdf(PdfData pdfData) async {
+  Future<Either<Failure, Uint8List>> getPdf(PdfData pdfData) async {
     try {
-      return Right(pdfForm.getDocument());
+      return Right(await pdfForm.getDocument());
     } catch (error) {
       return Left(Failure(id: 2001, message: error.toString()));
     }

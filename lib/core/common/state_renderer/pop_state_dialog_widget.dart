@@ -70,12 +70,15 @@ class ErrorPopUpDialog extends MyAlertDialogPopUp {
         );
 }
 
-void showLoadingPopUpDialog(context) {
+void showLoadingPopUpDialog(context,
+    {GlobalKey<NavigatorState>? navigatorKey}) {
   showDialog(
       barrierDismissible: false,
       context: context,
       builder: (_) {
-        return const LoadingDialog();
+        return LoadingDialog(
+          key: navigatorKey,
+        );
       });
 }
 

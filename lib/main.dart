@@ -9,8 +9,7 @@ import 'package:resume_app/firebase_options.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(    options: DefaultFirebaseOptions.currentPlatform
-);
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   initModule();
 
   // configureDependencies(Env.dev);
@@ -30,7 +29,7 @@ class MyApp extends StatelessWidget {
     ScreenSizeService screenSizeService = getIt<ScreenSizeService>();
     screenSizeService.updateScreenSize(screenWidth);
     return MaterialApp(
-      initialRoute: Routes.login, // Set the initial route
+      initialRoute: Routes.pdfView, // Set the initial route
       onGenerateRoute: RouteManager.generateRoute,
       debugShowCheckedModeBanner: false,
       theme: myThemeManager.getTheme(),

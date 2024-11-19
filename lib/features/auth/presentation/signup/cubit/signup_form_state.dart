@@ -13,7 +13,7 @@ class SuccessSignupFormState extends SignupFormState {}
 
 class FailureSignupFormState extends SignupFormState {
   final String errorMessage;
-  FailureSignupFormState({
+  const FailureSignupFormState({
     required this.errorMessage,
   });
 }
