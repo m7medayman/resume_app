@@ -43,7 +43,7 @@ class PdfView extends StatelessWidget {
                   Navigator.of(navigatorKey.currentContext!).pop();
                 }
 
-                Navigator.push(
+                 Navigator.push(
                     context,
                     MaterialPageRoute(
                         builder: (BuildContext context) =>
