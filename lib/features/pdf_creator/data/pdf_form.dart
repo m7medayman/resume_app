@@ -7,6 +7,7 @@ import 'package:resume_app/core/data_classes/pdf_data_class.dart';
 import 'dart:typed_data';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:resume_app/features/pdf_creator/data/pdf_constants.dart';
+import 'package:resume_app/features/pdf_creator/data/pdf_strings.dart';
 
 class PdfForm {
   Future<Uint8List> getDocument() async {
@@ -34,11 +35,24 @@ class PdfForm {
           pw.SizedBox(height: 5),
           pw.Text("Location: cario ,Egypt", style: PdfTextStyles.mediumBold),
           pw.SizedBox(height: 25),
-          pw.Text("Professional Summary", style: PdfTextStyles.largeBold),
+          pw.Text(
+            "Professional Summary",
+            style: PdfTextStyles.largeBold,
+          ),
           pw.Divider(thickness: 1, color: PdfColors.black),
+          pw.Text(
+            PdfStrings.professionalSummary,
+            style: PdfTextStyles.medium,
+          ),
+          pw.SizedBox(height: 25),
+          // end of the professional summary
 
- pw.Text("Phone", style: PdfTextStyles.mediumBold),
-
+          pw.Text(
+            "KEY COMPETENCIES - SKILLS",
+            style: PdfTextStyles.largeBold,
+          ),
+          pw.Divider(thickness: 1, color: PdfColors.black),
+          pw.SizedBox(height: 25),
           pw.Table(
             defaultColumnWidth: pw.IntrinsicColumnWidth(),
             children: List.generate(
@@ -50,15 +64,12 @@ class PdfForm {
                     (colIndex) {
                       int index = rowIndex * 3 + colIndex;
                       return pw.Container(
-                        alignment: pw.Alignment.center,
-                        margin: const pw.EdgeInsets.all(4),
-                        child: pw.Text(
-                          'Item ${index + 1}',
-                          style: const pw.TextStyle(
-                            fontSize: 14,
-                          ),
-                        ),
-                      );
+                          alignment: pw.Alignment.center,
+                          margin: const pw.EdgeInsets.all(4),
+                          child: pw.Text(
+                            "-skillllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll $index",
+                            style: PdfTextStyles.medium,
+                          ));
                     },
                   ),
                 );
