@@ -1,3 +1,8 @@
+import 'package:resume_app/core/data_classes/data_classes.dart';
+import 'package:resume_app/core/data_classes/project_experience.dart';
+import 'package:resume_app/core/data_classes/work_experience.dart';
+import 'package:word_generator/word_generator.dart';
+
 class PdfStrings {
   // Professional Summary
   static const professionalSummary =
@@ -19,7 +24,8 @@ class PdfStrings {
 
   // Technical Proficiencies
   static const technicalProficienciesTitle = 'Technical Proficiencies';
-  static const programmingLanguages = 'Programming Languages: Flutter, Dart, Python, C++';
+  static const programmingLanguages =
+      'Programming Languages: Flutter, Dart, Python, C++';
   static const tools = 'Tools: Git, Firebase, GraphQL';
   static const platforms = 'Platforms: Android, iOS';
 
@@ -69,4 +75,34 @@ class PdfStrings {
     'Problem-solving mindset with a focus on delivering high-quality solutions.',
     'Fast learner with the ability to adapt to new technologies.',
   ];
+  static List<Degree> testDegrees = List.filled(
+      6,
+      Degree(
+          title: 'test',
+          grade: GradeDegree.ACCEPTED,
+          startDate: DateTime(2001),
+          endDate: DateTime(2002),
+          school: 'test school'));
+  static List<Course> testCorses = List.filled(
+      5,
+      Course(
+          title: 'test Cors',
+          startDate: DateTime(2001, 3),
+          endDate: DateTime(2002, 4)));
+  static List<ProjectExperience> testProjects = List.filled(
+      5,
+      ProjectExperience(
+          title: 'project test',
+          link: "www.test.com",
+          description:
+              'this is dis for project testttttt twetsdgsdg etwdsdgsadg teewtsdg wetdgdsg tewgsgsdg etsdgsdgsdwet dgsdgsdgwe dsgwe sdg gs rg sd sdgsdg weg sdge gdsg s sdg e gsd gsdgs '));
+  static List<WorkExperience> testExperince = List.filled(
+      6,
+      WorkExperience(
+          description: WordGenerator().randomSentence(20),
+          title: 'test work expreince ',
+          startDate: DateTime(2001, 4),
+          endDate: DateTime(2002, 5)));
+  static List<String> testSkills =
+      List.filled(30, "Test skill hard 1212 tooooo looooooooooooong ");
 }

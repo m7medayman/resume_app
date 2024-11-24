@@ -8,6 +8,7 @@ import 'dart:typed_data';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:resume_app/features/pdf_creator/data/pdf_constants.dart';
 import 'package:resume_app/features/pdf_creator/data/pdf_strings.dart';
+import 'package:resume_app/features/pdf_creator/data/pdf_widgets.dart';
 
 class PdfForm {
   Future<Uint8List> getDocument() async {
@@ -44,6 +45,7 @@ class PdfForm {
             PdfStrings.professionalSummary,
             style: PdfTextStyles.medium,
           ),
+
           pw.SizedBox(height: 25),
           // end of the professional summary
 
@@ -52,30 +54,43 @@ class PdfForm {
             style: PdfTextStyles.largeBold,
           ),
           pw.Divider(thickness: 1, color: PdfColors.black),
+          SkillsColumn(skills: PdfStrings.testSkills),
           pw.SizedBox(height: 25),
-          pw.Table(
-            defaultColumnWidth: pw.IntrinsicColumnWidth(),
-            children: List.generate(
-              20, // Rows
-              (rowIndex) {
-                return pw.TableRow(
-                  children: List.generate(
-                    3, // Columns
-                    (colIndex) {
-                      int index = rowIndex * 3 + colIndex;
-                      return pw.Container(
-                          alignment: pw.Alignment.center,
-                          margin: const pw.EdgeInsets.all(4),
-                          child: pw.Text(
-                            "-skillllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll $index",
-                            style: PdfTextStyles.medium,
-                          ));
-                    },
-                  ),
-                );
-              },
-            ),
+
+          pw.SizedBox(height: 25),
+// end of skills section
+
+          pw.Text(
+            " EDUCATION ",
+            style: PdfTextStyles.largeBold,
           ),
+          pw.Divider(thickness: 1, color: PdfColors.black),
+          EducationColumn(degrees: PdfStrings.testDegrees),
+          pw.SizedBox(height: 25),
+          // end of Education
+          pw.Text(
+            "COURCES & CERTIFICATIONS",
+            style: PdfTextStyles.largeBold,
+          ),
+          pw.Divider(thickness: 1, color: PdfColors.black),
+          CoursesColumn(courses: PdfStrings.testCorses),
+          pw.SizedBox(height: 25),
+          // end of certification and references
+          pw.Text(
+            " EXPERIENCE ",
+            style: PdfTextStyles.largeBold,
+          ),
+          pw.Divider(thickness: 1, color: PdfColors.black),
+          ExperinceColumn(workExperience: PdfStrings.testExperince),
+          pw.SizedBox(height: 25),
+          // end of experience
+          pw.Text(
+            "PROJECTS",
+            style: PdfTextStyles.largeBold,
+          ),
+          pw.Divider(thickness: 1, color: PdfColors.black),
+          ProjectColumn(projects: PdfStrings.testProjects),
+          pw.SizedBox(height: 25),
         ];
       },
     ));
