@@ -11,6 +11,8 @@ import 'package:resume_app/features/pdf_creator/data/pdf_strings.dart';
 import 'package:resume_app/features/pdf_creator/data/pdf_widgets.dart';
 
 class PdfForm {
+  PdfData data;
+  PdfForm({required this.data});
   Future<Uint8List> getDocument() async {
     final pdf = pw.Document();
 
@@ -19,22 +21,20 @@ class PdfForm {
       pageFormat: PdfPageFormat.a4,
       build: (pw.Context context) {
         return [
-          pw.Text("Mohaemd Ayman Abd elmohsen",
-              style: PdfTextStyles.extraLargeBold),
-          pw.Text("Flutter developer", style: PdfTextStyles.large),
+          pw.Text(data.userInfo.name, style: PdfTextStyles.extraLargeBold),
+          pw.Text(data.jobTitle, style: PdfTextStyles.large),
           pw.Divider(thickness: 1, color: PdfColors.black),
           pw.SizedBox(height: 10),
-          pw.Text("Email: m7medmahgoop@gmail.com",
+          pw.Text("Email: ${data.userInfo.contactEmail}",
               style: PdfTextStyles.mediumBold),
           pw.SizedBox(height: 5),
-          pw.Text("Phone : 01090849580", style: PdfTextStyles.mediumBold),
+          pw.Text("Phone : ${data.userInfo.phone}",
+              style: PdfTextStyles.mediumBold),
           pw.SizedBox(height: 5),
-          pw.Link(
-              child: pw.Text("website: https://github.com/m7medayman",
-                  style: PdfTextStyles.mediumBold),
-              destination: 'https://github.com/m7medayman11'),
+          WebsiteOrEmpty(website: data.userInfo.contactDetails.website ?? ""),
           pw.SizedBox(height: 5),
-          pw.Text("Location: cario ,Egypt", style: PdfTextStyles.mediumBold),
+          pw.Text("Address:${data.userInfo.address}",
+              style: PdfTextStyles.mediumBold),
           pw.SizedBox(height: 25),
           pw.Text(
             "Professional Summary",
@@ -42,7 +42,7 @@ class PdfForm {
           ),
           pw.Divider(thickness: 1, color: PdfColors.black),
           pw.Text(
-            PdfStrings.professionalSummary,
+            data.jobSummery,
             style: PdfTextStyles.medium,
           ),
 
@@ -54,10 +54,9 @@ class PdfForm {
             style: PdfTextStyles.largeBold,
           ),
           pw.Divider(thickness: 1, color: PdfColors.black),
-          SkillsColumn(skills: PdfStrings.testSkills),
+          SkillsColumn(skills: data.selectedHardSkills),
           pw.SizedBox(height: 25),
 
-          pw.SizedBox(height: 25),
 // end of skills section
 
           pw.Text(
@@ -65,7 +64,7 @@ class PdfForm {
             style: PdfTextStyles.largeBold,
           ),
           pw.Divider(thickness: 1, color: PdfColors.black),
-          EducationColumn(degrees: PdfStrings.testDegrees),
+          EducationColumn(degrees: data.selectedEducationInfo.degrees ?? []),
           pw.SizedBox(height: 25),
           // end of Education
           pw.Text(
@@ -73,7 +72,7 @@ class PdfForm {
             style: PdfTextStyles.largeBold,
           ),
           pw.Divider(thickness: 1, color: PdfColors.black),
-          CoursesColumn(courses: PdfStrings.testCorses),
+          CoursesColumn(courses: data.selectedEducationInfo.courses ?? []),
           pw.SizedBox(height: 25),
           // end of certification and references
           pw.Text(
@@ -81,7 +80,7 @@ class PdfForm {
             style: PdfTextStyles.largeBold,
           ),
           pw.Divider(thickness: 1, color: PdfColors.black),
-          ExperinceColumn(workExperience: PdfStrings.testExperince),
+          ExperinceColumn(workExperience: data.punchOfWorkExperiences),
           pw.SizedBox(height: 25),
           // end of experience
           pw.Text(
@@ -89,7 +88,7 @@ class PdfForm {
             style: PdfTextStyles.largeBold,
           ),
           pw.Divider(thickness: 1, color: PdfColors.black),
-          ProjectColumn(projects: PdfStrings.testProjects),
+          ProjectColumn(projects: data.punchOfProjectExperience),
           pw.SizedBox(height: 25),
         ];
       },

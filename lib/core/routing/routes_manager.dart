@@ -1,6 +1,7 @@
 // Define route names as constants for better manageability
 import 'package:flutter/material.dart';
 import 'package:resume_app/core/Di/di.dart';
+import 'package:resume_app/core/data_classes/pdf_data_class.dart';
 import 'package:resume_app/features/auth/presentation/lognin/presentation/login_screen.dart';
 import 'package:resume_app/features/auth/presentation/signup/presentation/singup_presentation.dart';
 import 'package:resume_app/features/pdf_creator/presentation/view/pdf_view.dart';
@@ -23,7 +24,7 @@ class RouteManager {
         return MaterialPageRoute(
             builder: (_) => const JobApplicationViewScreen());
       case Routes.pdfView:
-        initPdfViewerModule();
+        initPdfViewerModule(settings.arguments as PdfData);
         return MaterialPageRoute(builder: (_) => PdfView());
       case Routes.signUP:
         initSignupModule();

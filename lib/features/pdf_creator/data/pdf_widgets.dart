@@ -161,3 +161,20 @@ class SkillsColumn extends pw.StatelessWidget {
         }).toList());
   }
 }
+
+class WebsiteOrEmpty extends pw.StatelessWidget {
+  final String website;
+
+  WebsiteOrEmpty({required this.website});
+
+  @override
+  pw.Widget build(pw.Context context) {
+    // TODO: implement build
+   return website.isEmpty
+        ? pw.Container()
+        : pw.Link(
+            child: pw.Text("website: $website",
+                style: PdfTextStyles.mediumBold),
+            destination: website);
+  }
+}

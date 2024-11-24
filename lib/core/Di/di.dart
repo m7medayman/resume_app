@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get_it/get_it.dart';
+import 'package:resume_app/core/data_classes/pdf_data_class.dart';
 
 import 'package:resume_app/core/resources/device_manager.dart/device_manager.dart';
 import 'package:resume_app/core/resources/failure/failure_handler.dart';
@@ -104,11 +105,14 @@ void initResumeDialogModel() {
 }
 
 bool isPdfViewerInit = false;
-void initPdfViewerModule() {
+void initPdfViewerModule(PdfData data) {
   if (isPdfViewerInit) {
+    getIt.unregister(instance: getIt<PdfForm>());
+    getIt.registerFactory(() => PdfForm(data: data));
+
     return;
   }
-  getIt.registerFactory(() => PdfForm());
+  getIt.registerFactory(() => PdfForm(data: data));
   getIt.registerFactory(() => pdfRepoImp(pdfForm: getIt()));
   getIt.registerFactory(() => PdfCreatingUseCase(repo: getIt<pdfRepoImp>()));
   isPdfViewerInit = true;

@@ -9,7 +9,7 @@ class PdfData {
   Map<String, String> language;
   EducationInfo selectedEducationInfo;
   MyUserInfo userInfo;
-  Map<String, bool> selectedHardSkills;
+  List<String> selectedHardSkills;
   Map<String, bool> selectedSoftSkills;
   List<WorkExperience> punchOfWorkExperiences;
   List<ProjectExperience> punchOfProjectExperience;
