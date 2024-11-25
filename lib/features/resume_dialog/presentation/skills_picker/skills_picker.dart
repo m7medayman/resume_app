@@ -146,7 +146,10 @@ class JobSkillPicker extends StatelessWidget {
                       const Spacer(),
                       ElevatedButton(
                           onPressed: () {
-                            cubit.getNextPage();
+                            if (fieldFormKey.currentState!.validate()) {
+                              cubit.updateJobTitle(fieldInput.text);
+                              cubit.getNextPage();
+                            }
                           },
                           child: const Text("Next")),
                     ],

@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
     ScreenSizeService screenSizeService = getIt<ScreenSizeService>();
     screenSizeService.updateScreenSize(screenWidth);
     return MaterialApp(
-      initialRoute: Routes.pdfView, // Set the initial route
+      initialRoute: Routes.login, // Set the initial route
       onGenerateRoute: RouteManager.generateRoute,
       debugShowCheckedModeBanner: false,
       theme: myThemeManager.getTheme(),

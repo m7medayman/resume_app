@@ -4,8 +4,10 @@ import 'package:resume_app/core/common/widgets/project_experience_view.dart';
 import 'package:resume_app/core/common/widgets/separator.dart';
 import 'package:resume_app/core/common/widgets/work_experince_view.dart';
 import 'package:resume_app/core/common/widgets/wrokExperience_input.dart';
+import 'package:resume_app/core/data_classes/pdf_data_class.dart';
 import 'package:resume_app/core/data_classes/project_experience.dart';
 import 'package:resume_app/core/data_classes/work_experience.dart';
+import 'package:resume_app/core/routing/routes_manager.dart';
 import 'package:resume_app/features/resume_dialog/presentation/cubit/resume_dialog_cubit.dart';
 
 class JobExperiences extends StatelessWidget {
@@ -105,7 +107,19 @@ class JobExperiences extends StatelessWidget {
             const Spacer(),
             ElevatedButton(
                 onPressed: () {
-                  cubit.getNextPage();
+                  Navigator.of(context).pushNamed(Routes.pdfView,
+                      arguments: PdfData(
+                          jobTitle: state.jobTitle,
+                          jobSummery: state.jobSummery,
+                          language: state.language,
+                          selectedEducationInfo: state.selectedEducationInfo,
+                          userInfo: state.userInfo!,
+                          selectedHardSkills:
+                              state.selectedHardSkills.keys.toList(),
+                          selectedSoftSkills: state.selectedSoftSkills,
+                          punchOfWorkExperiences: state.punchOfWorkExperiences,
+                          punchOfProjectExperience:
+                              state.punchOfProjectExperiences));
                 },
                 child: const Text("Next")),
           ],

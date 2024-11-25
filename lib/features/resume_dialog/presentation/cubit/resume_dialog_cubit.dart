@@ -35,6 +35,15 @@ class ResumeDialogCubit extends Cubit<ResumeDialogState> {
             userInfo: getIt<MyUserInfo>()));
   void goBack() {
     emit(state.copyWith(resumeFormState: GoBackFormState()));
+    emit(state.copyWith(resumeFormState: InitResumeFormState()));
+  }
+
+  void updateJobTitle(String input) {
+    emit(state.copyWith(jobTitle: input));
+  }
+
+  void updateJobSummery(String input) {
+    emit(state.copyWith(jobSummery: input));
   }
 
   Future<String> getJobExperienceEnhanced(String jobExperience) async {
@@ -148,6 +157,7 @@ class ResumeDialogCubit extends Cubit<ResumeDialogState> {
       emit(state.copyWith(resumeFormState: InitResumeFormState()));
     }, (success) {
       emit(state.copyWith(
+          jobSummery: success,
           resumeFormState:
               SuccessResumeFormStateJobSummary(jobSummary: success)));
       emit(state.copyWith(resumeFormState: InitResumeFormState()));
@@ -155,7 +165,7 @@ class ResumeDialogCubit extends Cubit<ResumeDialogState> {
   }
 
   void getNextPage() {
-    emit(state.copyWith(resumeFormState: SuccessResumeFormState()));
+    emit(state.copyWith(resumeFormState: GoForwardFormState()));
     emit(state.copyWith(resumeFormState: InitResumeFormState()));
   }
 
@@ -218,6 +228,7 @@ class ResumeDialogCubit extends Cubit<ResumeDialogState> {
       emit(state.copyWith(
           resumeFormState: SuccessResumeFormState(), jobInfoAi: data));
       emit(state.copyWith(resumeFormState: InitResumeFormState()));
+      getNextPage();
     });
   }
 }

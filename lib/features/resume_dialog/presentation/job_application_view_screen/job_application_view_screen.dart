@@ -101,7 +101,7 @@ class _JobApplicationViewScreenState extends State<JobApplicationViewScreen>
             if (resumeFormState is SuccessResumeFormStateJobSummary) {
               textEditingControllerJobSummary.text = resumeFormState.jobSummary;
             }
-            if (resumeFormState is SuccessResumeFormState) {
+            if (resumeFormState is GoForwardFormState) {
               _currentPageIndex++;
               _pageViewController.nextPage(
                   duration: const Duration(milliseconds: 400),
@@ -127,12 +127,6 @@ class _JobApplicationViewScreenState extends State<JobApplicationViewScreen>
                           physics: const NeverScrollableScrollPhysics(),
                           controller: _pageViewController,
                           children: [
-                            JobExperiences(
-                              screenHeight: screenHeight,
-                              screenWidth: screenWidth,
-                              state: state,
-                              cubit: context.read<ResumeDialogCubit>(),
-                            ),
                             JobDescription(
                               onFinished: () {
                                 if (formKeyJobDescription.currentState!
@@ -176,6 +170,12 @@ class _JobApplicationViewScreenState extends State<JobApplicationViewScreen>
                                 screenWidth: screenWidth,
                                 cubit: context.read<ResumeDialogCubit>(),
                                 state: state),
+                            JobExperiences(
+                              screenHeight: screenHeight,
+                              screenWidth: screenWidth,
+                              state: state,
+                              cubit: context.read<ResumeDialogCubit>(),
+                            ),
                           ],
                         ),
                       ],

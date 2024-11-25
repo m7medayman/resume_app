@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get_it/get_it.dart';
 import 'package:resume_app/core/data_classes/pdf_data_class.dart';
+import 'package:resume_app/core/data_classes/user_info.dart';
 
 import 'package:resume_app/core/resources/device_manager.dart/device_manager.dart';
 import 'package:resume_app/core/resources/failure/failure_handler.dart';
@@ -105,9 +106,9 @@ void initResumeDialogModel() {
 }
 
 bool isPdfViewerInit = false;
-void initPdfViewerModule(PdfData data) {
+void initPdfViewerModule(PdfData data) async {
   if (isPdfViewerInit) {
-    getIt.unregister(instance: getIt<PdfForm>());
+    await getIt.unregister<PdfForm>();
     getIt.registerFactory(() => PdfForm(data: data));
 
     return;
@@ -116,4 +117,16 @@ void initPdfViewerModule(PdfData data) {
   getIt.registerFactory(() => pdfRepoImp(pdfForm: getIt()));
   getIt.registerFactory(() => PdfCreatingUseCase(repo: getIt<pdfRepoImp>()));
   isPdfViewerInit = true;
+}
+
+bool isUserRegisted = false;
+void registUser(MyUserInfo userInfo) {
+  if (isUserRegisted) {
+    getIt.unregister(instance: getIt<MyUserInfo>());
+    getIt.registerLazySingleton(() => userInfo);
+
+    return;
+  }
+  isUserRegisted = true;
+  getIt.registerLazySingleton(() => userInfo);
 }

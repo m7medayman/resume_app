@@ -25,15 +25,15 @@ class PdfForm {
           pw.Text(data.jobTitle, style: PdfTextStyles.large),
           pw.Divider(thickness: 1, color: PdfColors.black),
           pw.SizedBox(height: 10),
-          pw.Text("Email: ${data.userInfo.contactEmail}",
+          pw.Text("Email : ${data.userInfo.contactEmail}",
               style: PdfTextStyles.mediumBold),
           pw.SizedBox(height: 5),
           pw.Text("Phone : ${data.userInfo.phone}",
               style: PdfTextStyles.mediumBold),
           pw.SizedBox(height: 5),
-          WebsiteOrEmpty(website: data.userInfo.contactDetails.website ?? ""),
+          LinkOrEmpty(website: data.userInfo.contactDetails.website ?? ""),
           pw.SizedBox(height: 5),
-          pw.Text("Address:${data.userInfo.address}",
+          pw.Text("Address : ${data.userInfo.address}",
               style: PdfTextStyles.mediumBold),
           pw.SizedBox(height: 25),
           pw.Text(
@@ -59,35 +59,16 @@ class PdfForm {
 
 // end of skills section
 
-          pw.Text(
-            " EDUCATION ",
-            style: PdfTextStyles.largeBold,
-          ),
-          pw.Divider(thickness: 1, color: PdfColors.black),
           EducationColumn(degrees: data.selectedEducationInfo.degrees ?? []),
           pw.SizedBox(height: 25),
           // end of Education
-          pw.Text(
-            "COURCES & CERTIFICATIONS",
-            style: PdfTextStyles.largeBold,
-          ),
-          pw.Divider(thickness: 1, color: PdfColors.black),
           CoursesColumn(courses: data.selectedEducationInfo.courses ?? []),
           pw.SizedBox(height: 25),
           // end of certification and references
-          pw.Text(
-            " EXPERIENCE ",
-            style: PdfTextStyles.largeBold,
-          ),
-          pw.Divider(thickness: 1, color: PdfColors.black),
           ExperinceColumn(workExperience: data.punchOfWorkExperiences),
           pw.SizedBox(height: 25),
           // end of experience
-          pw.Text(
-            "PROJECTS",
-            style: PdfTextStyles.largeBold,
-          ),
-          pw.Divider(thickness: 1, color: PdfColors.black),
+
           ProjectColumn(projects: data.punchOfProjectExperience),
           pw.SizedBox(height: 25),
         ];

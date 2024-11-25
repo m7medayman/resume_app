@@ -24,9 +24,7 @@ class AuthRepositoryImp extends AuthRepository {
       AuthResponse response =
           await serviceProvider.login(loginParameter.toLoginRequest());
       var userInfo = response.toEntity();
-      getIt.registerLazySingleton(
-        () => userInfo,
-      );
+      registUser(userInfo);
       return Right(userInfo);
     } catch (e) {
       return Left(failureHandler.handleFailure(e.toString()));

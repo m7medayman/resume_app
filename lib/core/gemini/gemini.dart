@@ -12,7 +12,7 @@ class Gemini {
         // See https://ai.google.dev/gemini-api/docs/safety-settings
         generationConfig: GenerationConfig(
             temperature: 1,
-            topK: 64,
+            topK: 40,
             topP: 0.95,
             maxOutputTokens: maxOutputToken,
             responseMimeType: 'application/json',
