@@ -59,17 +59,21 @@ class PdfForm {
 
 // end of skills section
 
-          EducationColumn(degrees: data.selectedEducationInfo.degrees ?? []),
+          ...EducationColumn(degrees: data.selectedEducationInfo.degrees ?? [])
+              .getList(),
           pw.SizedBox(height: 25),
           // end of Education
-          CoursesColumn(courses: data.selectedEducationInfo.courses ?? []),
+          ...CoursesColumn(courses: data.selectedEducationInfo.courses ?? [])
+              .getList(),
           pw.SizedBox(height: 25),
           // end of certification and references
-          ExperinceColumn(workExperience: data.punchOfWorkExperiences),
+          ...ExperinceColumn(workExperience: data.punchOfWorkExperiences)
+              .getList(),
           pw.SizedBox(height: 25),
           // end of experience
 
-          ProjectColumn(projects: data.punchOfProjectExperience),
+          ...ProjectColumn(projects: data.punchOfProjectExperience)
+              .getWidgetList(),
           pw.SizedBox(height: 25),
         ];
       },

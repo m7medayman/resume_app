@@ -29,32 +29,42 @@ class EducationText extends pw.StatelessWidget {
   }
 }
 
-class EducationColumn extends pw.StatelessWidget {
+class EducationColumn {
   final List<Degree> degrees;
 
   EducationColumn({required this.degrees});
 
-  @override
-  pw.Widget build(pw.Context context) {
+  List<pw.Widget> getList() {
     return degrees.isEmpty
-        ? pw.Container()
-        : pw.Table(children: [
-            pw.TableRow(children: [
-              pw.Text(
-                " EDUCATION ",
-                style: PdfTextStyles.largeBold,
-              ),
-            ]),
-            pw.TableRow(children: [
-              pw.Divider(thickness: 1, color: PdfColors.black),
-            ]),
-            pw.TableRow(children: [
-              pw.Table(
-                  children: degrees.map((degree) {
-                return pw.TableRow(children: [EducationText(degree: degree)]);
-              }).toList())
-            ])
-          ]);
+        ? []
+        : [
+            pw.Text(
+              " EDUCATION ",
+              style: PdfTextStyles.largeBold,
+            ),
+            pw.Divider(thickness: 1, color: PdfColors.black),
+            pw.Table(
+                children: degrees.map((degree) {
+              return pw.TableRow(children: [EducationText(degree: degree)]);
+            }).toList())
+          ];
+    pw.Table(children: [
+      pw.TableRow(children: [
+        pw.Text(
+          " EDUCATION ",
+          style: PdfTextStyles.largeBold,
+        ),
+      ]),
+      pw.TableRow(children: [
+        pw.Divider(thickness: 1, color: PdfColors.black),
+      ]),
+      pw.TableRow(children: [
+        pw.Table(
+            children: degrees.map((degree) {
+          return pw.TableRow(children: [EducationText(degree: degree)]);
+        }).toList())
+      ])
+    ]);
   }
 }
 
@@ -84,32 +94,42 @@ class CourseText extends pw.StatelessWidget {
   }
 }
 
-class CoursesColumn extends pw.StatelessWidget {
+class CoursesColumn {
   final List<Course> courses;
 
   CoursesColumn({required this.courses});
 
-  @override
-  pw.Widget build(pw.Context context) {
+  List<pw.Widget> getList() {
     return courses.isEmpty
-        ? pw.Container()
-        : pw.Table(children: [
-            pw.TableRow(children: [
-              pw.Text(
-                "COURCES & CERTIFICATIONS",
-                style: PdfTextStyles.largeBold,
-              ),
-            ]),
-            pw.TableRow(children: [
-              pw.Divider(thickness: 1, color: PdfColors.black),
-            ]),
-            pw.TableRow(children: [
-              pw.Table(
-                  children: courses.map((corse) {
-                return pw.TableRow(children: [CourseText(course: corse)]);
-              }).toList())
-            ])
-          ]);
+        ? []
+        : [
+            pw.Text(
+              "COURCES & CERTIFICATIONS",
+              style: PdfTextStyles.largeBold,
+            ),
+            pw.Divider(thickness: 1, color: PdfColors.black),
+            pw.Table(
+                children: courses.map((corse) {
+              return pw.TableRow(children: [CourseText(course: corse)]);
+            }).toList())
+          ];
+    pw.Table(children: [
+      pw.TableRow(children: [
+        pw.Text(
+          "COURCES & CERTIFICATIONS",
+          style: PdfTextStyles.largeBold,
+        ),
+      ]),
+      pw.TableRow(children: [
+        pw.Divider(thickness: 1, color: PdfColors.black),
+      ]),
+      pw.TableRow(children: [
+        pw.Table(
+            children: courses.map((corse) {
+          return pw.TableRow(children: [CourseText(course: corse)]);
+        }).toList())
+      ])
+    ]);
   }
 }
 
@@ -141,33 +161,45 @@ class ExpericeText extends pw.StatelessWidget {
   }
 }
 
-class ExperinceColumn extends pw.StatelessWidget {
+class ExperinceColumn {
   final List<WorkExperience> workExperience;
 
   ExperinceColumn({required this.workExperience});
 
   @override
-  pw.Widget build(pw.Context context) {
+  List<pw.Widget> getList() {
     return workExperience.isEmpty
-        ? pw.Container()
-        : pw.Table(children: [
-            pw.TableRow(children: [
-              pw.Text(
-                " EXPERIENCE ",
-                style: PdfTextStyles.largeBold,
-              ),
-            ]),
-            pw.TableRow(children: [
-              pw.Divider(thickness: 1, color: PdfColors.black),
-            ]),
-            pw.TableRow(children: [
-              pw.Table(
-                  children: workExperience.map((workExperience) {
-                return pw.TableRow(
-                    children: [ExpericeText(experience: workExperience)]);
-              }).toList())
-            ])
-          ]);
+        ? []
+        : [
+            pw.Text(
+              " EXPERIENCE ",
+              style: PdfTextStyles.largeBold,
+            ),
+            pw.Divider(thickness: 1, color: PdfColors.black),
+            pw.Table(
+                children: workExperience.map((workExperience) {
+              return pw.TableRow(
+                  children: [ExpericeText(experience: workExperience)]);
+            }).toList())
+          ];
+    pw.Table(children: [
+      pw.TableRow(children: [
+        pw.Text(
+          " EXPERIENCE ",
+          style: PdfTextStyles.largeBold,
+        ),
+      ]),
+      pw.TableRow(children: [
+        pw.Divider(thickness: 1, color: PdfColors.black),
+      ]),
+      pw.TableRow(children: [
+        pw.Table(
+            children: workExperience.map((workExperience) {
+          return pw.TableRow(
+              children: [ExpericeText(experience: workExperience)]);
+        }).toList())
+      ])
+    ]);
   }
 }
 
@@ -201,35 +233,44 @@ class ProjectText extends pw.StatelessWidget {
   }
 }
 
-class ProjectColumn extends pw.StatelessWidget {
+class ProjectColumn {
   final List<ProjectExperience> projects;
 
   ProjectColumn({required this.projects});
 
-  @override
-  pw.Widget build(pw.Context context) {
+  List<pw.Widget> getWidgetList() {
     return projects.isEmpty
-        ? pw.Container()
-        : pw.Table(
-            defaultVerticalAlignment: pw.TableCellVerticalAlignment.full,
-            children: [
-                pw.TableRow(children: [
-                  pw.Text(
-                    "PROJECTS",
-                    style: PdfTextStyles.largeBold,
-                  ),
-                ]),
-                pw.TableRow(children: [
-                  pw.Divider(thickness: 1, color: PdfColors.black),
-                ]),
-                pw.TableRow(children: [
-                  pw.Table(
-                      children: projects.map((project) {
-                    return pw.TableRow(
-                        children: [ProjectText(project: project)]);
-                  }).toList())
-                ])
-              ]);
+        ? []
+        : [
+            pw.Text(
+              "PROJECTS",
+              style: PdfTextStyles.largeBold,
+            ),
+            pw.Divider(thickness: 1, color: PdfColors.black),
+            pw.Table(
+                children: projects.map((project) {
+              return pw.TableRow(children: [ProjectText(project: project)]);
+            }).toList())
+          ];
+    pw.Table(
+        defaultVerticalAlignment: pw.TableCellVerticalAlignment.full,
+        children: [
+          pw.TableRow(children: [
+            pw.Text(
+              "PROJECTS",
+              style: PdfTextStyles.largeBold,
+            ),
+          ]),
+          pw.TableRow(children: [
+            pw.Divider(thickness: 1, color: PdfColors.black),
+          ]),
+          pw.TableRow(children: [
+            pw.Table(
+                children: projects.map((project) {
+              return pw.TableRow(children: [ProjectText(project: project)]);
+            }).toList())
+          ])
+        ]);
   }
 }
 
@@ -242,7 +283,7 @@ class SkillsColumn extends pw.StatelessWidget {
   pw.Widget build(pw.Context context) {
     return pw.GridView(
         crossAxisCount: 2,
-        childAspectRatio: 0.2,
+        childAspectRatio: 0.12,
         children: skills.map((skill) {
           return pw.Padding(
               padding: pw.EdgeInsetsDirectional.all(5),

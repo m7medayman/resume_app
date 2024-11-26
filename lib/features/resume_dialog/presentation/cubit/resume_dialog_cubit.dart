@@ -16,23 +16,24 @@ class ResumeDialogCubit extends Cubit<ResumeDialogState> {
   JobDescriptionUseCases jobDescriptionUseCases;
   JobSummaryUseCase jobSummaryUseCase;
   JobExperienceEnhanceUseCase jobExperienceEnhanceUseCase;
+  static final iniReumeState = ResumeDialogState(
+      punchOfProjectExperiences: const [],
+      selectedEducationInfo: getIt<MyUserInfo>().educationInfo,
+      language: const {},
+      jobInfoAi:
+          JobInfo(softSkills: [], hardSkills: [], jobTitle: "", keyWords: []),
+      resumeFormState: InitResumeFormState(),
+      jobTitle: '',
+      jobSummery: '',
+      selectedHardSkills: const {},
+      selectedSoftSkills: const {},
+      punchOfWorkExperiences: const [],
+      userInfo: getIt<MyUserInfo>());
   ResumeDialogCubit(
       {required this.jobDescriptionUseCases,
       required this.jobSummaryUseCase,
       required this.jobExperienceEnhanceUseCase})
-      : super(ResumeDialogState(
-            punchOfProjectExperiences: const [],
-            selectedEducationInfo: getIt<MyUserInfo>().educationInfo,
-            language: const {},
-            jobInfoAi: JobInfo(
-                softSkills: [], hardSkills: [], jobTitle: "", keyWords: []),
-            resumeFormState: InitResumeFormState(),
-            jobTitle: '',
-            jobSummery: '',
-            selectedHardSkills: const {},
-            selectedSoftSkills: const {},
-            punchOfWorkExperiences: const [],
-            userInfo: getIt<MyUserInfo>()));
+      : super(iniReumeState);
   void goBack() {
     emit(state.copyWith(resumeFormState: GoBackFormState()));
     emit(state.copyWith(resumeFormState: InitResumeFormState()));
@@ -226,7 +227,9 @@ class ResumeDialogCubit extends Cubit<ResumeDialogState> {
     }, (data) {
       print(data);
       emit(state.copyWith(
-          resumeFormState: SuccessResumeFormState(), jobInfoAi: data));
+          resumeFormState: SuccessResumeFormState(),
+          jobInfoAi: data,
+          selectedHardSkills: iniReumeState.selectedHardSkills));
       emit(state.copyWith(resumeFormState: InitResumeFormState()));
       getNextPage();
     });
