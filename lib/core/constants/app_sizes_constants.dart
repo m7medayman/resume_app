@@ -40,4 +40,5 @@ class AppSize {
   static const double s140 = 140.0;
   static const double s160 = 160.0;
   static const double s190 = 190.0;
+  static const double drawerIcon = 40;
 }

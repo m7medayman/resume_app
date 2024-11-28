@@ -4,13 +4,13 @@ import 'package:resume_app/core/Di/di.dart';
 import 'package:resume_app/core/data_classes/pdf_data_class.dart';
 import 'package:resume_app/features/auth/presentation/lognin/presentation/login_screen.dart';
 import 'package:resume_app/features/auth/presentation/signup/presentation/singup_presentation.dart';
-import 'package:resume_app/features/home/home_page_view.dart';
+import 'package:resume_app/features/home/presentation/home_page_view.dart';
 import 'package:resume_app/features/pdf_creator/presentation/view/pdf_view.dart';
 import 'package:resume_app/features/resume_dialog/presentation/job_application_view_screen/job_application_view_screen.dart';
 
 class Routes {
   static const String login = '/';
-  static const String home = "home";
+  static const String home = "/home";
   static const String signUP = '/signUP';
   static const String profile = '/profile';
   static const String pdfView = '/pdfView';

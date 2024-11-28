@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:resume_app/core/common/state_renderer/pop_state_dialog_widget.dart';
@@ -103,8 +102,7 @@ class _SignUpPresentationState extends State<SignUpPresentation> {
                       _showFailurePopUpDialog(context, formState.errorMessage);
                     }
                     if (state.signupFormState is SuccessSignupFormState) {
-                      Navigator.of(context)
-                          .pushReplacementNamed(Routes.resumeApplication);
+                      Navigator.of(context).pushReplacementNamed(Routes.home);
                     }
                   },
                   child: getBody(),

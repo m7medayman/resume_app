@@ -20,13 +20,13 @@ class FontSizeManager {
   static const double body3Tablet = 14;
 
 //Mobile Font Sizes
-  static const double heading1Mobile = 36;
-  static const double heading2Mobile = 24;
-  static const double heading3Mobile = 18;
-  static const double subtitleMobile = 18;
-  static const double body1Mobile = 16;
+  static const double heading1Mobile = 22;
+  static const double heading2Mobile = 28;
+  static const double heading3Mobile = 36;
+  static const double subtitleMobile = 20;
+  static const double body1Mobile = 14;
   static const double body2Mobile = 16;
-  static const double body3Mobile = 14;
+  static const double body3Mobile = 18;
 }
 
 enum Sizes { heading1, heading2, heading3, subtitle, body1, body2, body3 }
