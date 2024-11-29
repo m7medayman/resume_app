@@ -127,7 +127,7 @@ class DrawerItem extends StatelessWidget {
             color: ColorManager.textColor,
           ),
         ),
-        isEnd ? const Divider() : Container()
+        Visibility(visible: isEnd, child: const Divider())
       ],
     );
   }

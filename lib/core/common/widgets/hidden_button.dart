@@ -15,22 +15,24 @@ class HiddenButton extends StatelessWidget {
   double screenHeight;
   @override
   Widget build(BuildContext context) {
-    return isHidden
-        ? Container()
-        : SizedBox(
-            height: 0.07 * screenHeight,
-            child: ElevatedButton(
-                onPressed: onPressed,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    const Icon(
-                      Icons.add_circle_outline,
-                      color: ColorManager.textColor,
-                    ),
-                    childWidget,
-                  ],
-                )),
-          );
+    return Visibility(
+      visible: !isHidden,
+      
+      child: SizedBox(
+        height: 0.07 * screenHeight,
+        child: ElevatedButton(
+            onPressed: onPressed,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                const Icon(
+                  Icons.add_circle_outline,
+                  color: ColorManager.textColor,
+                ),
+                childWidget,
+              ],
+            )),
+      ),
+    );
   }
 }

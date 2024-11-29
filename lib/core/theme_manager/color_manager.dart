@@ -4,7 +4,7 @@ class ColorManager {
   static const Color textColorInput = Color(0xff535360);
   static const Color textColorInputBackGround = Color(0xff393946);
   static const Color textColor = Color(0xffF3F4F6);
-  static Color primaryColor = const Color(0xFF00D763);
+  static Color primaryColor = const Color.fromARGB(255, 0, 127, 61);
   static Color onPrimaryColor = const Color(0xFFF9FAFB);
   static Color secondaryColor = const Color(0xFFF9FAFB);
   static Color onSecondaryColor = const Color(0xFFF9FAFB);
