@@ -48,23 +48,6 @@ class EducationColumn {
               return pw.TableRow(children: [EducationText(degree: degree)]);
             }).toList())
           ];
-    pw.Table(children: [
-      pw.TableRow(children: [
-        pw.Text(
-          " EDUCATION ",
-          style: PdfTextStyles.largeBold,
-        ),
-      ]),
-      pw.TableRow(children: [
-        pw.Divider(thickness: 1, color: PdfColors.black),
-      ]),
-      pw.TableRow(children: [
-        pw.Table(
-            children: degrees.map((degree) {
-          return pw.TableRow(children: [EducationText(degree: degree)]);
-        }).toList())
-      ])
-    ]);
   }
 }
 
@@ -113,23 +96,6 @@ class CoursesColumn {
               return pw.TableRow(children: [CourseText(course: corse)]);
             }).toList())
           ];
-    pw.Table(children: [
-      pw.TableRow(children: [
-        pw.Text(
-          "COURCES & CERTIFICATIONS",
-          style: PdfTextStyles.largeBold,
-        ),
-      ]),
-      pw.TableRow(children: [
-        pw.Divider(thickness: 1, color: PdfColors.black),
-      ]),
-      pw.TableRow(children: [
-        pw.Table(
-            children: courses.map((corse) {
-          return pw.TableRow(children: [CourseText(course: corse)]);
-        }).toList())
-      ])
-    ]);
   }
 }
 
@@ -182,24 +148,6 @@ class ExperinceColumn {
                   children: [ExpericeText(experience: workExperience)]);
             }).toList())
           ];
-    pw.Table(children: [
-      pw.TableRow(children: [
-        pw.Text(
-          " EXPERIENCE ",
-          style: PdfTextStyles.largeBold,
-        ),
-      ]),
-      pw.TableRow(children: [
-        pw.Divider(thickness: 1, color: PdfColors.black),
-      ]),
-      pw.TableRow(children: [
-        pw.Table(
-            children: workExperience.map((workExperience) {
-          return pw.TableRow(
-              children: [ExpericeText(experience: workExperience)]);
-        }).toList())
-      ])
-    ]);
   }
 }
 
@@ -252,43 +200,88 @@ class ProjectColumn {
               return pw.TableRow(children: [ProjectText(project: project)]);
             }).toList())
           ];
-    pw.Table(
-        defaultVerticalAlignment: pw.TableCellVerticalAlignment.full,
-        children: [
-          pw.TableRow(children: [
-            pw.Text(
-              "PROJECTS",
-              style: PdfTextStyles.largeBold,
-            ),
-          ]),
-          pw.TableRow(children: [
-            pw.Divider(thickness: 1, color: PdfColors.black),
-          ]),
-          pw.TableRow(children: [
-            pw.Table(
-                children: projects.map((project) {
-              return pw.TableRow(children: [ProjectText(project: project)]);
-            }).toList())
-          ])
-        ]);
   }
 }
 
 class SkillsColumn extends pw.StatelessWidget {
   final List<String> skills;
+  List<pw.TableRow> getRow(List<String> skills) {
+    List<pw.TableRow> result = [];
+    int index = 0;
+    while (index < skills.length) {
+      if (index + 1 < skills.length) {
+        result.add(pw.TableRow(children: [
+          pw.Expanded(
+              flex: 1,
+              child: pw.Padding(
+                padding: pw.EdgeInsets.all(3),
+                child: pw.Text("- ${skills[index]}",
+                    style: PdfTextStyles.mediumBold),
+              )),
+          pw.Expanded(
+              flex: 1,
+              child: pw.Padding(
+                padding: pw.EdgeInsets.symmetric(vertical: 3, horizontal: 8),
+                child: pw.Text("- ${skills[index + 1]}",
+                    style: PdfTextStyles.mediumBold),
+              ))
+        ]));
+      } else {
+        result.add(pw.TableRow(children: [
+          pw.Padding(
+            padding: pw.EdgeInsets.all(3),
+            child:
+                pw.Text("- ${skills[index]}", style: PdfTextStyles.mediumBold),
+          )
+        ]));
+      }
+
+      index += 2;
+    }
+    return result;
+  }
 
   SkillsColumn({required this.skills});
 
   @override
   pw.Widget build(pw.Context context) {
-    return pw.GridView(
-        crossAxisCount: 2,
-        childAspectRatio: 0.12,
-        children: skills.map((skill) {
-          return pw.Padding(
-              padding: pw.EdgeInsetsDirectional.all(5),
-              child: pw.Text("-$skill", style: PdfTextStyles.mediumBold));
-        }).toList());
+    int midList = skills.length ~/ 2;
+    List<String> firstList = List.from(skills.getRange(0, midList));
+    List<String> secondList =
+        List.from(skills.getRange(midList, skills.length));
+    return pw.Table(children: getRow(skills));
+    // pw.Row(
+    //   crossAxisAlignment: pw.CrossAxisAlignment.start,
+    //   children: [
+    //     // First column
+    //     pw.Expanded(
+    //       child: pw.ListView(
+    //         children: firstList.map((skill) {
+    //           return pw.Padding(
+    //             padding: pw.EdgeInsets.all(5),
+    //             child: pw.Text("- $skill", style: PdfTextStyles.mediumBold),
+    //           );
+    //         }).toList(),
+    //       ),
+    //     ),
+    //     pw.SizedBox(width: 10), // Space between columns
+
+    //     // Second column
+    //     pw.Expanded(
+    //       child: pw.ListView(
+    //         children: secondList.map((skill) {
+    //           return pw.Padding(
+    //             padding: pw.EdgeInsets.all(5),
+    //             child: pw.Text(
+    //               "- $skill",
+    //               style: PdfTextStyles.mediumBold,
+    //             ),
+    //           );
+    //         }).toList(),
+    //       ),
+    //     ),
+    //   ],
+    // );
   }
 }
 

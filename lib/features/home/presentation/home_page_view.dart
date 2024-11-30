@@ -68,7 +68,7 @@ class HomePageView extends StatelessWidget {
                                       Assets.assetsResumeIcon,
                                     )),
                               ),
-                              Container(
+                              Container( 
                                   height: screenheigth * 0.1,
                                   child: const Text(
                                     "Flutter developre cv to looooooooooooooooooooooooooooong",

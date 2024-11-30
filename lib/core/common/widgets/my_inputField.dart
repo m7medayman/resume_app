@@ -41,6 +41,10 @@ class GeneralInputFiled extends StatelessWidget {
         controller: fieldInput,
         validator: (value) => validateMessageFunction(value),
         decoration: InputDecoration(
+            hintStyle: Theme.of(context)
+                .textTheme
+                .bodyMedium!
+                .copyWith(color: ColorManager.textColor.withOpacity(0.6)),
             hintText: hintText,
             errorMaxLines: 2,
             suffixIcon: icon,

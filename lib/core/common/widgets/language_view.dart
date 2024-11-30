@@ -40,7 +40,7 @@ class LanguageView extends StatelessWidget {
                             language,
                             style: Theme.of(context)
                                 .textTheme
-                                .headlineLarge!
+                                .bodyMedium!
                                 .copyWith(color: ColorManager.textColor),
                           ),
                           Text(

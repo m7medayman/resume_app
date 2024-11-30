@@ -39,7 +39,7 @@ class DegreeView extends StatelessWidget {
                             element.title,
                             style: Theme.of(context)
                                 .textTheme
-                                .headlineLarge!
+                                .bodyLarge!
                                 .copyWith(color: ColorManager.textColor),
                           ),
                           Text("from: ${element.school}",
