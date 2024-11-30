@@ -14,6 +14,7 @@ import 'package:resume_app/features/auth/data/fire_base_auth/fire_base_auth.dart
 import 'package:resume_app/features/auth/data/repository.dart';
 import 'package:resume_app/features/auth/domain/use_case.dart';
 import 'package:resume_app/features/pdf_creator/data/pdf_form.dart';
+import 'package:resume_app/features/pdf_creator/data/pdf_save_service.dart';
 import 'package:resume_app/features/pdf_creator/data/repo_imp.dart';
 import 'package:resume_app/features/pdf_creator/domain/pdf_creating_use_case.dart';
 import 'package:resume_app/features/resume_dialog/data/gemini_repo/job_details_service_provider.dart';
@@ -113,9 +114,12 @@ void initPdfViewerModule(PdfData data) async {
 
     return;
   }
+  getIt.registerFactory(() => PdfSaveService());
   getIt.registerFactory(() => PdfForm(data: data));
-  getIt.registerFactory(() => pdfRepoImp(pdfForm: getIt()));
+  getIt.registerFactory(
+      () => pdfRepoImp(pdfForm: getIt(), pdfSaveService: getIt()));
   getIt.registerFactory(() => PdfCreatingUseCase(repo: getIt<pdfRepoImp>()));
+  getIt.registerFactory(() => PdfSaveUseCase(repo: getIt<pdfRepoImp>()));
   isPdfViewerInit = true;
 }
 

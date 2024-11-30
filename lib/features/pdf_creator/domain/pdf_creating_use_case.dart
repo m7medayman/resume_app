@@ -17,3 +17,20 @@ class PdfCreatingUseCase extends BaseUseCase<PdfData, Uint8List> {
     return await repo.getPdf(input);
   }
 }
+
+class PdfSaveUseCase extends BaseUseCase<PdfSaveInput, String> {
+  final PdfRepo repo;
+
+  PdfSaveUseCase({required this.repo});
+  @override
+  Future<Either<Failure, String>> execute(PdfSaveInput input) async {
+    return await repo.savePdf(input.file, input.name);
+  }
+}
+
+class PdfSaveInput {
+  final Uint8List file;
+  final String name;
+
+  PdfSaveInput({required this.file, required this.name});
+}

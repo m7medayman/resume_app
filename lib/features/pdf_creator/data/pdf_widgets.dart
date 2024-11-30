@@ -245,10 +245,6 @@ class SkillsColumn extends pw.StatelessWidget {
 
   @override
   pw.Widget build(pw.Context context) {
-    int midList = skills.length ~/ 2;
-    List<String> firstList = List.from(skills.getRange(0, midList));
-    List<String> secondList =
-        List.from(skills.getRange(midList, skills.length));
     return pw.Table(children: getRow(skills));
     // pw.Row(
     //   crossAxisAlignment: pw.CrossAxisAlignment.start,

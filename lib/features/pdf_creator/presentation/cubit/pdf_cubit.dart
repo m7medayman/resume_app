@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:injectable/injectable.dart';
 import 'package:resume_app/core/data_classes/data_classes.dart';
 import 'package:resume_app/core/data_classes/pdf_data_class.dart';
 import 'package:resume_app/core/data_classes/user_info.dart';
@@ -9,8 +10,9 @@ import 'package:resume_app/features/pdf_creator/presentation/cubit/pdf_form_stat
 part 'pdf_state.dart';
 
 class PdfCubit extends Cubit<PdfState> {
-  PdfCreatingUseCase useCase;
-  PdfCubit(this.useCase)
+  final PdfCreatingUseCase useCase;
+  final PdfSaveUseCase pdfSaveUseCase;
+  PdfCubit({required this.pdfSaveUseCase, required this.useCase})
       : super(PdfState(
             state: PdfInitState(),
             data: PdfData(
@@ -37,8 +39,26 @@ class PdfCubit extends Cubit<PdfState> {
       emit(state.copyWith(formState: PdfFailure(failure: error)));
       emit(state.copyWith(formState: PdfInitState()));
     }, (successData) {
-      emit(state.copyWith(formState: PdfSuccess(data: successData)));
+      emit(state.copyWith(formState: ShowPdfState(data: successData)));
+    });
+  }
 
+  void savePdf() async {
+    emit(state.copyWith(formState: PdfLoading()));
+    var res = await useCase.execute(state.data);
+    res.fold((error) {
+      emit(state.copyWith(formState: PdfFailure(failure: error)));
+      emit(state.copyWith(formState: PdfInitState()));
+    }, (successData) async {
+      var result = await pdfSaveUseCase
+          .execute(PdfSaveInput(file: successData, name: "test"));
+      result.fold((error) {
+        emit(state.copyWith(formState: PdfFailure(failure: error)));
+        emit(state.copyWith(formState: PdfInitState()));
+      }, (path) {
+        print(path);
+        emit(state.copyWith(formState: PdfInitState()));
+      });
     });
   }
 }

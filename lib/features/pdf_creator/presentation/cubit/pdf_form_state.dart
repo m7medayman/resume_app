@@ -17,3 +17,16 @@ class PdfFailure extends PdfFormState {
 class PdfInitState extends PdfFormState {}
 
 class PdfLoading extends PdfFormState {}
+
+class ShowPdfState extends PdfFormState {
+  final dynamic data;
+
+  ShowPdfState({required this.data});
+}
+
+
+class SavePdfState extends PdfFormState {
+  final String path;
+
+  SavePdfState({required this.path});
+}
