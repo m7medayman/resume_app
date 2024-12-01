@@ -4,6 +4,7 @@ import 'package:injectable/injectable.dart';
 import 'package:resume_app/core/data_classes/data_classes.dart';
 import 'package:resume_app/core/data_classes/pdf_data_class.dart';
 import 'package:resume_app/core/data_classes/user_info.dart';
+import 'package:resume_app/core/doc_manager/docs_manager_and_permission.dart';
 import 'package:resume_app/features/pdf_creator/domain/pdf_creating_use_case.dart';
 import 'package:resume_app/features/pdf_creator/presentation/cubit/pdf_form_state.dart';
 
@@ -44,6 +45,7 @@ class PdfCubit extends Cubit<PdfState> {
   }
 
   void savePdf() async {
+
     emit(state.copyWith(formState: PdfLoading()));
     var res = await useCase.execute(state.data);
     res.fold((error) {

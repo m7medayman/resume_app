@@ -53,6 +53,7 @@ dependencies:
   flutter_svg: ^2.0.16
   path_provider: ^2.1.5
   permission_handler: ^11.3.1
+  device_info_plus: ^10.1.2
 
 dev_dependencies:
   flutter_test:

@@ -51,6 +51,7 @@ void initModule() {
     getIt.registerLazySingleton(() => FailureHandler());
     initAllAuthFailureHandles();
     FailureRegistry.initializeAll(getIt<FailureHandler>());
+    
   }
   isInitModule = true;
 }

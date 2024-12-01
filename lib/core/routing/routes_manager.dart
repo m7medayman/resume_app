@@ -35,6 +35,7 @@ class RouteManager {
         return MaterialPageRoute(builder: (_) => const SignUpPresentation());
       case Routes.login:
         initLoginModule();
+        
         return MaterialPageRoute(
             builder: (_) => const LoginScreenPresentation());
       // case Routes.profile:
