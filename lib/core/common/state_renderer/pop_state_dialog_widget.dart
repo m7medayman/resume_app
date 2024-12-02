@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:resume_app/core/constants/app_string_constats.dart';
 import 'package:resume_app/core/theme_manager/color_manager.dart';
@@ -70,6 +72,23 @@ class ErrorPopUpDialog extends MyAlertDialogPopUp {
         );
 }
 
+class FilePermissionDeniedDialog extends MyAlertDialogPopUp {
+  final void Function()? givePermissionFunction;
+
+  FilePermissionDeniedDialog(
+      {super.key, required super.context, required this.givePermissionFunction})
+      : super(actions: [
+          ElevatedButton(
+              onPressed: () {
+                exit(0);
+              },
+              child: const Text("exit")),
+          ElevatedButton(
+              onPressed: givePermissionFunction,
+              child: const Text("give permission"))
+        ], title: "file permission", content: "file permission denied");
+}
+
 void showLoadingPopUpDialog(context,
     {GlobalKey<NavigatorState>? navigatorKey}) {
   showDialog(
@@ -90,5 +109,16 @@ void showFailurePopUpDialog(context, String content) {
           content: content,
           context: context,
         );
+      });
+}
+
+void showFilePermissionDeniedDialog(
+    BuildContext context, void Function()? givePermissionFunction) {
+  showDialog(
+      barrierDismissible: false,
+      context: context,
+      builder: (_) {
+        return FilePermissionDeniedDialog(
+            context: context, givePermissionFunction: givePermissionFunction);
       });
 }

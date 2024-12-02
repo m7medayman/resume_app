@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:injectable/injectable.dart';
+import 'package:resume_app/core/common/widgets/toast/save_file_toast.dart';
 import 'package:resume_app/core/data_classes/data_classes.dart';
 import 'package:resume_app/core/data_classes/pdf_data_class.dart';
 import 'package:resume_app/core/data_classes/user_info.dart';
@@ -44,8 +45,7 @@ class PdfCubit extends Cubit<PdfState> {
     });
   }
 
-  void savePdf() async {
-
+  void savePdf(String pdfname) async {
     emit(state.copyWith(formState: PdfLoading()));
     var res = await useCase.execute(state.data);
     res.fold((error) {
@@ -53,14 +53,16 @@ class PdfCubit extends Cubit<PdfState> {
       emit(state.copyWith(formState: PdfInitState()));
     }, (successData) async {
       var result = await pdfSaveUseCase
-          .execute(PdfSaveInput(file: successData, name: "test"));
+          .execute(PdfSaveInput(file: successData, name: ""));
       result.fold((error) {
         emit(state.copyWith(formState: PdfFailure(failure: error)));
         emit(state.copyWith(formState: PdfInitState()));
       }, (path) {
         print(path);
+        showSaveToast();
         emit(state.copyWith(formState: PdfInitState()));
       });
     });
   }
 }
+

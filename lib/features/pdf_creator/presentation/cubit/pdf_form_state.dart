@@ -7,7 +7,9 @@ class PdfSuccess extends PdfFormState {
 
   PdfSuccess({required this.data});
 }
-
+class PdfShowToast extends PdfFormState{
+  
+}
 class PdfFailure extends PdfFormState {
   final Failure failure;
 

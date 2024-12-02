@@ -1,7 +1,11 @@
+import 'dart:ffi';
 import 'dart:io';
 import 'package:device_info_plus/device_info_plus.dart';
+import 'package:either_dart/either.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:resume_app/core/common/widgets/alert_dialog_without_context.dart';
+import 'package:resume_app/core/resources/failure/failure_model.dart';
+import 'package:resume_app/core/resources/failure/system_failure_const.dart';
 
 class DocsManagerAndPermissions {
   static const String folderName = "GeneratedPDFs";
@@ -24,7 +28,7 @@ class DocsManagerAndPermissions {
     }
   }
 
-  static Future<bool> checkPermission() async {
+  static Future<bool> _checkPermission() async {
     DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
     AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
     if (androidInfo.version.sdkInt >= 30) {
@@ -35,10 +39,10 @@ class DocsManagerAndPermissions {
   }
 
   /// Creates a directory in external storage if the permission is granted
-  static Future<void> createFileInExternalStorage() async {
+  static Future<Either<Failure, String>> createFileInExternalStorage() async {
     try {
       // Check if the storage permission is already granted
-      var permissionStatus = await checkPermission();
+      var permissionStatus = await _checkPermission();
 
       if (permissionStatus) {
         // Define the base directory as /storage/emulated/0
@@ -50,8 +54,9 @@ class DocsManagerAndPermissions {
           await customFolder.create();
         }
         print("Folder created at: ${customFolder.path}");
+        return Right(customFolder.path);
       } else {
-        AlertDialogStoragePermission.showPermissionDialog();
+        return Left(SystemFailureConstants.systemPermissionDenied);
       }
     } catch (e) {
       throw Exception("Error creating directory: $e");

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:resume_app/core/common/widgets/language_select.dart';
+import 'package:resume_app/core/common/widgets/input_dialogs_body/language_select.dart';
 import 'package:resume_app/core/common/widgets/language_view.dart';
 import 'package:resume_app/core/common/widgets/separator.dart';
 import 'package:resume_app/features/resume_dialog/presentation/cubit/resume_dialog_cubit.dart';

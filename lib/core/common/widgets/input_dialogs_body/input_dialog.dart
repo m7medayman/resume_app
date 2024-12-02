@@ -1,22 +1,24 @@
-
 import 'package:flutter/material.dart';
 import 'package:resume_app/core/common/widgets/my_inputField.dart';
 import 'package:resume_app/core/common/widgets/separator.dart';
 import 'package:resume_app/core/resources/helpers/input_fields.dart';
 
 class InputDialog extends StatefulWidget {
-  const InputDialog({super.key});
-
+  const InputDialog({super.key, this.readyText = "", required this.title});
+  final String readyText;
+  final String title;
   @override
   State<InputDialog> createState() => _InputDialogState();
 }
 
 class _InputDialogState extends State<InputDialog> {
   TextEditingController textEditingController = TextEditingController();
+
   GlobalKey<FormState> keyForm = GlobalKey();
 
   @override
   Widget build(BuildContext context) {
+    textEditingController.text = widget.readyText;
     double screenHeight = MediaQuery.sizeOf(context).height;
     double screenWidth = MediaQuery.sizeOf(context).width;
     return Dialog(
@@ -32,7 +34,7 @@ class _InputDialogState extends State<InputDialog> {
               GeneralInputFiled(
                   fieldFormKey: keyForm,
                   fieldInput: textEditingController,
-                  label: "Skill:",
+                  label: widget.title,
                   validateMessageFunction: InputValidator.validateRegularField),
               FormSeparator(screenHeight: screenHeight),
               ElevatedButton(
@@ -41,7 +43,7 @@ class _InputDialogState extends State<InputDialog> {
                       Navigator.of(context).pop(textEditingController.text);
                     }
                   },
-                  child: const Text("Add skill"))
+                  child: const Text("Save"))
             ],
           ),
         ),
@@ -50,6 +52,12 @@ class _InputDialogState extends State<InputDialog> {
   }
 }
 
-Future showInputDialog(context) {
-  return showDialog(context: context, builder: (_) => const InputDialog());
+Future showInputDialog(context,
+    {required String title, String readyText = ''}) {
+  return showDialog(
+      context: context,
+      builder: (_) => InputDialog(
+            title: title,
+            readyText: readyText,
+          ));
 }

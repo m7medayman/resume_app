@@ -20,3 +20,9 @@ final class LogInFailure extends LoginState {
   LogInFailure({required this.failure});
   get getFailureMessage => failure.message;
 }
+
+final class LoginPermissionFailure extends LoginState {
+  final Failure failure;
+
+  LoginPermissionFailure({required this.failure});
+}

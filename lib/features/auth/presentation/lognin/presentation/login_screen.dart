@@ -26,12 +26,27 @@ class _LoginScreenPresentationState extends State<LoginScreenPresentation> {
   final _passwordFormKey = GlobalKey<FormState>();
   final loadingKey = GlobalKey();
   bool isLoadingDialog = false;
+  late LoginCubit _loginCubit;
+  @override
+  void initState() {
+    // TODO: implement initState
+    _loginCubit = LoginCubit(getIt());
+    super.initState();
+  }
+
+  @override
+  void didChangeDependencies() {
+    // TODO: implement didChangeDependencies
+    _loginCubit.checkFilePermission();
+    super.didChangeDependencies();
+  }
+
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
     return BlocProvider(
-      create: (context) => LoginCubit(getIt()),
+      create: (context) => _loginCubit,
       child: Scaffold(
           appBar: AppBar(title: const AppBarText(content: AppStrings.login)),
           body: BlocListener<LoginCubit, FormLoginState>(
@@ -43,6 +58,16 @@ class _LoginScreenPresentationState extends State<LoginScreenPresentation> {
                   isLoadingDialog = false;
                 }
                 showFailurePopUpDialog(context, logInFailure.getFailureMessage);
+              }
+              if (state.loginState is LoginPermissionFailure) {
+                LoginPermissionFailure loginState =
+                    state.loginState as LoginPermissionFailure;
+                if (isLoadingDialog) {
+                  Navigator.of(context).pop();
+                  isLoadingDialog = false;
+                }
+                showFilePermissionDeniedDialog(
+                    context, context.read<LoginCubit>().checkFilePermission);
               }
               if (state.loginState is LogInLoading) {
                 isLoadingDialog = true;

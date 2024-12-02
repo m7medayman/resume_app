@@ -15,13 +15,6 @@ void main() async {
 
   initModule();
 
-  // configureDependencies(Env.dev);
-     try {
-      await DocsManagerAndPermissions.requestStoragePermission();
-      await DocsManagerAndPermissions.createFileInExternalStorage();
-    } catch (e) {
-      print("Error: $e");
-    }
   runApp(const MyApp());
 }
 

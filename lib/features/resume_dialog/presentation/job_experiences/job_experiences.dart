@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:resume_app/core/common/widgets/project_experience_input.dart';
+import 'package:resume_app/core/common/widgets/input_dialogs_body/project_experience_input.dart';
 import 'package:resume_app/core/common/widgets/project_experience_view.dart';
 import 'package:resume_app/core/common/widgets/separator.dart';
 import 'package:resume_app/core/common/widgets/work_experince_view.dart';
-import 'package:resume_app/core/common/widgets/wrokExperience_input.dart';
+import 'package:resume_app/core/common/widgets/input_dialogs_body/wrokExperience_input.dart';
 import 'package:resume_app/core/data_classes/pdf_data_class.dart';
 import 'package:resume_app/core/data_classes/project_experience.dart';
 import 'package:resume_app/core/data_classes/work_experience.dart';

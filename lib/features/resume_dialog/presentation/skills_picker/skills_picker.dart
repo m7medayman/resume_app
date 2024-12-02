@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:resume_app/core/common/widgets/input_dialog.dart';
+import 'package:resume_app/core/common/widgets/input_dialogs_body/input_dialog.dart';
 import 'package:resume_app/core/common/widgets/my_inputField.dart';
 import 'package:resume_app/core/common/widgets/separator.dart';
 import 'package:resume_app/core/resources/helpers/input_fields.dart';
@@ -72,7 +72,9 @@ class JobSkillPicker extends StatelessWidget {
                                           ColorManager.backgroundColor)),
                                   // add hard skill button
                                   onPressed: () {
-                                    showInputDialog(context).then((value) {
+                                    showInputDialog(context,
+                                            title: "Add Skill: ")
+                                        .then((value) {
                                       print(value.runtimeType);
                                       if (value is String) {
                                         print("softSkill added");
@@ -120,7 +122,9 @@ class JobSkillPicker extends StatelessWidget {
                                       backgroundColor: WidgetStatePropertyAll(
                                           ColorManager.backgroundColor)),
                                   onPressed: () {
-                                    showInputDialog(context).then((value) {
+                                    showInputDialog(context,
+                                            title: "Add Skill: ")
+                                        .then((value) {
                                       if (value is String) {
                                         cubit.addAiJobsSoftSkill(value);
                                         cubit.addSoftSkill(value);

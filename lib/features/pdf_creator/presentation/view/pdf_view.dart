@@ -4,7 +4,9 @@ import 'package:flutter_svg/svg.dart';
 import 'package:resume_app/core/Di/injection.dart';
 import 'package:resume_app/core/assets_path/assets.dart';
 import 'package:resume_app/core/common/state_renderer/pop_state_dialog_widget.dart';
+import 'package:resume_app/core/common/widgets/input_dialogs_body/input_dialog.dart';
 import 'package:resume_app/core/common/widgets/separator.dart';
+import 'package:resume_app/core/common/widgets/toast/save_file_toast.dart';
 import 'package:resume_app/core/constants/app_sizes_constants.dart';
 import 'package:resume_app/core/theme_manager/color_manager.dart';
 import 'package:resume_app/features/pdf_creator/presentation/cubit/pdf_cubit.dart';
@@ -43,6 +45,9 @@ class PdfView extends StatelessWidget {
                     Navigator.of(navigatorKey.currentContext!).pop();
                   }
                   showFailurePopUpDialog(context, failueState.failure.message);
+                }
+                if (state.state is PdfShowToast) {
+                  showSaveToast();
                 }
                 if (state.state is PdfInitState) {
                   if (navigatorKey.currentContext != null) {
@@ -89,7 +94,13 @@ class PdfView extends StatelessWidget {
                         FormSeparator(screenHeight: screenHeight),
                         ElevatedButton(
                             onPressed: () {
-                              context.read<PdfCubit>().savePdf();
+                              showInputDialog(context,
+                                      title: "pdf name: ", readyText: "")
+                                  .then((pdfname) {
+                                if (pdfname is String) {
+                                  context.read<PdfCubit>().savePdf(pdfname);
+                                }
+                              });
                             },
                             child: const Text("Save pdf"))
                       ],

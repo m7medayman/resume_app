@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:resume_app/core/common/state_renderer/pop_state_dialog_widget.dart';
-import 'package:resume_app/core/common/widgets/course_certification_input.dart';
+import 'package:resume_app/core/common/widgets/input_dialogs_body/course_certification_input.dart';
 import 'package:resume_app/core/common/widgets/course_view_widget.dart';
 import 'package:resume_app/core/common/widgets/degree_view_widget.dart';
 import 'package:resume_app/core/common/widgets/devider_with_label.dart';
 
-import 'package:resume_app/core/common/widgets/education_certification_input.dart';
+import 'package:resume_app/core/common/widgets/input_dialogs_body/education_certification_input.dart';
 import 'package:resume_app/core/common/widgets/hidden_button.dart';
 import 'package:resume_app/core/common/widgets/my_inputField.dart';
 import 'package:resume_app/core/common/widgets/reveal_widget.dart';

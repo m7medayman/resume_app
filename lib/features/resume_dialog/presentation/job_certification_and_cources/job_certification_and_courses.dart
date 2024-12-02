@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:resume_app/core/common/widgets/course_certification_input.dart';
+import 'package:resume_app/core/common/widgets/input_dialogs_body/course_certification_input.dart';
 import 'package:resume_app/core/common/widgets/course_view_widget.dart';
 import 'package:resume_app/core/common/widgets/degree_view_widget.dart';
-import 'package:resume_app/core/common/widgets/education_certification_input.dart';
+import 'package:resume_app/core/common/widgets/input_dialogs_body/education_certification_input.dart';
 import 'package:resume_app/core/common/widgets/separator.dart';
 import 'package:resume_app/core/data_classes/data_classes.dart';
 import 'package:resume_app/features/resume_dialog/presentation/cubit/resume_dialog_cubit.dart';
