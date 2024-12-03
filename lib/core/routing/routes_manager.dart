@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:resume_app/core/Di/di.dart';
 import 'package:resume_app/core/Di/home_moule.dart';
+import 'package:resume_app/core/common/widgets/pdf_file_view/pdf_file_view.dart';
 import 'package:resume_app/core/data_classes/pdf_data_class.dart';
 import 'package:resume_app/features/auth/presentation/lognin/presentation/login_screen.dart';
 import 'package:resume_app/features/auth/presentation/signup/presentation/singup_presentation.dart';
@@ -16,12 +17,16 @@ class Routes {
   static const String profile = '/profile';
   static const String pdfView = '/pdfView';
   static const String resumeApplication = "/resume_apply";
+  static const String pdfFileView = "/pdf_file_view";
 }
 
 // Route manager to handle navigation
 class RouteManager {
   static Route<String> generateRoute(RouteSettings settings) {
     switch (settings.name) {
+      case Routes.pdfFileView:
+        return MaterialPageRoute(
+            builder: (_) => PdfFileView(pdfPath: settings.arguments as String));
       case Routes.resumeApplication:
         initResumeDialogModel();
         return MaterialPageRoute(

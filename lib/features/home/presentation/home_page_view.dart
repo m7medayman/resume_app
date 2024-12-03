@@ -5,7 +5,9 @@ import 'package:flutter_svg/svg.dart';
 import 'package:resume_app/core/Di/injection.dart';
 import 'package:resume_app/core/assets_path/assets.dart';
 import 'package:resume_app/core/common/state_renderer/full_screens_state_widgets/loading_full_screen.dart';
+import 'package:resume_app/core/common/widgets/popup_pdf_info_dilog/popup_pdf_dialog.dart';
 import 'package:resume_app/core/constants/app_sizes_constants.dart';
+import 'package:resume_app/core/data_classes/pdf_view_data.dart';
 import 'package:resume_app/core/page_states/page_states.dart';
 import 'package:resume_app/core/routing/routes_manager.dart';
 import 'package:resume_app/core/theme_manager/color_manager.dart';
@@ -113,6 +115,7 @@ class MainHomePage extends StatelessWidget {
                             crossAxisCount: 3),
                     itemCount: state.pdfWidgetData.length,
                     itemBuilder: (BuildContext context, int x) {
+                      PdfWidgetViewData pdfData = state.pdfWidgetData[x];
                       return Container(
                         width: screenWidth * 0.25,
                         height: screenheigth * 0.3,
@@ -122,7 +125,12 @@ class MainHomePage extends StatelessWidget {
                             Container(
                               child: IconButton(
                                   onPressed: () {
-                                    context.read<HomeCubit>().getPdf();
+                                    PopupPdfDialog.showPdfDialog(
+                                        context: context,
+                                        pdfFilePath: pdfData.pdfLocation,
+                                        screenHeight: screenheigth,
+                                        screenWidth: screenWidth,
+                                        pdfName: pdfData.pdfName);
                                   },
                                   icon: SvgPicture.asset(
                                     width: screenWidth * 0.25,
@@ -144,7 +152,11 @@ class MainHomePage extends StatelessWidget {
               padding: const EdgeInsets.all(8.0),
               child: ElevatedButton(
                   onPressed: () {
-                    Navigator.of(context).pushNamed(Routes.resumeApplication);
+                    Navigator.of(context)
+                        .pushNamed(Routes.resumeApplication)
+                        .whenComplete(() {
+                      context.read<HomeCubit>().getPdf();
+                    });
                   },
                   child: Text(
                     "make Reume",
