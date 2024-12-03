@@ -53,7 +53,7 @@ class PdfCubit extends Cubit<PdfState> {
       emit(state.copyWith(formState: PdfInitState()));
     }, (successData) async {
       var result = await pdfSaveUseCase
-          .execute(PdfSaveInput(file: successData, name: ""));
+          .execute(PdfSaveInput(file: successData, name: pdfname));
       result.fold((error) {
         emit(state.copyWith(formState: PdfFailure(failure: error)));
         emit(state.copyWith(formState: PdfInitState()));
@@ -65,4 +65,3 @@ class PdfCubit extends Cubit<PdfState> {
     });
   }
 }
-

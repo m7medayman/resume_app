@@ -4,11 +4,11 @@ import 'package:device_info_plus/device_info_plus.dart';
 import 'package:either_dart/either.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:resume_app/core/common/widgets/alert_dialog_without_context.dart';
+import 'package:resume_app/core/doc_manager/doc_path_consts.dart';
 import 'package:resume_app/core/resources/failure/failure_model.dart';
 import 'package:resume_app/core/resources/failure/system_failure_const.dart';
 
 class DocsManagerAndPermissions {
-  static const String folderName = "GeneratedPDFs";
   static Future<void> requestStoragePermission() async {
     if (Platform.isAndroid) {
       DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
@@ -46,10 +46,9 @@ class DocsManagerAndPermissions {
 
       if (permissionStatus) {
         // Define the base directory as /storage/emulated/0
-        final baseDirectory = Directory('/storage/emulated/0');
 
         // Create the custom folder
-        final customFolder = Directory('${baseDirectory.path}/$folderName');
+        final customFolder = Directory(DocPathConsts.fullPathFolder);
         if (!(await customFolder.exists())) {
           await customFolder.create();
         }
