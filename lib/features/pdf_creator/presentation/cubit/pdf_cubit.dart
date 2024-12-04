@@ -30,7 +30,7 @@ class PdfCubit extends Cubit<PdfState> {
                     contactDetails: ContactExtraDetails(),
                     educationInfo: EducationInfo()),
                 selectedHardSkills: [],
-                selectedSoftSkills: {},
+                selectedSoftSkills: [],
                 punchOfWorkExperiences: [],
                 punchOfProjectExperience: [])));
 

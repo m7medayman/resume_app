@@ -10,7 +10,7 @@ class PdfData {
   EducationInfo selectedEducationInfo;
   MyUserInfo userInfo;
   List<String> selectedHardSkills;
-  Map<String, bool> selectedSoftSkills;
+  List<String> selectedSoftSkills;
   List<WorkExperience> punchOfWorkExperiences;
   List<ProjectExperience> punchOfProjectExperience;
   PdfData({

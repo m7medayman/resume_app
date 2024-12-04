@@ -116,7 +116,8 @@ class JobExperiences extends StatelessWidget {
                           userInfo: state.userInfo!,
                           selectedHardSkills:
                               state.selectedHardSkills.keys.toList(),
-                          selectedSoftSkills: state.selectedSoftSkills,
+                          selectedSoftSkills:
+                              state.selectedSoftSkills.keys.toList(),
                           punchOfWorkExperiences: state.punchOfWorkExperiences,
                           punchOfProjectExperience:
                               state.punchOfProjectExperiences));

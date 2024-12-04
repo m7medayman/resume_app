@@ -5,16 +5,16 @@ class PdfFontSize {
   // Commonly used font sizes for a PDF document
   static const double extraSmall = 10;
   static const double small = 12;
-  static const double normal = 14;
-  static const double medium = 16;
-  static const double large = 20;
+  static const double normal = 10;
+  static const double medium = 12;
+  static const double large = 16;
   static const double extraLarge = 24;
   static const double title = 28;
   static const double headline = 32;
 
   // Custom sizes for specific use cases
   static const double caption = 8;
-  static const double subTitle = 20;
+  static const double subTitle = 16;
   static const double display = 40;
 }
 

@@ -55,13 +55,12 @@ class PdfForm {
           ),
           pw.Divider(thickness: 1, color: PdfColors.black),
           SkillsColumn(skills: data.selectedHardSkills),
-          pw.SizedBox(height: 25),
 
 // end of skills section
 
           ...EducationColumn(degrees: data.selectedEducationInfo.degrees ?? [])
               .getList(),
-          pw.SizedBox(height: 25),
+
           // end of Education
           ...CoursesColumn(courses: data.selectedEducationInfo.courses ?? [])
               .getList(),
@@ -69,12 +68,27 @@ class PdfForm {
           // end of certification and references
           ...ExperinceColumn(workExperience: data.punchOfWorkExperiences)
               .getList(),
-          pw.SizedBox(height: 25),
+
           // end of experience
 
           ...ProjectColumn(projects: data.punchOfProjectExperience)
               .getWidgetList(),
+
+          // soft skill section
+          pw.Text(
+            "PERSONAL SKILLS",
+            style: PdfTextStyles.largeBold,
+          ),
+          pw.Divider(thickness: 1, color: PdfColors.black),
+          SkillsColumn(skills: data.selectedSoftSkills),
           pw.SizedBox(height: 25),
+          // language section
+          pw.Text(
+            "Languages",
+            style: PdfTextStyles.largeBold,
+          ),
+          pw.Divider(thickness: 1, color: PdfColors.black),
+          LanguageColumn(languages: data.language)
         ];
       },
     ));

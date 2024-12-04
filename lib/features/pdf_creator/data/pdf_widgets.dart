@@ -38,9 +38,12 @@ class EducationColumn {
     return degrees.isEmpty
         ? []
         : [
-            pw.Text(
-              " EDUCATION ",
-              style: PdfTextStyles.largeBold,
+            pw.Padding(
+              padding: const pw.EdgeInsets.only(top: 5),
+              child: pw.Text(
+                " EDUCATION ",
+                style: PdfTextStyles.largeBold,
+              ),
             ),
             pw.Divider(thickness: 1, color: PdfColors.black),
             pw.Table(
@@ -132,7 +135,6 @@ class ExperinceColumn {
 
   ExperinceColumn({required this.workExperience});
 
-  @override
   List<pw.Widget> getList() {
     return workExperience.isEmpty
         ? []
@@ -221,7 +223,8 @@ class SkillsColumn extends pw.StatelessWidget {
           pw.Expanded(
               flex: 1,
               child: pw.Padding(
-                padding: pw.EdgeInsets.symmetric(vertical: 3, horizontal: 8),
+                padding:
+                    const pw.EdgeInsets.symmetric(vertical: 3, horizontal: 8),
                 child: pw.Text("- ${skills[index + 1]}",
                     style: PdfTextStyles.mediumBold),
               ))
@@ -246,38 +249,6 @@ class SkillsColumn extends pw.StatelessWidget {
   @override
   pw.Widget build(pw.Context context) {
     return pw.Table(children: getRow(skills));
-    // pw.Row(
-    //   crossAxisAlignment: pw.CrossAxisAlignment.start,
-    //   children: [
-    //     // First column
-    //     pw.Expanded(
-    //       child: pw.ListView(
-    //         children: firstList.map((skill) {
-    //           return pw.Padding(
-    //             padding: pw.EdgeInsets.all(5),
-    //             child: pw.Text("- $skill", style: PdfTextStyles.mediumBold),
-    //           );
-    //         }).toList(),
-    //       ),
-    //     ),
-    //     pw.SizedBox(width: 10), // Space between columns
-
-    //     // Second column
-    //     pw.Expanded(
-    //       child: pw.ListView(
-    //         children: secondList.map((skill) {
-    //           return pw.Padding(
-    //             padding: pw.EdgeInsets.all(5),
-    //             child: pw.Text(
-    //               "- $skill",
-    //               style: PdfTextStyles.mediumBold,
-    //             ),
-    //           );
-    //         }).toList(),
-    //       ),
-    //     ),
-    //   ],
-    // );
   }
 }
 
@@ -289,10 +260,101 @@ class LinkOrEmpty extends pw.StatelessWidget {
   @override
   pw.Widget build(pw.Context context) {
     // TODO: implement build
-    return website.isEmpty
-        ? pw.Container()
-        : pw.Link(
-            child: pw.Text("$title: $website", style: PdfTextStyles.mediumBold),
-            destination: website);
+    return website.isEmpty ? pw.Container() : pw.RichText(text: pw.TextSpan(
+      text: "$title: $website", style: PdfTextStyles.medium
+      ,annotation: pw.AnnotationUrl(website)
+    ));
   }
+}
+
+class LanguageText extends pw.StatelessWidget {
+  final String language;
+  final String languageLevel;
+
+  LanguageText({required this.language, required this.languageLevel});
+
+  @override
+  pw.Widget build(pw.Context context) {
+    return pw.Table(children: [
+      pw.TableRow(children: [
+        pw.RichText(
+            text: pw.TextSpan(children: [
+          pw.TextSpan(style: PdfTextStyles.mediumBold, text: "-$language\n"),
+          pw.TextSpan(style: PdfTextStyles.medium, text: "$languageLevel\n"),
+        ])),
+        // link of the logic
+      ]),
+      pw.TableRow(children: [pw.SizedBox(height: 20)])
+    ]);
+  }
+}
+
+class LanguageColumn extends pw.StatelessWidget {
+  final Map<String, String> languages;
+
+  LanguageColumn({required this.languages});
+  List<pw.TableRow> getRow(List<String> punchOfLanguages) {
+    List<pw.TableRow> result = [];
+    int index = 0;
+    while (index < punchOfLanguages.length) {
+      String language = punchOfLanguages[index];
+      if (index + 1 < punchOfLanguages.length) {
+        String secoendLanguage = punchOfLanguages[index + 1];
+        result.add(pw.TableRow(children: [
+          pw.Expanded(
+              flex: 1,
+              child: pw.Padding(
+                padding: const pw.EdgeInsets.all(3),
+                child: LanguageText(
+                    language: language,
+                    languageLevel: languages[language] ?? ""),
+              )),
+          pw.Expanded(
+              flex: 1,
+              child: pw.Padding(
+                padding:
+                    const pw.EdgeInsets.symmetric(vertical: 3, horizontal: 8),
+                child: LanguageText(
+                    language: secoendLanguage,
+                    languageLevel: languages[secoendLanguage] ?? ""),
+              ))
+        ]));
+      } else {
+        result.add(pw.TableRow(children: [
+          pw.Padding(
+            padding: const pw.EdgeInsets.all(3),
+            child: LanguageText(
+                language: language, languageLevel: languages[language] ?? ""),
+          )
+        ]));
+      }
+
+      index += 2;
+    }
+    return result;
+  }
+
+  @override
+  pw.Widget build(pw.Context context) {
+    return pw.Table(children: getRow(languages.keys.toList()));
+  }
+  // List<pw.Widget> getList() {
+  //   return languages.isEmpty
+  //       ? []
+  //       : [
+  //           pw.Text(
+  //             "Languages",
+  //             style: PdfTextStyles.largeBold,
+  //           ),
+  //           pw.Divider(thickness: 1, color: PdfColors.black),
+  //           pw.Table(
+  //               children: languages.keys.map((language) {
+  //             return pw.TableRow(children: [
+  //               LanguageText(
+  //                   language: language,
+  //                   languageLevel: languages[language] ?? "")
+  //             ]);
+  //           }).toList())
+  //         ];
+  // }
 }
