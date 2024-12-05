@@ -54,6 +54,7 @@ class LoginCubit extends Cubit<FormLoginState> {
       emit(state.copyWith(loginState: LogInFailure(failure: f)));
       emit(state.copyWith(loginState: LoginInitial()));
     }, (MyUserInfo entity) {
+      emit(state.copyWith(loginState: LoginInitial()));
       emit(state.copyWith(loginState: LogInSuccess(data: entity)));
     });
   }

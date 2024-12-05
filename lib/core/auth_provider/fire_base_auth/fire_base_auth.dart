@@ -2,13 +2,13 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:resume_app/core/resources/failure/failure_handler.dart';
 import 'package:resume_app/features/auth/data/Response.dart';
-import 'package:resume_app/features/auth/data/network_service_provider.dart';
+import 'package:resume_app/core/auth_provider/network_service_provider.dart';
 import 'package:resume_app/features/auth/data/request.dart';
 
-class AuthService extends NetworkServiceProvider {
+class FireBaseAuthService extends AuthServiceProvider {
   final FirebaseAuth _auth;
   final FailureHandler failureHandler;
-  AuthService({
+  FireBaseAuthService({
     required FirebaseAuth auth,
     required this.failureHandler,
   }) : _auth = auth;
@@ -75,5 +75,10 @@ class AuthService extends NetworkServiceProvider {
         rethrow;
       }
     }
+  }
+
+  @override
+  Future signOut() async {
+    await _auth.signOut();
   }
 }

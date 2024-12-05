@@ -4,7 +4,7 @@ class RequestModel {
   }
 
   static enhanceJobSummaryRequest(String jobSummary, List<String> keyWords) {
-    return "enhance that job summary to use this keyWords: $keyWords ,job summary : $jobSummary";
+    return "enhance that job summary to use this keyWords: $keyWords ,job summary : $jobSummary, /n output in about 100 word";
   }
 
   static enhanceJobExperienceRequest(String jobExperience) {

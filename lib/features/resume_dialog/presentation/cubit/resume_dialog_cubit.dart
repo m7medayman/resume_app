@@ -34,6 +34,36 @@ class ResumeDialogCubit extends Cubit<ResumeDialogState> {
       required this.jobSummaryUseCase,
       required this.jobExperienceEnhanceUseCase})
       : super(iniReumeState);
+  List<T> findUnselectedItems<T>(List<T> mainList, List<T> selectedList) {
+    // Use a Set for efficient lookup of selected items
+    final selectedSet = Set<T>.from(selectedList);
+
+    // Filter out the selected items from the main list
+    return mainList.where((item) => !selectedSet.contains(item)).toList();
+  }
+
+  List<String> _getSelectedKeyWords() {
+    List<String> unSelectedHardSkillsKeyWords = findUnselectedItems(
+        state.jobInfoAi.hardSkills, state.selectedHardSkills.keys.toList());
+    List<String> unSelectedSoftkillsKeyWords = findUnselectedItems(
+        state.jobInfoAi.softSkills, state.selectedSoftSkills.keys.toList());
+    List<String> resultkeyWords = List.from(state.jobInfoAi.keyWords);
+    resultkeyWords = resultkeyWords
+        .where((item) => !unSelectedHardSkillsKeyWords.contains(item))
+        .toList();
+    resultkeyWords = resultkeyWords
+        .where((item) => !unSelectedSoftkillsKeyWords.contains(item))
+        .toList();
+    resultkeyWords = [
+      ...resultkeyWords,
+      ...state.selectedHardSkills.keys,
+      ...state.selectedSoftSkills.keys
+    ];
+    resultkeyWords = resultkeyWords.toSet().toList();
+
+    return resultkeyWords;
+  }
+
   void goBack() {
     emit(state.copyWith(resumeFormState: GoBackFormState()));
     emit(state.copyWith(resumeFormState: InitResumeFormState()));
@@ -149,8 +179,9 @@ class ResumeDialogCubit extends Cubit<ResumeDialogState> {
 
   void getSummary(String jobSummary) async {
     emit(state.copyWith(resumeFormState: LoadingResumeFormState()));
+    print(_getSelectedKeyWords());
     var resposne = await jobSummaryUseCase.execute(JobSummaryInput(
-        jobSummary: jobSummary, keyWords: state.jobInfoAi.keyWords));
+        jobSummary: jobSummary, keyWords: _getSelectedKeyWords()));
     resposne.fold((error) {
       emit(state.copyWith(
           resumeFormState:

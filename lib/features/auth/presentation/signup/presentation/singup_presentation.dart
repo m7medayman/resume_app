@@ -102,7 +102,11 @@ class _SignUpPresentationState extends State<SignUpPresentation> {
                       _showFailurePopUpDialog(context, formState.errorMessage);
                     }
                     if (state.signupFormState is SuccessSignupFormState) {
-                      Navigator.of(context).pushReplacementNamed(Routes.home);
+                      Navigator.of(context).pop();
+                      Navigator.pushNamedAndRemoveUntil(
+                        context, Routes.home, // The new page to push
+                        (Route<dynamic> route) => false, // Remove all routes
+                      );
                     }
                   },
                   child: getBody(),
@@ -231,20 +235,20 @@ class _SignUpPresentationState extends State<SignUpPresentation> {
             Center(
               child: Wrap(
                 children: [
-                  HiddenButton(
-                    screenHeight: screenHeight,
-                    isHidden: state.extraPhoneFlag,
-                    childWidget: const Text(AppStrings.addPhone),
-                    onPressed: () {
-                      extraFields["extraPhone"] = extraPhoneKey;
-                      context
-                          .read<SignupCubit>()
-                          .changeExtraPhoneFiledVisibility();
-                    },
-                  ),
-                  SizedBox(
-                    width: screenWidth * 0.02,
-                  ),
+                  // HiddenButton(
+                  //   screenHeight: screenHeight,
+                  //   isHidden: state.extraPhoneFlag,
+                  //   childWidget: const Text(AppStrings.addPhone),
+                  //   onPressed: () {
+                  //     extraFields["extraPhone"] = extraPhoneKey;
+                  //     context
+                  //         .read<SignupCubit>()
+                  //         .changeExtraPhoneFiledVisibility();
+                  //   },
+                  // ),
+                  // SizedBox(
+                  //   width: screenWidth * 0.02,
+                  // ),
                   HiddenButton(
                     screenHeight: screenHeight,
                     isHidden: state.linkedInFlag,

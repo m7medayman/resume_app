@@ -25,8 +25,9 @@ class JobDetailsServiceProvider {
 
   Future<JobSummaryResponse> getJobSummary(
       String jobSummary, List<String> keyWords) async {
-    final GenerativeModel model =
-        Gemini.getModel(SchemaManager.getJobSummarySchema());
+    final GenerativeModel model = Gemini.getModel(
+        SchemaManager.getJobSummarySchema(),
+      );
 
     final chat = model.startChat(history: []);
     final message = RequestModel.enhanceJobSummaryRequest(jobSummary, keyWords);
@@ -43,7 +44,7 @@ class JobDetailsServiceProvider {
 
   Future<JobExperienceResponse> getJobExperience(String jobExperience) async {
     final GenerativeModel model =
-        Gemini.getModel(SchemaManager.getJobExperience(), maxOutputToken: 150);
+        Gemini.getModel(SchemaManager.getJobExperience());
 
     final chat = model.startChat(history: []);
     final message = RequestModel.enhanceJobExperienceRequest(jobExperience);

@@ -13,6 +13,7 @@ import 'package:resume_app/core/routing/routes_manager.dart';
 import 'package:resume_app/core/theme_manager/color_manager.dart';
 import 'package:resume_app/features/home/domain/home_use_case.dart';
 import 'package:resume_app/features/home/presentation/cubit/home_cubit.dart';
+import 'package:resume_app/features/home/presentation/cubit/home_page_special_states.dart';
 
 class HomePageView extends StatefulWidget {
   const HomePageView({super.key});
@@ -26,8 +27,17 @@ class _HomePageViewState extends State<HomePageView> {
   @override
   void initState() {
     // TODO: implement initState
-    _homeCubit = HomeCubit(getIt<GetPdfUseCase>());
+    _homeCubit = HomeCubit(
+        getPdfUseCase: getIt<GetPdfUseCase>(),
+        signOutUseCase: getIt<SignOutUseCase>());
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    _homeCubit.close();
+    super.dispose();
   }
 
   @override
@@ -42,6 +52,37 @@ class _HomePageViewState extends State<HomePageView> {
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenheigth = MediaQuery.of(context).size.height;
+    return BlocProvider(
+        create: (context) => _homeCubit,
+        child: BlocListener<HomeCubit, HomeState>(listener: (context, state) {
+          if (state.pageState is SignoutState) {
+            Navigator.pushReplacementNamed(context, Routes.login);
+          }
+        }, child: BlocBuilder<HomeCubit, HomeState>(
+          builder: (context, state) {
+            return HomeScaffold(
+              screenWidth: screenWidth,
+              screenheigth: screenheigth,
+              state: state,
+            );
+          },
+        )));
+  }
+}
+
+class HomeScaffold extends StatelessWidget {
+  const HomeScaffold(
+      {super.key,
+      required this.screenWidth,
+      required this.screenheigth,
+      required this.state});
+
+  final double screenWidth;
+  final double screenheigth;
+  final HomeState state;
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       drawer: Drawer(
         width: screenWidth * 0.6,
@@ -56,7 +97,11 @@ class _HomePageViewState extends State<HomePageView> {
               titile: "user",
               icon: Icons.person,
             ),
-            const DrawerItem(titile: "logout", icon: Icons.logout)
+            InkWell(
+                onTap: () {
+                  context.read<HomeCubit>().signOut();
+                },
+                child: const DrawerItem(titile: "logout", icon: Icons.logout))
           ],
         ),
       ),
@@ -66,22 +111,14 @@ class _HomePageViewState extends State<HomePageView> {
           style: Theme.of(context).textTheme.titleMedium,
         ),
       ),
-      body: BlocProvider(
-        create: (context) => _homeCubit,
-        child: BlocBuilder<HomeCubit, HomeState>(
-          builder: (context, state) {
-            return Stack(
-              children: [
-                MainHomePage(
-                    state: state,
-                    screenWidth: screenWidth,
-                    screenheigth: screenheigth),
-                LoadingFullScreen(
-                    isVisable: state.pageState is LoadingPageState),
-              ],
-            );
-          },
-        ),
+      body: Stack(
+        children: [
+          MainHomePage(
+              state: state,
+              screenWidth: screenWidth,
+              screenheigth: screenheigth),
+          LoadingFullScreen(isVisable: state.pageState is LoadingPageState),
+        ],
       ),
     );
   }

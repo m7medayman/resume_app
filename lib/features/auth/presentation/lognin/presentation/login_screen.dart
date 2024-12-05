@@ -35,6 +35,13 @@ class _LoginScreenPresentationState extends State<LoginScreenPresentation> {
   }
 
   @override
+  void dispose() {
+    // TODO: implement dispose
+    _loginCubit.close();
+    super.dispose();
+  }
+
+  @override
   void didChangeDependencies() {
     // TODO: implement didChangeDependencies
     _loginCubit.checkFilePermission();
@@ -74,6 +81,10 @@ class _LoginScreenPresentationState extends State<LoginScreenPresentation> {
                 showLoadingPopUpDialog(context);
               }
               if (state.loginState is LogInSuccess) {
+                 if (isLoadingDialog) {
+                  Navigator.of(context).pop();
+                  isLoadingDialog = false;
+                }
                 Navigator.of(context).pushReplacementNamed(Routes.home);
               }
             },

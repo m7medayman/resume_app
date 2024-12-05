@@ -13,3 +13,13 @@ class GetPdfUseCase extends BaseUseCase<void, List<PdfWidgetViewData>> {
     return repo.getListOfPdfFilesFromFolder();
   }
 }
+
+class SignOutUseCase extends BaseUseCase<void, void> {
+  final HomeRepo repo;
+
+  SignOutUseCase({required this.repo});
+  @override
+  Future<Either<Failure, void>> execute([void input])async {
+  return await repo.signOut();
+  }
+}

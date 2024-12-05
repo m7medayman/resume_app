@@ -56,7 +56,7 @@ class _EducationCertificationInputDialogState
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Text(
-                "Work Experience:",
+                "Project Experience:",
                 style: Theme.of(context).textTheme.bodyLarge,
               ),
               FormSeparator(screenHeight: widget.screenHeight),

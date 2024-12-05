@@ -9,9 +9,9 @@ import 'package:resume_app/core/resources/failure/failure_registry.dart';
 import 'package:resume_app/core/screen_manager/screen_service_manager.dart';
 import 'package:resume_app/core/theme_manager/font/font_stayle_manager.dart';
 import 'package:resume_app/core/theme_manager/theme_manager.dart';
-import 'package:resume_app/features/auth/data/fire_base_auth/failure_handler.dart';
-import 'package:resume_app/features/auth/data/fire_base_auth/fire_base_auth.dart';
-import 'package:resume_app/features/auth/data/repository.dart';
+import 'package:resume_app/core/auth_provider/fire_base_auth/failure_handler.dart';
+import 'package:resume_app/core/auth_provider/fire_base_auth/fire_base_auth.dart';
+import 'package:resume_app/features/auth/data/auth_repo_imp.dart';
 import 'package:resume_app/features/auth/domain/use_case.dart';
 import 'package:resume_app/features/pdf_creator/data/pdf_form.dart';
 import 'package:resume_app/features/pdf_creator/data/pdf_save_service.dart';
@@ -51,7 +51,6 @@ void initModule() {
     getIt.registerLazySingleton(() => FailureHandler());
     initAllAuthFailureHandles();
     FailureRegistry.initializeAll(getIt<FailureHandler>());
-    
   }
   isInitModule = true;
 }
@@ -62,10 +61,10 @@ void authRepoInit() {
     return;
   }
   isAuthReoInit = true;
-  getIt.registerFactory(() => AuthService(
+  getIt.registerFactory(() => FireBaseAuthService(
       auth: getIt<FirebaseAuth>(), failureHandler: getIt<FailureHandler>()));
   getIt.registerFactory(() => AuthRepositoryImp(
-      serviceProvider: getIt<AuthService>(),
+      serviceProvider: getIt<FireBaseAuthService>(),
       failureHandler: getIt<FailureHandler>()));
 }
 

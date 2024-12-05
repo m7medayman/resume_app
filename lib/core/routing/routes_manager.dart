@@ -12,12 +12,12 @@ import 'package:resume_app/features/resume_dialog/presentation/job_application_v
 
 class Routes {
   static const String login = '/';
-  static const String home = "/home";
-  static const String signUP = '/signUP';
-  static const String profile = '/profile';
-  static const String pdfView = '/pdfView';
-  static const String resumeApplication = "/resume_apply";
-  static const String pdfFileView = "/pdf_file_view";
+  static const String home = "home";
+  static const String signUP = 'signUP';
+  static const String profile = 'profile';
+  static const String pdfView = 'pdfView';
+  static const String resumeApplication = "resume_apply";
+  static const String pdfFileView = "pdf_file_view";
 }
 
 // Route manager to handle navigation
