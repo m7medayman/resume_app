@@ -19,7 +19,7 @@ class FireBaseAuthService extends AuthServiceProvider {
       UserCredential userCredential = await _auth.signInWithEmailAndPassword(
           email: request.email, password: request.password);
       if (userCredential.user == null) {
-        throw Exception("Null Auth USer");
+        throw Exception("Null Auth User");
       }
       String userId = userCredential.user!.uid;
       print(userId);
@@ -80,5 +80,15 @@ class FireBaseAuthService extends AuthServiceProvider {
   @override
   Future signOut() async {
     await _auth.signOut();
+  }
+
+  @override
+  Future<AuthResponse> autoLogin() {
+    var user = _auth.currentUser;
+    if (user != null) {
+      return getUserAuthInfoWithId(user.uid);
+    } else {
+      throw Exception("Null Auth User");
+    }
   }
 }

@@ -6,4 +6,5 @@ abstract class AuthServiceProvider {
   Future<AuthResponse> signUp(
       SignUpRequest request, SignUpRequestUserDetails userDetailsRequest);
   Future signOut();
+  Future<AuthResponse> autoLogin();
 }

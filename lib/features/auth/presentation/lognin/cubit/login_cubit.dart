@@ -2,6 +2,7 @@ import 'dart:ffi';
 
 import 'package:bloc/bloc.dart';
 import 'package:either_dart/either.dart';
+import 'package:resume_app/core/auth_provider/auth_check.dart';
 import 'package:resume_app/core/data_classes/user_info.dart';
 import 'package:resume_app/core/doc_manager/docs_manager_and_permission.dart';
 import 'package:resume_app/core/resources/failure/failure_model.dart';
@@ -13,7 +14,8 @@ part 'login_form_state.dart';
 
 class LoginCubit extends Cubit<FormLoginState> {
   LoginUseCase loginUseCase;
-  LoginCubit(this.loginUseCase)
+  AutoLoginUseCase autoLoginUseCase;
+  LoginCubit(this.loginUseCase, this.autoLoginUseCase)
       : super(FormLoginState(
             loginState: LoginInitial(), email: '', password: ''));
 
@@ -38,6 +40,23 @@ class LoginCubit extends Cubit<FormLoginState> {
       emit(state.copyWith(loginState: LoginInitial()));
     }, (success) {
       emit(state.copyWith(loginState: LoginInitial()));
+    });
+  }
+
+  Future autoLogin() async {
+    emit(state.copyWith(loginState: LogInLoading()));
+    Either<Failure, MyUserInfo?> res = await autoLoginUseCase.execute();
+
+    res.fold((Failure f) {
+      print(" failure");
+      print(f.message);
+      emit(state.copyWith(loginState: LogInFailure(failure: f)));
+      emit(state.copyWith(loginState: LoginInitial()));
+    }, (MyUserInfo? entity) {
+      emit(state.copyWith(loginState: LoginInitial()));
+      if (entity != null) {
+        emit(state.copyWith(loginState: LogInSuccess(data: entity)));
+      }
     });
   }
 

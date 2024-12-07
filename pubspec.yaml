@@ -55,6 +55,7 @@ dependencies:
   fluttertoast: ^8.2.8
   flutter_native_splash: ^2.4.3
   flutter_launcher_icons: ^0.14.2
+  shared_preferences: ^2.3.3
 
 
 dev_dependencies:

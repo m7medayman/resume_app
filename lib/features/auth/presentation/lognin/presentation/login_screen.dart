@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:resume_app/core/Di/di.dart';
+import 'package:resume_app/core/auth_provider/auth_check.dart';
 import 'package:resume_app/core/common/state_renderer/pop_state_dialog_widget.dart';
 import 'package:resume_app/core/common/widgets/my_inputField.dart';
 import 'package:resume_app/core/common/widgets/my_text.dart';
@@ -8,6 +9,7 @@ import 'package:resume_app/core/common/widgets/separator.dart';
 import 'package:resume_app/core/constants/app_string_constats.dart';
 import 'package:resume_app/core/constants/widget_dimensions.dart';
 import 'package:resume_app/core/routing/routes_manager.dart';
+import 'package:resume_app/features/auth/domain/use_case.dart';
 import 'package:resume_app/features/auth/presentation/lognin/cubit/login_cubit.dart';
 import 'package:resume_app/features/auth/presentation/lognin/cubit/login_state.dart';
 
@@ -30,7 +32,8 @@ class _LoginScreenPresentationState extends State<LoginScreenPresentation> {
   @override
   void initState() {
     // TODO: implement initState
-    _loginCubit = LoginCubit(getIt());
+    _loginCubit = LoginCubit(getIt(), getIt<AutoLoginUseCase>());
+    _loginCubit.autoLogin();
     super.initState();
   }
 
@@ -81,7 +84,7 @@ class _LoginScreenPresentationState extends State<LoginScreenPresentation> {
                 showLoadingPopUpDialog(context);
               }
               if (state.loginState is LogInSuccess) {
-                 if (isLoadingDialog) {
+                if (isLoadingDialog) {
                   Navigator.of(context).pop();
                   isLoadingDialog = false;
                 }

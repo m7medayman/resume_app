@@ -17,6 +17,16 @@ class LoginUseCase extends BaseUseCase<LoginParameter, MyUserInfo> {
   }
 }
 
+class AutoLoginUseCase extends BaseUseCase<void, MyUserInfo?> {
+  final AuthRepository authRepository;
+
+  AutoLoginUseCase({required this.authRepository});
+  @override
+  Future<Either<Failure, MyUserInfo?>> execute([void input])async {
+    return await authRepository.autoLogin();
+  }
+}
+
 class SignUpUseCase extends BaseUseCase<SignUpParameter, MyUserInfo> {
   AuthRepository authRepository;
   SignUpUseCase({

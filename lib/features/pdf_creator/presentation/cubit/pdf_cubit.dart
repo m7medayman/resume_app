@@ -16,6 +16,7 @@ class PdfCubit extends Cubit<PdfState> {
   final PdfSaveUseCase pdfSaveUseCase;
   PdfCubit({required this.pdfSaveUseCase, required this.useCase})
       : super(PdfState(
+            isFileSaved: false,
             state: PdfInitState(),
             data: PdfData(
                 jobTitle: '',
@@ -60,6 +61,7 @@ class PdfCubit extends Cubit<PdfState> {
       }, (path) {
         print(path);
         showSaveToast();
+        emit(state.copyWith(isSaved: true));
         emit(state.copyWith(formState: PdfInitState()));
       });
     });

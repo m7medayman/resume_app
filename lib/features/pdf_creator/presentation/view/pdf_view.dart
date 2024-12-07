@@ -8,6 +8,7 @@ import 'package:resume_app/core/common/widgets/input_dialogs_body/input_dialog.d
 import 'package:resume_app/core/common/widgets/separator.dart';
 import 'package:resume_app/core/common/widgets/toast/save_file_toast.dart';
 import 'package:resume_app/core/constants/app_sizes_constants.dart';
+import 'package:resume_app/core/doc_manager/doc_path_consts.dart';
 import 'package:resume_app/core/theme_manager/color_manager.dart';
 import 'package:resume_app/features/pdf_creator/presentation/cubit/pdf_cubit.dart';
 import 'package:resume_app/features/pdf_creator/presentation/cubit/pdf_form_state.dart';
@@ -21,6 +22,7 @@ class PdfView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     bool isLoadign = false;
+
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
@@ -102,7 +104,11 @@ class PdfView extends StatelessWidget {
                                 }
                               });
                             },
-                            child: const Text("Save pdf"))
+                            child: const Text("Save pdf")),
+                        FormSeparator(screenHeight: screenHeight),
+                        const Visibility(
+                            child: Text(
+                                "the file is saved at: Device/${DocPathConsts.outPutFolder} "))
                       ],
                     ),
                   );

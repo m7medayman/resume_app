@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get_it/get_it.dart';
+import 'package:resume_app/core/auth_provider/auth_check.dart';
 import 'package:resume_app/core/data_classes/pdf_data_class.dart';
 import 'package:resume_app/core/data_classes/user_info.dart';
 
@@ -20,6 +21,7 @@ import 'package:resume_app/features/pdf_creator/domain/pdf_creating_use_case.dar
 import 'package:resume_app/features/resume_dialog/data/gemini_repo/job_details_service_provider.dart';
 import 'package:resume_app/features/resume_dialog/data/repo_impelement.dart';
 import 'package:resume_app/features/resume_dialog/domain/use_case.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 final getIt = GetIt.instance;
 bool isInitThemeModule = false;
@@ -44,13 +46,18 @@ void initThemeModule(double screenWidth) {
 }
 
 bool isInitModule = false;
-void initModule() {
+void initModule()async {
   if (!isInitModule) {
     final FirebaseAuth auth = FirebaseAuth.instance;
     getIt.registerLazySingleton(() => auth);
     getIt.registerLazySingleton(() => FailureHandler());
     initAllAuthFailureHandles();
     FailureRegistry.initializeAll(getIt<FailureHandler>());
+    getIt.registerFactory(
+        () => AuthChecker(firebaseAuth: getIt<FirebaseAuth>()));
+     getIt.registerLazySingletonAsync(() async{
+      return await SharedPreferences.getInstance();
+    });
   }
   isInitModule = true;
 }
@@ -64,8 +71,9 @@ void authRepoInit() {
   getIt.registerFactory(() => FireBaseAuthService(
       auth: getIt<FirebaseAuth>(), failureHandler: getIt<FailureHandler>()));
   getIt.registerFactory(() => AuthRepositoryImp(
+    authChecker: getIt<AuthChecker>(),
       serviceProvider: getIt<FireBaseAuthService>(),
-      failureHandler: getIt<FailureHandler>()));
+      failureHandler: getIt<FailureHandler>(), ));
 }
 
 bool isLoginModule = false;
@@ -74,6 +82,7 @@ void initLoginModule() {
     authRepoInit();
     getIt.registerFactory(
         () => LoginUseCase(authRepository: getIt<AuthRepositoryImp>()));
+    getIt.registerFactory(()=>AutoLoginUseCase(authRepository:getIt<AuthRepositoryImp>()));
   }
   isLoginModule = true;
 }
