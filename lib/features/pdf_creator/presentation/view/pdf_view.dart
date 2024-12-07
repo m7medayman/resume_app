@@ -106,9 +106,12 @@ class PdfView extends StatelessWidget {
                             },
                             child: const Text("Save pdf")),
                         FormSeparator(screenHeight: screenHeight),
-                        const Visibility(
-                            child: Text(
-                                "the file is saved at: Device/${DocPathConsts.outPutFolder} "))
+                        Visibility(
+                            visible: state.isFileSaved,
+                            child: const Center(
+                              child:  Text(
+                                  "the file is saved at: Device${DocPathConsts.outPutFolder} "),
+                            ))
                       ],
                     ),
                   );

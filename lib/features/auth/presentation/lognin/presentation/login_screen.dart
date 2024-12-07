@@ -33,8 +33,12 @@ class _LoginScreenPresentationState extends State<LoginScreenPresentation> {
   void initState() {
     // TODO: implement initState
     _loginCubit = LoginCubit(getIt(), getIt<AutoLoginUseCase>());
-    _loginCubit.autoLogin();
+
     super.initState();
+    _loginCubit.checkFilePermission();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _loginCubit.autoLogin();
+    });
   }
 
   @override
@@ -47,7 +51,7 @@ class _LoginScreenPresentationState extends State<LoginScreenPresentation> {
   @override
   void didChangeDependencies() {
     // TODO: implement didChangeDependencies
-    _loginCubit.checkFilePermission();
+
     super.didChangeDependencies();
   }
 
@@ -61,33 +65,29 @@ class _LoginScreenPresentationState extends State<LoginScreenPresentation> {
           appBar: AppBar(title: const AppBarText(content: AppStrings.login)),
           body: BlocListener<LoginCubit, FormLoginState>(
             listener: (context, state) {
-              if (state.loginState is LogInFailure) {
-                LogInFailure logInFailure = state.loginState as LogInFailure;
+              if (state.loginState is LogInLoading) {
+                if (!isLoadingDialog) {
+                  isLoadingDialog = true;
+                  showLoadingPopUpDialog(context);
+                }
+              } else {
                 if (isLoadingDialog) {
                   Navigator.of(context).pop();
                   isLoadingDialog = false;
                 }
+              }
+              if (state.loginState is LogInFailure) {
+                LogInFailure logInFailure = state.loginState as LogInFailure;
                 showFailurePopUpDialog(context, logInFailure.getFailureMessage);
               }
               if (state.loginState is LoginPermissionFailure) {
                 LoginPermissionFailure loginState =
                     state.loginState as LoginPermissionFailure;
-                if (isLoadingDialog) {
-                  Navigator.of(context).pop();
-                  isLoadingDialog = false;
-                }
                 showFilePermissionDeniedDialog(
                     context, context.read<LoginCubit>().checkFilePermission);
               }
-              if (state.loginState is LogInLoading) {
-                isLoadingDialog = true;
-                showLoadingPopUpDialog(context);
-              }
+
               if (state.loginState is LogInSuccess) {
-                if (isLoadingDialog) {
-                  Navigator.of(context).pop();
-                  isLoadingDialog = false;
-                }
                 Navigator.of(context).pushReplacementNamed(Routes.home);
               }
             },

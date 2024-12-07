@@ -111,15 +111,8 @@ class HomeScaffold extends StatelessWidget {
           style: Theme.of(context).textTheme.titleMedium,
         ),
       ),
-      body: Stack(
-        children: [
-          MainHomePage(
-              state: state,
-              screenWidth: screenWidth,
-              screenheigth: screenheigth),
-          LoadingFullScreen(isVisable: state.pageState is LoadingPageState),
-        ],
-      ),
+      body: MainHomePage(
+          state: state, screenWidth: screenWidth, screenheigth: screenheigth),
     );
   }
 }

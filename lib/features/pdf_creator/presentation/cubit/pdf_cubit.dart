@@ -61,8 +61,7 @@ class PdfCubit extends Cubit<PdfState> {
       }, (path) {
         print(path);
         showSaveToast();
-        emit(state.copyWith(isSaved: true));
-        emit(state.copyWith(formState: PdfInitState()));
+        emit(state.copyWith(formState: PdfInitState(), isSaved: true));
       });
     });
   }

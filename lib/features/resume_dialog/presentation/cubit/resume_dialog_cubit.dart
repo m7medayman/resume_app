@@ -196,6 +196,10 @@ class ResumeDialogCubit extends Cubit<ResumeDialogState> {
     });
   }
 
+  void updateSummery(String jobSummery) {
+    emit(state.copyWith(jobSummery: jobSummery));
+  }
+
   void getNextPage() {
     emit(state.copyWith(resumeFormState: GoForwardFormState()));
     emit(state.copyWith(resumeFormState: InitResumeFormState()));

@@ -21,7 +21,6 @@ import 'package:resume_app/features/pdf_creator/domain/pdf_creating_use_case.dar
 import 'package:resume_app/features/resume_dialog/data/gemini_repo/job_details_service_provider.dart';
 import 'package:resume_app/features/resume_dialog/data/repo_impelement.dart';
 import 'package:resume_app/features/resume_dialog/domain/use_case.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 final getIt = GetIt.instance;
 bool isInitThemeModule = false;
@@ -46,7 +45,7 @@ void initThemeModule(double screenWidth) {
 }
 
 bool isInitModule = false;
-void initModule()async {
+void initModule() async {
   if (!isInitModule) {
     final FirebaseAuth auth = FirebaseAuth.instance;
     getIt.registerLazySingleton(() => auth);
@@ -55,9 +54,6 @@ void initModule()async {
     FailureRegistry.initializeAll(getIt<FailureHandler>());
     getIt.registerFactory(
         () => AuthChecker(firebaseAuth: getIt<FirebaseAuth>()));
-     getIt.registerLazySingletonAsync(() async{
-      return await SharedPreferences.getInstance();
-    });
   }
   isInitModule = true;
 }
@@ -71,9 +67,10 @@ void authRepoInit() {
   getIt.registerFactory(() => FireBaseAuthService(
       auth: getIt<FirebaseAuth>(), failureHandler: getIt<FailureHandler>()));
   getIt.registerFactory(() => AuthRepositoryImp(
-    authChecker: getIt<AuthChecker>(),
-      serviceProvider: getIt<FireBaseAuthService>(),
-      failureHandler: getIt<FailureHandler>(), ));
+        authChecker: getIt<AuthChecker>(),
+        serviceProvider: getIt<FireBaseAuthService>(),
+        failureHandler: getIt<FailureHandler>(),
+      ));
 }
 
 bool isLoginModule = false;
@@ -82,7 +79,8 @@ void initLoginModule() {
     authRepoInit();
     getIt.registerFactory(
         () => LoginUseCase(authRepository: getIt<AuthRepositoryImp>()));
-    getIt.registerFactory(()=>AutoLoginUseCase(authRepository:getIt<AuthRepositoryImp>()));
+    getIt.registerFactory(
+        () => AutoLoginUseCase(authRepository: getIt<AuthRepositoryImp>()));
   }
   isLoginModule = true;
 }

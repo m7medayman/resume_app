@@ -51,7 +51,11 @@ class JobSummary extends StatelessWidget {
         FormSeparator(screenHeight: screenHeight),
         const Divider(),
         FormSeparator(screenHeight: screenHeight),
-        GoBackAndForward(formKey: formKey, cubit: cubit)
+        GoBackAndForward(
+          formKey: formKey,
+          cubit: cubit,
+          jobDescriptionTextController: jobDescriptionTextController,
+        )
       ],
     ));
   }
@@ -60,10 +64,11 @@ class JobSummary extends StatelessWidget {
 class GoBackAndForward extends StatelessWidget {
   const GoBackAndForward({
     super.key,
+    required this.jobDescriptionTextController,
     required this.formKey,
     required this.cubit,
   });
-
+  final TextEditingController jobDescriptionTextController;
   final GlobalKey<FormState> formKey;
   final ResumeDialogCubit cubit;
 
@@ -80,6 +85,7 @@ class GoBackAndForward extends StatelessWidget {
         ElevatedButton(
             onPressed: () {
               if (formKey.currentState!.validate()) {
+                cubit.updateJobSummery(jobDescriptionTextController.text);
                 cubit.getNextPage();
               }
             },
