@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:resume_app/core/Di/di.dart';
 import 'package:resume_app/core/Di/home_moule.dart';
+import 'package:resume_app/core/Di/update_user_module.dart';
 import 'package:resume_app/core/common/widgets/pdf_file_view/pdf_file_view.dart';
 import 'package:resume_app/core/data_classes/pdf_data_class.dart';
 import 'package:resume_app/features/auth/presentation/lognin/presentation/login_screen.dart';
@@ -27,6 +28,7 @@ class RouteManager {
   static Route<String> generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case Routes.updateUserView:
+        updateUserModule();
         return MaterialPageRoute(builder: (_) => const UpdateUserView());
       case Routes.pdfFileView:
         return MaterialPageRoute(

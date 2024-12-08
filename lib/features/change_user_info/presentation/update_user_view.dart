@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:resume_app/core/Di/injection.dart';
@@ -19,6 +20,7 @@ import 'package:resume_app/core/page_states/page_states.dart';
 import 'package:resume_app/core/resources/helpers/input_fields.dart';
 import 'package:resume_app/core/resources/helpers/null_type_extension.dart';
 import 'package:resume_app/core/routing/routes_manager.dart';
+import 'package:resume_app/features/change_user_info/domain/update_user_usecase.dart';
 import 'package:resume_app/features/change_user_info/presentation/cubit/change_user_cubit.dart';
 
 class UpdateUserView extends StatefulWidget {
@@ -53,6 +55,12 @@ class _UpdateUserViewState extends State<UpdateUserView> {
   late double screenHeight;
   late List<GlobalKey<FormState>> checkPrimaryKeys;
   late ChangeUserCubit _cubit;
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    _cubit.close();
+    super.dispose();
+  }
 
   @override
   void initState() {
@@ -63,7 +71,10 @@ class _UpdateUserViewState extends State<UpdateUserView> {
       locationFormKey,
     ];
     super.initState();
-    _cubit = ChangeUserCubit(userInfo: getIt<MyUserInfo>());
+    _cubit = ChangeUserCubit(
+        userInfo: getIt<MyUserInfo>(),
+        auth: getIt<FirebaseAuth>(),
+        usecase: getIt<UpdateUserUsecase>());
     ChangeUserState state = _cubit.state;
     userNameContrller.text = state.userName;
     phoneController.text = state.phone;
@@ -365,14 +376,14 @@ class _UpdateUserViewState extends State<UpdateUserView> {
                       extraFields.values.toList();
                   if (checkAllKeys(checkPrimaryKeys) &
                       checkAllKeys(extraKeys)) {
-                    // context.read<ChangeUserCubit>().registerUser(
-                    //     userNameContrller.text,
-                    //     phoneController.text,
-                    //     contactEmailFormController.text,
-                    //     locationFormController.text,
-                    //     extraPhoneInput.text,
-                    //     linkeInInput.text,
-                    //     websiteInput.text);
+                    context.read<ChangeUserCubit>().updateUser(
+                        userNameContrller.text,
+                        phoneController.text,
+                        contactEmailFormController.text,
+                        locationFormController.text,
+                        extraPhoneInput.text,
+                        linkeInInput.text,
+                        websiteInput.text);
                   }
                 },
                 child: const Text(AppStrings.submit))
