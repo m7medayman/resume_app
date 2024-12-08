@@ -3,8 +3,8 @@
 import 'package:resume_app/core/data_classes/data_classes.dart';
 import 'package:resume_app/core/data_classes/user_info.dart';
 import 'package:resume_app/core/resources/helpers/null_type_extension.dart';
-import 'package:resume_app/features/auth/data/Response.dart';
-import 'package:resume_app/features/auth/data/request.dart';
+import 'package:resume_app/core/auth_provider/responses/Response.dart';
+import 'package:resume_app/core/auth_provider/requests/request.dart';
 import 'package:resume_app/features/auth/domain/use_case.dart';
 
 extension LoginMapper on LoginParameter {
@@ -13,9 +13,9 @@ extension LoginMapper on LoginParameter {
   }
 }
 
-extension SignUpRequestUserDetailsMapper on SignUpParameter {
-  SignUpRequestUserDetails toSignUpRequestUserDetails() {
-    return SignUpRequestUserDetails(
+extension UserInfoDataRequestsMapper on SignUpParameter {
+  UserInfoDataRequest toUserInfoDataRequest() {
+    return UserInfoDataRequest(
         contactEmail: contactEmail,
         name: name,
         phone: phone,
@@ -24,6 +24,7 @@ extension SignUpRequestUserDetailsMapper on SignUpParameter {
         educationInfo: educationInfo.toJson());
   }
 }
+
 
 extension SignUpAuthMapper on SignUpParameter {
   SignUpRequest toSignUpRequest() {
@@ -38,7 +39,7 @@ extension AuthEntityMapper on AuthResponse {
         name: name.nullSafety(),
         phone: phone.nullSafety(),
         address: address.nullSafety(),
-        contactDetails: ContactExtraDetails.fromJson(contactDetails),
+        extraContactDetails: ContactExtraDetails.fromJson(contactDetails),
         educationInfo: EducationInfo.fromJson(educationInfo));
   }
 }

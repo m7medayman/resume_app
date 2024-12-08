@@ -12,14 +12,14 @@ class SignUpRequest {
 }
 
 @JsonSerializable()
-class SignUpRequestUserDetails {
+class UserInfoDataRequest {
   String name;
   String phone;
   String address;
   String contactEmail;
   Map<String, dynamic> contactDetails;
   Map<String, dynamic> educationInfo;
-  SignUpRequestUserDetails({
+  UserInfoDataRequest({
     required this.name,
     required this.phone,
     required this.address,
@@ -28,7 +28,7 @@ class SignUpRequestUserDetails {
     required this.educationInfo,
   });
 
-  factory SignUpRequestUserDetails.fromJson(Map<String, dynamic> json) =>
+  factory UserInfoDataRequest.fromJson(Map<String, dynamic> json) =>
       _$SignUpRequestUserDetailsFromJson(json);
   Map<String, dynamic> toJson() => _$SignUpRequestUserDetailsToJson(this);
 }

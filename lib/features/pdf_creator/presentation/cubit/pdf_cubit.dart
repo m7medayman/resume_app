@@ -28,7 +28,7 @@ class PdfCubit extends Cubit<PdfState> {
                     phone: "",
                     address: "",
                     contactEmail: "",
-                    contactDetails: ContactExtraDetails(),
+                    extraContactDetails: ContactExtraDetails(),
                     educationInfo: EducationInfo()),
                 selectedHardSkills: [],
                 selectedSoftSkills: [],

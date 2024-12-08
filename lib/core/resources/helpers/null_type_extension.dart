@@ -1,6 +1,6 @@
 extension NullSafetyOnString on String? {
   String nullSafety() {
-    return this ?? "null";
+    return this ?? "";
   }
 }
 

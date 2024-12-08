@@ -102,7 +102,7 @@ class SignupCubit extends Cubit<SighupState> {
               FailureSignupFormState(errorMessage: failure.message)));
     }, (success) {
       print(success.address);
-      print(success.contactDetails);
+      print(success.extraContactDetails);
       emit(state.copyWith(signupFormState: SuccessSignupFormState()));
     });
   }

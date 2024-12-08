@@ -32,11 +32,11 @@ class PdfForm {
               style: PdfTextStyles.mediumBold),
           pw.SizedBox(height: 2),
           LinkOrEmpty(
-              website: data.userInfo.contactDetails.linkedIn ?? "",
+              website: data.userInfo.extraContactDetails.linkedIn ?? "",
               title: "LinkedIn"),
           pw.SizedBox(height: 2),
           LinkOrEmpty(
-              website: data.userInfo.contactDetails.website ?? "",
+              website: data.userInfo.extraContactDetails.website ?? "",
               title: "website"),
 
           pw.SizedBox(height: 5),

@@ -93,9 +93,14 @@ class HomeScaffold extends StatelessWidget {
             SizedBox(
               height: screenheigth * 0.1,
             ),
-            const DrawerItem(
-              titile: "user",
-              icon: Icons.person,
+            InkWell(
+              onTap: () {
+                Navigator.of(context).pushNamed(Routes.updateUserView);
+              },
+              child: const DrawerItem(
+                titile: "update user info",
+                icon: Icons.person,
+              ),
             ),
             InkWell(
                 onTap: () {

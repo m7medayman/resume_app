@@ -4,7 +4,7 @@ import 'package:either_dart/src/either.dart';
 import 'package:resume_app/core/data_classes/pdf_view_data.dart';
 import 'package:resume_app/core/doc_manager/doc_path_consts.dart';
 import 'package:resume_app/core/resources/failure/failure_model.dart';
-import 'package:resume_app/core/auth_provider/network_service_provider.dart';
+import 'package:resume_app/core/auth_provider/auth_network_service_provider.dart';
 import 'package:resume_app/features/home/data/file_scan_service.dart';
 import 'package:resume_app/features/home/domain/home_repo.dart';
 

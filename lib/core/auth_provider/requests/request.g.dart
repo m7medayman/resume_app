@@ -6,9 +6,9 @@ part of 'request.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-SignUpRequestUserDetails _$SignUpRequestUserDetailsFromJson(
+UserInfoDataRequest _$SignUpRequestUserDetailsFromJson(
         Map<String, dynamic> json) =>
-    SignUpRequestUserDetails(
+    UserInfoDataRequest(
       name: json['name'] as String,
       phone: json['phone'] as String,
       address: json['address'] as String,
@@ -18,7 +18,7 @@ SignUpRequestUserDetails _$SignUpRequestUserDetailsFromJson(
     );
 
 Map<String, dynamic> _$SignUpRequestUserDetailsToJson(
-        SignUpRequestUserDetails instance) =>
+        UserInfoDataRequest instance) =>
     <String, dynamic>{
       'name': instance.name,
       'phone': instance.phone,

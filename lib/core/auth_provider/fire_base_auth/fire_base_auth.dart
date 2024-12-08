@@ -1,9 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:resume_app/core/auth_provider/requests/request.dart';
 import 'package:resume_app/core/resources/failure/failure_handler.dart';
-import 'package:resume_app/features/auth/data/Response.dart';
-import 'package:resume_app/core/auth_provider/network_service_provider.dart';
-import 'package:resume_app/features/auth/data/request.dart';
+import 'package:resume_app/core/auth_provider/responses/Response.dart';
+import 'package:resume_app/core/auth_provider/auth_network_service_provider.dart';
 
 class FireBaseAuthService extends AuthServiceProvider {
   final FirebaseAuth _auth;
@@ -33,8 +33,8 @@ class FireBaseAuthService extends AuthServiceProvider {
   }
 
   @override
-  Future<AuthResponse> signUp(SignUpRequest request,
-      SignUpRequestUserDetails userDetailsRequest) async {
+  Future<AuthResponse> signUp(
+      SignUpRequest request, UserInfoDataRequest userDetailsRequest) async {
     UserCredential userCredential = await _auth.createUserWithEmailAndPassword(
         email: request.email, password: request.password);
     if (userCredential.user == null) {
@@ -46,7 +46,7 @@ class FireBaseAuthService extends AuthServiceProvider {
   }
 
   Future setUserAuthInfoWithId(
-      String id, SignUpRequestUserDetails userDetailsRequest) async {
+      String id, UserInfoDataRequest userDetailsRequest) async {
     await FirebaseFirestore.instance
         .collection('users')
         .doc(id)
@@ -91,4 +91,15 @@ class FireBaseAuthService extends AuthServiceProvider {
       throw Exception("Null Auth User");
     }
   }
+  
+  @override
+  Future<AuthResponse> updateUserInfo( {required String id, 
+  required  UserInfoDataRequest userDetailsRequest})async {
+  await FirebaseFirestore.instance
+        .collection('users')
+        .doc(id)
+        .update(userDetailsRequest.toJson());
+         return getUserAuthInfoWithId(id);
+  }
+ 
 }

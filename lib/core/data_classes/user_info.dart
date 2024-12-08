@@ -5,14 +5,14 @@ class MyUserInfo {
   String phone;
   String address;
   String contactEmail;
-  ContactExtraDetails contactDetails;
+  ContactExtraDetails extraContactDetails;
   EducationInfo educationInfo;
   MyUserInfo({
     required this.name,
     required this.phone,
     required this.address,
     required this.contactEmail,
-    required this.contactDetails,
+    required this.extraContactDetails,
     required this.educationInfo,
   });
 }
