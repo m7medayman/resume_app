@@ -6,6 +6,7 @@ import 'package:resume_app/core/resources/helpers/null_type_extension.dart';
 import 'package:resume_app/core/auth_provider/responses/Response.dart';
 import 'package:resume_app/core/auth_provider/requests/request.dart';
 import 'package:resume_app/features/auth/domain/use_case.dart';
+import 'package:resume_app/features/change_user_info/domain/update_user_usecase.dart';
 
 extension LoginMapper on LoginParameter {
   LoginRequest toLoginRequest() {
@@ -41,5 +42,16 @@ extension AuthEntityMapper on AuthResponse {
         address: address.nullSafety(),
         extraContactDetails: ContactExtraDetails.fromJson(contactDetails),
         educationInfo: EducationInfo.fromJson(educationInfo));
+  }
+}
+extension UpdateUserDataMapper on UpdateUserParameters {
+  UserInfoDataRequest toUserInfoRequest() {
+    return UserInfoDataRequest(
+        name: name,
+        phone: phone,
+        address: address,
+        contactEmail: contactEmail,
+        contactDetails: contactExtraDetails.toJson(),
+        educationInfo: educationInfo.toJson());
   }
 }

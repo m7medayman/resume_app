@@ -4,16 +4,23 @@ import 'package:resume_app/core/resources/base_usecase/base_use_case.dart';
 import 'package:resume_app/core/resources/failure/failure_model.dart';
 import 'package:resume_app/features/change_user_info/domain/update_user_repo.dart';
 
-class UpdateUserUsecase extends BaseUseCase<UpdateUserParameters, Null> {
+class UpdateUserUsecase extends BaseUseCase<UpdateUerInput, Null> {
   final UpdateUserRepo updateUserRepo;
 
   UpdateUserUsecase({required this.updateUserRepo});
 
   @override
-  Future<Either<Failure, Null>> execute(UpdateUserParameters input) async {
+  Future<Either<Failure, Null>> execute(UpdateUerInput input) async {
     // TODO: implement execute
-    return await updateUserRepo.updateUserData(input);
+    return await updateUserRepo.updateUserData(
+        id: input.uid, input: input.updateUserParameters);
   }
+}
+
+class UpdateUerInput {
+  String uid;
+  UpdateUserParameters updateUserParameters;
+  UpdateUerInput({required this.uid, required this.updateUserParameters});
 }
 
 class UpdateUserParameters {

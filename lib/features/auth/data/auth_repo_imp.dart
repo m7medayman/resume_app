@@ -7,7 +7,7 @@ import 'package:resume_app/core/resources/failure/failure_handler.dart';
 import 'package:resume_app/core/resources/failure/failure_model.dart';
 import 'package:resume_app/core/shared_pref/shared_pref.dart';
 import 'package:resume_app/core/auth_provider/responses/Response.dart';
-import 'package:resume_app/features/auth/data/mapper.dart';
+import 'package:resume_app/core/auth_provider/mapper.dart';
 import 'package:resume_app/core/auth_provider/auth_network_service_provider.dart';
 import 'package:resume_app/features/auth/domain/repository.dart';
 import 'package:resume_app/features/auth/domain/use_case.dart';
