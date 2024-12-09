@@ -15,10 +15,7 @@ void main() async {
 
   initModule();
 
-  runApp(MediaQuery(
-      data: MediaQueryData.fromView(WidgetsBinding.instance.window)
-          .copyWith(textScaler: const TextScaler.linear(1.0)),
-      child: const MyApp()));
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -32,13 +29,16 @@ class MyApp extends StatelessWidget {
     MyTheme myThemeManager = getIt<MyTheme>();
     ScreenSizeService screenSizeService = getIt<ScreenSizeService>();
     screenSizeService.updateScreenSize(screenWidth);
-    return MaterialApp(
-      initialRoute: Routes.login, // Set the initial route
-      onGenerateRoute: RouteManager.generateRoute,
-      debugShowCheckedModeBanner: false,
-      theme: myThemeManager.getTheme(),
-      title: 'AI Resume Boost',
-      // home: const JobApplicationViewScreen(),
+    return MediaQuery(
+      data: MediaQueryData.fromView(WidgetsBinding.instance.window)
+          .copyWith(textScaler: const TextScaler.linear(1.0)),
+      child: MaterialApp(
+        initialRoute: Routes.login,
+        onGenerateRoute: RouteManager.generateRoute,
+        debugShowCheckedModeBanner: false,
+        theme: getIt<MyTheme>().getTheme(),
+        title: 'AI Resume Boost',
+      ),
     );
   }
 }
