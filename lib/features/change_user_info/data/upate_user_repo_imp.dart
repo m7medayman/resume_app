@@ -7,6 +7,7 @@ import 'package:resume_app/core/auth_provider/mapper.dart';
 import 'package:resume_app/features/change_user_info/domain/update_user_repo.dart';
 import 'package:resume_app/features/change_user_info/domain/update_user_usecase.dart';
 
+
 class UpateUserRepoImp extends UpdateUserRepo {
  final AuthServiceProvider serviceProvider;
 

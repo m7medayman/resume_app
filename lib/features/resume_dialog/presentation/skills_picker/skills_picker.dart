@@ -75,9 +75,9 @@ class JobSkillPicker extends StatelessWidget {
                                     showInputDialog(context,
                                             title: "Add Skill: ")
                                         .then((value) {
-                                      print(value.runtimeType);
+                                  
                                       if (value is String) {
-                                        print("softSkill added");
+                                
                                         cubit.addAiJobHardSkill(value);
                                         cubit.addHardSkill(value);
                                       }

@@ -52,7 +52,7 @@ class DocsManagerAndPermissions {
         if (!(await customFolder.exists())) {
           await customFolder.create();
         }
-        print("Folder created at: ${customFolder.path}");
+     
         return Right(customFolder.path);
       } else {
         return Left(SystemFailureConstants.systemPermissionDenied);

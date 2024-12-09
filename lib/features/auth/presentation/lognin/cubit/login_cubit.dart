@@ -48,8 +48,8 @@ class LoginCubit extends Cubit<FormLoginState> {
     Either<Failure, MyUserInfo?> res = await autoLoginUseCase.execute();
 
     res.fold((Failure f) {
-      print(" failure");
-      print(f.message);
+   
+
       emit(state.copyWith(loginState: LogInFailure(failure: f)));
       emit(state.copyWith(loginState: LoginInitial()));
     }, (MyUserInfo? entity) {
@@ -61,15 +61,13 @@ class LoginCubit extends Cubit<FormLoginState> {
   }
 
   Future login() async {
-    print(state.email);
-    print(state.password);
+
     emit(state.copyWith(loginState: LogInLoading()));
     Either<Failure, MyUserInfo> res = await loginUseCase
         .execute(LoginParameter(email: state.email, password: state.password));
 
     res.fold((Failure f) {
-      print(" failure");
-      print(f.message);
+
       emit(state.copyWith(loginState: LogInFailure(failure: f)));
       emit(state.copyWith(loginState: LoginInitial()));
     }, (MyUserInfo entity) {

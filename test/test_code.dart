@@ -15,7 +15,6 @@ void main() {
         endDate: DateTime(2001)),
   ]);
   ed.toJson();
-  print(ed.toJson());
+
   var fj = EducationInfo.fromJson(ed.toJson());
-  print(fj);
 }

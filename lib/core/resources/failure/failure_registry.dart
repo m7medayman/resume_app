@@ -5,7 +5,7 @@ class FailureRegistry {
 
   static void registerHandler(FailureHandle handler) {
     registeredHandlers.add(handler);
-    print(registeredHandlers);
+
   }
 
   static void initializeAll(FailureHandler handler) {

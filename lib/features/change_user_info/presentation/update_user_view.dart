@@ -23,6 +23,7 @@ import 'package:resume_app/core/routing/routes_manager.dart';
 import 'package:resume_app/features/change_user_info/domain/update_user_usecase.dart';
 import 'package:resume_app/features/change_user_info/presentation/cubit/change_user_cubit.dart';
 
+
 class UpdateUserView extends StatefulWidget {
   const UpdateUserView({super.key});
 
@@ -342,7 +343,7 @@ class _UpdateUserViewState extends State<UpdateUserView> {
                           context
                               .read<ChangeUserCubit>()
                               .addDegree(returendValue);
-                          print(value!.title);
+    
                         }
                       });
                     },
@@ -363,7 +364,7 @@ class _UpdateUserViewState extends State<UpdateUserView> {
                           context
                               .read<ChangeUserCubit>()
                               .addCourse(returendValue);
-                          print(value!.title);
+     
                         }
                       });
                     },

@@ -66,7 +66,7 @@ class ErrorPopUpDialog extends MyAlertDialogPopUp {
               onPressed: () {
                 Navigator.of(context).pop();
               },
-              child: const Text(AppStrings.cancel),
+              child: const Text(AppStrings.close),
             ),
           ],
         );

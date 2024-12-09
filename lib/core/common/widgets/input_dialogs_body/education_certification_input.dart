@@ -163,7 +163,7 @@ class _EducationCertificationInputDialogState
                             Navigator.of(context).pop(null);
                           },
                           child: Text(
-                            AppStrings.cancel,
+                            AppStrings.close,
                             style: Theme.of(context)
                                 .textTheme
                                 .bodyMedium!
@@ -175,7 +175,7 @@ class _EducationCertificationInputDialogState
                                 firstDateFormKey.currentState!.validate();
                             bool sdf =
                                 secondDateFormKey.currentState!.validate();
-                            print(sdf);
+                        
                             bool tf = titleFormKey.currentState!.validate();
                             bool df = gradeFormKey.currentState!.validate();
                             bool ss = schoolFormKey.currentState!.validate();
@@ -184,7 +184,7 @@ class _EducationCertificationInputDialogState
                                   titleInputController.text;
                               educationalDegree.school =
                                   schoolInputController.text;
-                              print(educationalDegree.grade);
+                        
                               Navigator.of(context).pop(educationalDegree);
                             }
                           },

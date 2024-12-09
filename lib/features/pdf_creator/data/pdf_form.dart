@@ -33,11 +33,13 @@ class PdfForm {
           pw.SizedBox(height: 2),
           LinkOrEmpty(
               website: data.userInfo.extraContactDetails.linkedIn ?? "",
-              title: "LinkedIn"),
+              title: "LinkedIn",
+              style: PdfTextStyles.mediumBold),
           pw.SizedBox(height: 2),
           LinkOrEmpty(
               website: data.userInfo.extraContactDetails.website ?? "",
-              title: "website"),
+              title: "website",
+              style: PdfTextStyles.mediumBold),
 
           pw.SizedBox(height: 5),
           pw.Text("Address : ${data.userInfo.address}",

@@ -176,7 +176,8 @@ class ProjectText extends pw.StatelessWidget {
             ? pw.Container()
             : pw.Align(
                 alignment: pw.Alignment.centerRight,
-                child: LinkOrEmpty(website: project.link))
+                child: LinkOrEmpty(
+                    website: project.link, style: PdfTextStyles.medium))
       ]),
       pw.TableRow(children: [pw.SizedBox(height: 20)])
     ]);
@@ -255,15 +256,20 @@ class SkillsColumn extends pw.StatelessWidget {
 class LinkOrEmpty extends pw.StatelessWidget {
   final String website;
   final String? title;
-  LinkOrEmpty({required this.website, this.title = "link"});
+  pw.TextStyle style;
+  LinkOrEmpty(
+      {required this.style, required this.website, this.title = "link"});
 
   @override
   pw.Widget build(pw.Context context) {
     // TODO: implement build
-    return website.isEmpty ? pw.Container() : pw.RichText(text: pw.TextSpan(
-      text: "$title: $website", style: PdfTextStyles.medium
-      ,annotation: pw.AnnotationUrl(website)
-    ));
+    return website.isEmpty
+        ? pw.Container()
+        : pw.RichText(
+            text: pw.TextSpan(
+                text: "$title: $website",
+                style: style,
+                annotation: pw.AnnotationUrl(website)));
   }
 }
 

@@ -43,7 +43,7 @@ class PdfView extends StatelessWidget {
                 if (state.state is PdfFailure) {
                   PdfFailure failueState = state.state as PdfFailure;
                   if (navigatorKey.currentContext != null) {
-                    print("test");
+                
                     Navigator.of(navigatorKey.currentContext!).pop();
                   }
                   showFailurePopUpDialog(context, failueState.failure.message);
@@ -53,7 +53,7 @@ class PdfView extends StatelessWidget {
                 }
                 if (state.state is PdfInitState) {
                   if (navigatorKey.currentContext != null) {
-                    print("test");
+                 
                     Navigator.of(navigatorKey.currentContext!).pop();
                   }
                 }

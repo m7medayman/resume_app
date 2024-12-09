@@ -8,6 +8,7 @@ import 'package:resume_app/core/auth_provider/requests/request.dart';
 import 'package:resume_app/features/auth/domain/use_case.dart';
 import 'package:resume_app/features/change_user_info/domain/update_user_usecase.dart';
 
+
 extension LoginMapper on LoginParameter {
   LoginRequest toLoginRequest() {
     return LoginRequest(email: email, password: password);

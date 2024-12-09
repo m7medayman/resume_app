@@ -1,10 +1,13 @@
 import 'package:either_dart/src/either.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:internet_connection_checker_plus/internet_connection_checker_plus.dart';
 import 'package:resume_app/core/Di/di.dart';
 import 'package:resume_app/core/auth_provider/auth_check.dart';
 import 'package:resume_app/core/data_classes/user_info.dart';
 
 import 'package:resume_app/core/resources/failure/failure_handler.dart';
 import 'package:resume_app/core/resources/failure/failure_model.dart';
+import 'package:resume_app/core/resources/failure/system_failure_const.dart';
 import 'package:resume_app/core/shared_pref/shared_pref.dart';
 import 'package:resume_app/core/auth_provider/responses/Response.dart';
 import 'package:resume_app/core/auth_provider/mapper.dart';
@@ -25,12 +28,17 @@ class AuthRepositoryImp extends AuthRepository {
   @override
   Future<Either<Failure, MyUserInfo>> login(
       LoginParameter loginParameter) async {
+    if (!await InternetConnection().hasInternetAccess) {
+      return Left(SystemFailureConstants.noInternetConnection);
+    }
     try {
       AuthResponse response =
           await serviceProvider.login(loginParameter.toLoginRequest());
       var userInfo = response.toEntity();
       registUser(userInfo);
       return Right(userInfo);
+    } on FirebaseAuthException catch (e) {
+      return Left(failureHandler.handleFailure(e.code));
     } catch (e) {
       return Left(failureHandler.handleFailure(e.toString()));
     }
@@ -39,6 +47,9 @@ class AuthRepositoryImp extends AuthRepository {
   @override
   Future<Either<Failure, MyUserInfo>> signUP(
       SignUpParameter signUpParameter) async {
+    if (!await InternetConnection().hasInternetAccess) {
+      return Left(SystemFailureConstants.noInternetConnection);
+    }
     try {
       AuthResponse response = await serviceProvider.signUp(
           signUpParameter.toSignUpRequest(),
@@ -54,6 +65,9 @@ class AuthRepositoryImp extends AuthRepository {
 
   @override
   Future<Either<Failure, MyUserInfo?>> autoLogin() async {
+    if (!await InternetConnection().hasInternetAccess) {
+      return Left(SystemFailureConstants.noInternetConnection);
+    }
     if (authChecker.check()) {
       try {
         AuthResponse response = await serviceProvider.autoLogin();

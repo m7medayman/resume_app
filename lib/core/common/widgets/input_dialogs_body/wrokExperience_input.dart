@@ -128,7 +128,7 @@ class _EducationCertificationInputDialogState
                             Navigator.of(context).pop(null);
                           },
                           child: Text(
-                            AppStrings.cancel,
+                            AppStrings.close,
                             style: Theme.of(context)
                                 .textTheme
                                 .bodyMedium!
@@ -140,7 +140,7 @@ class _EducationCertificationInputDialogState
                                 firstDateFormKey.currentState!.validate();
                             bool sdf =
                                 secondDateFormKey.currentState!.validate();
-                            print(sdf);
+                         
                             bool tf = titleFormKey.currentState!.validate();
 
                             bool ss =

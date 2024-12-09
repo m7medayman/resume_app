@@ -79,7 +79,7 @@ class JobCertificationAndCourses extends StatelessWidget {
                     Course? returendValue = value as Course?;
                     if (returendValue != null) {
                       cubit.addCourse(returendValue);
-                      print(value!.title);
+                  
                     }
                   });
                 },

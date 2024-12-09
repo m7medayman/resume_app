@@ -4,7 +4,7 @@ class AppStrings {
   static const String loadingContent = "please wait loading ";
   static const String error = "An error occurred";
   static const String retry = "Retry";
-  static const String cancel = "Cancel";
+  static const String close = "Close";
   static const String ok = "OK";
   static const String yes = "Yes";
   static const String no = "No";

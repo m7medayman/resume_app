@@ -105,7 +105,7 @@ class _CourseCertificationInputDialogState
                           Navigator.of(context).pop(null);
                         },
                         child: Text(
-                          AppStrings.cancel,
+                          AppStrings.close,
                           style: Theme.of(context)
                               .textTheme
                               .bodyMedium!

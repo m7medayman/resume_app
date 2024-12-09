@@ -14,7 +14,7 @@ class JobDetailsServiceProvider {
     final message = RequestModel.getJobDetailsRequest(jobDescription);
     final content = Content.text(message);
     final response = await chat.sendMessage(content);
-    print(response.text);
+   
     if (response.text == null || response.text!.isEmpty) {
       throw Exception("job description is null or empty");
     }
@@ -33,7 +33,7 @@ class JobDetailsServiceProvider {
     final message = RequestModel.enhanceJobSummaryRequest(jobSummary, keyWords);
     final content = Content.text(message);
     final response = await chat.sendMessage(content);
-    print(response.text);
+    
     if (response.text == null || response.text!.isEmpty) {
       throw Exception("job Summary is null or empty");
     }
@@ -50,7 +50,7 @@ class JobDetailsServiceProvider {
     final message = RequestModel.enhanceJobExperienceRequest(jobExperience);
     final content = Content.text(message);
     final response = await chat.sendMessage(content);
-    print(response.text);
+  
     if (response.text == null || response.text!.isEmpty) {
       throw Exception("job Experience is null or empty");
     }

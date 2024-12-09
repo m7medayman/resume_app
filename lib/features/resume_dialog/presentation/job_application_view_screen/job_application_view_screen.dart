@@ -113,7 +113,7 @@ class _JobApplicationViewScreenState extends State<JobApplicationViewScreen>
           },
           child: BlocBuilder<ResumeDialogCubit, ResumeDialogState>(
             builder: (context, state) {
-              print('bloc build');
+           
               return Center(
                 child: SingleChildScrollView(
                   child: SizedBox(

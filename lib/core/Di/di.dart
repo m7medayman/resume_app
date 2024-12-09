@@ -27,16 +27,16 @@ bool isInitThemeModule = false;
 void initThemeModule(double screenWidth) {
   if (!isInitThemeModule) {
     DeviceManager deviceManager = DeviceManager(screenWidth: screenWidth);
-    print("device done");
+
 
     getIt.registerLazySingleton<DeviceManager>(() => deviceManager);
-    print("device done regist");
+   
     getIt.registerLazySingleton<FontStyleManager>(
         () => FontStyleManager(getIt<DeviceManager>()));
-    print("font done regist");
+    
     getIt.registerLazySingleton<MyTheme>(
         () => MyTheme(fontStyleManager: getIt<FontStyleManager>()));
-    print("theme done regist");
+   
     getIt.registerLazySingleton(() => ScreenSizeService(screenWidth));
   } else {
     //

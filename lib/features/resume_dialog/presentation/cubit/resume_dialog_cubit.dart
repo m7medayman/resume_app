@@ -179,7 +179,7 @@ class ResumeDialogCubit extends Cubit<ResumeDialogState> {
 
   void getSummary(String jobSummary) async {
     emit(state.copyWith(resumeFormState: LoadingResumeFormState()));
-    print(_getSelectedKeyWords());
+
     var resposne = await jobSummaryUseCase.execute(JobSummaryInput(
         jobSummary: jobSummary, keyWords: _getSelectedKeyWords()));
     resposne.fold((error) {
@@ -260,7 +260,7 @@ class ResumeDialogCubit extends Cubit<ResumeDialogState> {
           resumeFormState:
               FailureResumeFormState(errorMessage: error.message)));
     }, (data) {
-      print(data);
+    
       emit(state.copyWith(
           resumeFormState: SuccessResumeFormState(),
           jobInfoAi: data,

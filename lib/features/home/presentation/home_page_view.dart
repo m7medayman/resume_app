@@ -95,6 +95,7 @@ class HomeScaffold extends StatelessWidget {
             ),
             InkWell(
               onTap: () {
+                Navigator.of(context).pop();
                 Navigator.of(context).pushNamed(Routes.updateUserView);
               },
               child: const DrawerItem(

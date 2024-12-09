@@ -22,12 +22,10 @@ class FireBaseAuthService extends AuthServiceProvider {
         throw Exception("Null Auth User");
       }
       String userId = userCredential.user!.uid;
-      print(userId);
       return getUserAuthInfoWithId(userId);
+    } on FirebaseAuthException catch (_) {
+      rethrow ;
     } catch (e) {
-      if (e is FirebaseAuthException) {
-        throw Exception(e.code);
-      }
       rethrow;
     }
   }
@@ -91,15 +89,15 @@ class FireBaseAuthService extends AuthServiceProvider {
       throw Exception("Null Auth User");
     }
   }
-  
+
   @override
-  Future<AuthResponse> updateUserInfo( {required String id, 
-  required  UserInfoDataRequest userDetailsRequest})async {
-  await FirebaseFirestore.instance
+  Future<AuthResponse> updateUserInfo(
+      {required String id,
+      required UserInfoDataRequest userDetailsRequest}) async {
+    await FirebaseFirestore.instance
         .collection('users')
         .doc(id)
         .update(userDetailsRequest.toJson());
-         return getUserAuthInfoWithId(id);
+    return getUserAuthInfoWithId(id);
   }
- 
 }

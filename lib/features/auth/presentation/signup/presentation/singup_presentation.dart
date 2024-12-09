@@ -332,7 +332,7 @@ class _SignUpPresentationState extends State<SignUpPresentation> {
                         Degree? returendValue = value as Degree?;
                         if (returendValue != null) {
                           context.read<SignupCubit>().addDegree(returendValue);
-                          print(value!.title);
+                        
                         }
                       });
                     },
@@ -351,7 +351,7 @@ class _SignUpPresentationState extends State<SignUpPresentation> {
                         Course? returendValue = value as Course?;
                         if (returendValue != null) {
                           context.read<SignupCubit>().addCourse(returendValue);
-                          print(value!.title);
+                          
                         }
                       });
                     },
