@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     initThemeModule(screenWidth);
-    MyTheme myThemeManager = getIt<MyTheme>();
+
     ScreenSizeService screenSizeService = getIt<ScreenSizeService>();
     screenSizeService.updateScreenSize(screenWidth);
     return MediaQuery(

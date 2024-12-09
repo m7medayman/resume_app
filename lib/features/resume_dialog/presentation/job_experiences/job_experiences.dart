@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:resume_app/core/Di/injection.dart';
 import 'package:resume_app/core/common/widgets/input_dialogs_body/project_experience_input.dart';
 import 'package:resume_app/core/common/widgets/project_experience_view.dart';
 import 'package:resume_app/core/common/widgets/separator.dart';
@@ -6,6 +7,7 @@ import 'package:resume_app/core/common/widgets/work_experince_view.dart';
 import 'package:resume_app/core/common/widgets/input_dialogs_body/wrokExperience_input.dart';
 import 'package:resume_app/core/data_classes/pdf_data_class.dart';
 import 'package:resume_app/core/data_classes/project_experience.dart';
+import 'package:resume_app/core/data_classes/user_info.dart';
 import 'package:resume_app/core/data_classes/work_experience.dart';
 import 'package:resume_app/core/routing/routes_manager.dart';
 import 'package:resume_app/features/resume_dialog/presentation/cubit/resume_dialog_cubit.dart';
@@ -113,7 +115,7 @@ class JobExperiences extends StatelessWidget {
                           jobSummery: state.jobSummery,
                           language: state.language,
                           selectedEducationInfo: state.selectedEducationInfo,
-                          userInfo: state.userInfo!,
+                          userInfo: getIt<MyUserInfo>(),
                           selectedHardSkills:
                               state.selectedHardSkills.keys.toList(),
                           selectedSoftSkills:

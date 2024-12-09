@@ -33,18 +33,26 @@ class _JobApplicationViewScreenState extends State<JobApplicationViewScreen>
   TextEditingController textEditingControllerJobSummary =
       TextEditingController();
   int _currentPageIndex = 0;
+  late ResumeDialogCubit resumeDialogCubit;
   @override
   void initState() {
+    resumeDialogCubit = ResumeDialogCubit(
+        jobDescriptionUseCases: getIt(),
+        jobSummaryUseCase: getIt(),
+        jobExperienceEnhanceUseCase: getIt());
     super.initState();
+
     _pageViewController = PageController();
     _tabController = TabController(length: 3, vsync: this);
   }
 
   @override
   void dispose() {
-    super.dispose();
     _pageViewController.dispose();
     _tabController.dispose();
+    resumeDialogCubit.close();
+
+    super.dispose();
   }
 
   void _updateCurrentPageIndex(int index) {
@@ -69,10 +77,7 @@ class _JobApplicationViewScreenState extends State<JobApplicationViewScreen>
     double screenWidth = MediaQuery.of(context).size.width;
 
     return BlocProvider(
-      create: (context) => ResumeDialogCubit(
-          jobDescriptionUseCases: getIt(),
-          jobSummaryUseCase: getIt(),
-          jobExperienceEnhanceUseCase: getIt()),
+      create: (context) => resumeDialogCubit,
       child: Scaffold(
         appBar: AppBar(
           title: const Text("Job Application"),
@@ -113,7 +118,6 @@ class _JobApplicationViewScreenState extends State<JobApplicationViewScreen>
           },
           child: BlocBuilder<ResumeDialogCubit, ResumeDialogState>(
             builder: (context, state) {
-           
               return Center(
                 child: SingleChildScrollView(
                   child: SizedBox(

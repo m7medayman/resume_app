@@ -28,7 +28,8 @@ class ResumeDialogCubit extends Cubit<ResumeDialogState> {
       selectedHardSkills: const {},
       selectedSoftSkills: const {},
       punchOfWorkExperiences: const [],
-      userInfo: getIt<MyUserInfo>());
+      userInfo: getIt<MyUserInfo>());// there is a bug because of using getit in this static var 
+      // fixing it by passign the row user info in the navigator
   ResumeDialogCubit(
       {required this.jobDescriptionUseCases,
       required this.jobSummaryUseCase,
