@@ -1,8 +1,7 @@
-import 'dart:ffi';
+
 
 import 'package:bloc/bloc.dart';
 import 'package:either_dart/either.dart';
-import 'package:resume_app/core/auth_provider/auth_check.dart';
 import 'package:resume_app/core/data_classes/user_info.dart';
 import 'package:resume_app/core/doc_manager/docs_manager_and_permission.dart';
 import 'package:resume_app/core/resources/failure/failure_model.dart';

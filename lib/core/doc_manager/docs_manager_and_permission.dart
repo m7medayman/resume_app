@@ -1,9 +1,8 @@
-import 'dart:ffi';
+
 import 'dart:io';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:either_dart/either.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:resume_app/core/common/widgets/alert_dialog_without_context.dart';
 import 'package:resume_app/core/doc_manager/doc_path_consts.dart';
 import 'package:resume_app/core/resources/failure/failure_model.dart';
 import 'package:resume_app/core/resources/failure/system_failure_const.dart';

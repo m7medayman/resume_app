@@ -4,10 +4,8 @@ import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 
 import 'package:resume_app/core/data_classes/pdf_data_class.dart';
-import 'dart:typed_data';
-import 'package:pdf/widgets.dart' as pw;
 import 'package:resume_app/features/pdf_creator/data/pdf_constants.dart';
-import 'package:resume_app/features/pdf_creator/data/pdf_strings.dart';
+
 import 'package:resume_app/features/pdf_creator/data/pdf_widgets.dart';
 
 class PdfForm {

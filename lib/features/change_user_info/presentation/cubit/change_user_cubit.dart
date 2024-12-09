@@ -6,7 +6,6 @@ import 'package:resume_app/core/data_classes/user_info.dart';
 import 'package:resume_app/core/page_states/page_states.dart';
 import 'package:resume_app/core/resources/failure/failure_model.dart';
 import 'package:resume_app/core/resources/helpers/null_type_extension.dart';
-import 'package:resume_app/features/auth/presentation/signup/cubit/signup_form_state.dart';
 import 'package:resume_app/features/change_user_info/domain/update_user_usecase.dart';
 
 part 'change_user_state.dart';

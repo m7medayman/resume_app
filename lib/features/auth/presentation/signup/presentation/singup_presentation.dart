@@ -92,7 +92,7 @@ class _SignUpPresentationState extends State<SignUpPresentation> {
               child: SingleChildScrollView(
                 child: BlocListener<SignupCubit, SighupState>(
                   listener: (context, state) {
-                    if (state.signupFormState is loadingSignupFormstate) {
+                    if (state.signupFormState is LoadingSignupFormstate) {
                       _showLoadingPopUpDialog(context);
                     }
                     if (state.signupFormState is FailureSignupFormState) {
@@ -332,7 +332,6 @@ class _SignUpPresentationState extends State<SignUpPresentation> {
                         Degree? returendValue = value as Degree?;
                         if (returendValue != null) {
                           context.read<SignupCubit>().addDegree(returendValue);
-                        
                         }
                       });
                     },
@@ -351,7 +350,6 @@ class _SignUpPresentationState extends State<SignUpPresentation> {
                         Course? returendValue = value as Course?;
                         if (returendValue != null) {
                           context.read<SignupCubit>().addCourse(returendValue);
-                          
                         }
                       });
                     },

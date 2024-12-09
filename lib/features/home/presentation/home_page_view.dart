@@ -1,14 +1,11 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:resume_app/core/Di/injection.dart';
 import 'package:resume_app/core/assets_path/assets.dart';
-import 'package:resume_app/core/common/state_renderer/full_screens_state_widgets/loading_full_screen.dart';
 import 'package:resume_app/core/common/widgets/popup_pdf_info_dilog/popup_pdf_dialog.dart';
 import 'package:resume_app/core/constants/app_sizes_constants.dart';
 import 'package:resume_app/core/data_classes/pdf_view_data.dart';
-import 'package:resume_app/core/page_states/page_states.dart';
 import 'package:resume_app/core/routing/routes_manager.dart';
 import 'package:resume_app/core/theme_manager/color_manager.dart';
 import 'package:resume_app/features/home/domain/home_use_case.dart';

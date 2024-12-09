@@ -1,4 +1,3 @@
-import 'dart:ffi';
 
 import 'package:either_dart/src/either.dart';
 import 'package:resume_app/core/data_classes/pdf_view_data.dart';

@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:resume_app/core/common/widgets/date_picker.dart';
 import 'package:resume_app/core/common/widgets/enhance_button.dart';
@@ -9,14 +10,14 @@ import 'package:resume_app/core/resources/helpers/input_fields.dart';
 import 'package:resume_app/core/theme_manager/color_manager.dart';
 
 class WorkExperienceInputDialog extends StatefulWidget {
-  WorkExperienceInputDialog(
+  const WorkExperienceInputDialog(
       {super.key,
       required this.screenHeight,
       required this.screenWidth,
       required this.enhanceFunction});
-  double screenHeight;
-  double screenWidth;
-  Future<String> Function(String) enhanceFunction;
+  final double screenHeight;
+  final double screenWidth;
+  final Future<String> Function(String) enhanceFunction;
 
   @override
   State<WorkExperienceInputDialog> createState() =>
@@ -52,118 +53,111 @@ class _EducationCertificationInputDialogState
   Widget build(BuildContext context) {
     return ConstrainedBox(
       constraints: BoxConstraints(minHeight: widget.screenHeight * 0.5),
-      child: Container(
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: SingleChildScrollView(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Text(
-                  "Work Experience:",
-                  style: Theme.of(context).textTheme.bodyLarge,
-                ),
-                FormSeparator(screenHeight: widget.screenHeight),
-                GeneralInputFiled(
-                    hintText: "Working  at A company",
-                    fieldFormKey: titleFormKey,
-                    fieldInput: titleInputController,
-                    label: "title",
-                    validateMessageFunction:
-                        InputValidator.validateRegularField),
-                FormSeparator(screenHeight: widget.screenHeight),
-                DoubleDatePicker(
-                  setEndDate: (value) {
-                    if (value != null) {
-                      setState(() {
-                        workExperience.endDate = value;
-                      });
-                    }
-                  },
-                  setStartDate: (value) {
-                    if (value != null) {
-                      setState(() {
-                        workExperience.startDate = value;
-                      });
-                    }
-                  },
-                  firstDateInput: firstDateInput,
-                  secondDateInput: secondDateInput,
-                  screenWidth: widget.screenWidth,
-                  secondDateFormKey: secondDateFormKey,
-                  startDateTime: workExperience.startDate,
-                  endDateTime: workExperience.endDate,
-                  firstDateFormKey: firstDateFormKey,
-                ),
-                FormSeparator(screenHeight: widget.screenHeight),
-                GeneralInputFiled(
-                    minLines: 3,
-                    hintText:
-                        "working as a developer at A company on 'any project name' project ....etc ",
-                    fieldFormKey: descriptionFormKey,
-                    fieldInput: descriptionInputController,
-                    label: "description: ",
-                    validateMessageFunction:
-                        InputValidator.validateRegularField),
-                FormSeparator(screenHeight: widget.screenHeight),
-                EnhanceButton(
-                    formKey: descriptionFormKey,
-                    onPressed: () async {
-                      String? response = await widget
-                          .enhanceFunction(descriptionInputController.text);
-                      descriptionInputController.text = response;
-                    }),
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Text(
+                "Work Experience:",
+                style: Theme.of(context).textTheme.bodyLarge,
+              ),
+              FormSeparator(screenHeight: widget.screenHeight),
+              GeneralInputFiled(
+                  hintText: "Working  at A company",
+                  fieldFormKey: titleFormKey,
+                  fieldInput: titleInputController,
+                  label: "title",
+                  validateMessageFunction: InputValidator.validateRegularField),
+              FormSeparator(screenHeight: widget.screenHeight),
+              DoubleDatePicker(
+                setEndDate: (value) {
+                  if (value != null) {
+                    setState(() {
+                      workExperience.endDate = value;
+                    });
+                  }
+                },
+                setStartDate: (value) {
+                  if (value != null) {
+                    setState(() {
+                      workExperience.startDate = value;
+                    });
+                  }
+                },
+                firstDateInput: firstDateInput,
+                secondDateInput: secondDateInput,
+                screenWidth: widget.screenWidth,
+                secondDateFormKey: secondDateFormKey,
+                startDateTime: workExperience.startDate,
+                endDateTime: workExperience.endDate,
+                firstDateFormKey: firstDateFormKey,
+              ),
+              FormSeparator(screenHeight: widget.screenHeight),
+              GeneralInputFiled(
+                  minLines: 3,
+                  hintText:
+                      "working as a developer at A company on 'any project name' project ....etc ",
+                  fieldFormKey: descriptionFormKey,
+                  fieldInput: descriptionInputController,
+                  label: "description: ",
+                  validateMessageFunction: InputValidator.validateRegularField),
+              FormSeparator(screenHeight: widget.screenHeight),
+              EnhanceButton(
+                  formKey: descriptionFormKey,
+                  onPressed: () async {
+                    String? response = await widget
+                        .enhanceFunction(descriptionInputController.text);
+                    descriptionInputController.text = response;
+                  }),
 
-                // Spacer(),
-                BigFormSeparator(screenHeight: widget.screenHeight),
-                Align(
-                  alignment: Alignment.bottomCenter,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      OutlinedButton(
-                          onPressed: () {
-                            Navigator.of(context).pop(null);
-                          },
-                          child: Text(
-                            AppStrings.close,
-                            style: Theme.of(context)
-                                .textTheme
-                                .bodyMedium!
-                                .copyWith(color: ColorManager.primaryColor),
-                          )),
-                      OutlinedButton(
-                          onPressed: () {
-                            bool fdf =
-                                firstDateFormKey.currentState!.validate();
-                            bool sdf =
-                                secondDateFormKey.currentState!.validate();
-                         
-                            bool tf = titleFormKey.currentState!.validate();
+              // Spacer(),
+              BigFormSeparator(screenHeight: widget.screenHeight),
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    OutlinedButton(
+                        onPressed: () {
+                          Navigator.of(context).pop(null);
+                        },
+                        child: Text(
+                          AppStrings.close,
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyMedium!
+                              .copyWith(color: ColorManager.primaryColor),
+                        )),
+                    OutlinedButton(
+                        onPressed: () {
+                          bool fdf = firstDateFormKey.currentState!.validate();
+                          bool sdf = secondDateFormKey.currentState!.validate();
 
-                            bool ss =
-                                descriptionFormKey.currentState!.validate();
-                            if (fdf & sdf & tf & ss) {
-                              workExperience.title = titleInputController.text;
-                              workExperience.description =
-                                  descriptionInputController.text;
-                              Navigator.of(context).pop(workExperience);
-                            }
-                          },
-                          child: Text(
-                            AppStrings.saveChanges,
-                            style: Theme.of(context)
-                                .textTheme
-                                .bodyMedium!
-                                .copyWith(color: ColorManager.primaryColor),
-                          )),
-                    ],
-                  ),
-                )
-              ],
-            ),
+                          bool tf = titleFormKey.currentState!.validate();
+
+                          bool ss = descriptionFormKey.currentState!.validate();
+                          if (fdf & sdf & tf & ss) {
+                            workExperience.title = titleInputController.text;
+                            workExperience.description =
+                                descriptionInputController.text;
+                            Navigator.of(context).pop(workExperience);
+                          }
+                        },
+                        child: Text(
+                          AppStrings.saveChanges,
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyMedium!
+                              .copyWith(color: ColorManager.primaryColor),
+                        )),
+                  ],
+                ),
+              )
+            ],
           ),
         ),
       ),

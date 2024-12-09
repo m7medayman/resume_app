@@ -5,9 +5,9 @@ sealed class SignupFormState {
   const SignupFormState();
 }
 
-class initSignupFormState extends SignupFormState {}
+class InitSignupFormState extends SignupFormState {}
 
-class loadingSignupFormstate extends SignupFormState {}
+class LoadingSignupFormstate extends SignupFormState {}
 
 class SuccessSignupFormState extends SignupFormState {}
 

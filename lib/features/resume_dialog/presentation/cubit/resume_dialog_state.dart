@@ -1,19 +1,19 @@
 part of 'resume_dialog_cubit.dart';
 
 class ResumeDialogState extends Equatable {
-  ResumeFormState resumeFormState;
-  String jobTitle;
-  String jobSummery;
-  Map<String, String> language;
-  EducationInfo selectedEducationInfo;
-  MyUserInfo? userInfo;
-  Map<String, bool> selectedHardSkills;
-  Map<String, bool> selectedSoftSkills;
-  List<WorkExperience> punchOfWorkExperiences;
-  List<ProjectExperience> punchOfProjectExperiences;
-  JobInfo jobInfoAi; // this is the information that got by AI
+ final ResumeFormState resumeFormState;
+ final String jobTitle;
+ final String jobSummery;
+ final Map<String, String> language;
+ final EducationInfo selectedEducationInfo;
+ final MyUserInfo? userInfo;
+ final Map<String, bool> selectedHardSkills;
+ final Map<String, bool> selectedSoftSkills;
+ final List<WorkExperience> punchOfWorkExperiences;
+ final List<ProjectExperience> punchOfProjectExperiences;
+ final JobInfo jobInfoAi; // this is the information that got by AI
 
-  ResumeDialogState({
+const ResumeDialogState({
     required this.punchOfProjectExperiences,
     required this.selectedEducationInfo,
     required this.language,

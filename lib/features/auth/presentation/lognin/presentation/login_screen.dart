@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:resume_app/core/Di/di.dart';
-import 'package:resume_app/core/auth_provider/auth_check.dart';
+
 import 'package:resume_app/core/common/state_renderer/pop_state_dialog_widget.dart';
 import 'package:resume_app/core/common/widgets/my_inputField.dart';
 import 'package:resume_app/core/common/widgets/my_text.dart';
@@ -81,8 +81,6 @@ class _LoginScreenPresentationState extends State<LoginScreenPresentation> {
                 showFailurePopUpDialog(context, logInFailure.getFailureMessage);
               }
               if (state.loginState is LoginPermissionFailure) {
-                LoginPermissionFailure loginState =
-                    state.loginState as LoginPermissionFailure;
                 showFilePermissionDeniedDialog(
                     context, context.read<LoginCubit>().checkFilePermission);
               }

@@ -19,7 +19,6 @@ import 'package:resume_app/core/data_classes/user_info.dart';
 import 'package:resume_app/core/page_states/page_states.dart';
 import 'package:resume_app/core/resources/helpers/input_fields.dart';
 import 'package:resume_app/core/resources/helpers/null_type_extension.dart';
-import 'package:resume_app/core/routing/routes_manager.dart';
 import 'package:resume_app/features/change_user_info/domain/update_user_usecase.dart';
 import 'package:resume_app/features/change_user_info/presentation/cubit/change_user_cubit.dart';
 
@@ -58,7 +57,6 @@ class _UpdateUserViewState extends State<UpdateUserView> {
   late ChangeUserCubit _cubit;
   @override
   void dispose() {
-    // TODO: implement dispose
     _cubit.close();
     super.dispose();
   }

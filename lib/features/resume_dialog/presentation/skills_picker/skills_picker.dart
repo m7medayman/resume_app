@@ -27,139 +27,132 @@ class JobSkillPicker extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scrollbar(
       child: SingleChildScrollView(
-        child: state.jobInfoAi == null
-            ? Container()
-            : Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  GeneralInputFiled(
-                      fieldFormKey: fieldFormKey,
-                      fieldInput: fieldInput,
-                      label: "job title",
-                      validateMessageFunction:
-                          InputValidator.validateRegularField),
-                  FormSeparator(screenHeight: screenHeight),
-                  // Hard skill section
-                  Text(
-                    "Select Hard Skills:",
-                    style: Theme.of(context)
-                        .textTheme
-                        .displayMedium!
-                        .copyWith(fontWeight: FontWeight.bold),
-                  ),
-                  FormSeparator(screenHeight: screenHeight),
-                  ConstrainedBox(
-                      constraints: BoxConstraints(
-                        minHeight: screenHeight * 0.2,
-                        minWidth: double.maxFinite,
-                      ),
-                      child: Container(
-                        color: ColorManager.textColorInputBackGround,
-                        child: Wrap(
-                          children: [
-                            HardSkillsWrap(
-                                state: state,
-                                screenWidth: screenWidth,
-                                screenHeight: screenHeight,
-                                cubit: cubit),
-                            Padding(
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: screenWidth * 0.01,
-                                  vertical: screenHeight * 0.01),
-                              child: ElevatedButton(
-                                  style: ButtonStyle(
-                                      backgroundColor: WidgetStatePropertyAll(
-                                          ColorManager.backgroundColor)),
-                                  // add hard skill button
-                                  onPressed: () {
-                                    showInputDialog(context,
-                                            title: "Add Skill: ")
-                                        .then((value) {
-                                  
-                                      if (value is String) {
-                                
-                                        cubit.addAiJobHardSkill(value);
-                                        cubit.addHardSkill(value);
-                                      }
-                                    });
-                                  },
-                                  child: const Text("+ Add skill")),
-                            )
-                          ],
-                        ),
-                      )),
-                  FormSeparator(screenHeight: screenHeight),
-                  // soft skill section
-                  Text(
-                    "Select Soft Skills:",
-                    style: Theme.of(context)
-                        .textTheme
-                        .displayMedium!
-                        .copyWith(fontWeight: FontWeight.bold),
-                  ),
-                  FormSeparator(screenHeight: screenHeight),
-                  ConstrainedBox(
-                      constraints: BoxConstraints(
-                        minHeight: screenHeight * 0.2,
-                        minWidth: double.maxFinite,
-                      ),
-                      child: Container(
-                        color: ColorManager.textColorInputBackGround,
-                        child: Wrap(
-                          children: [
-                            SoftSkillWrap(
-                                state: state,
-                                screenWidth: screenWidth,
-                                screenHeight: screenHeight,
-                                cubit: cubit),
-                            Padding(
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: screenWidth * 0.01,
-                                  vertical: screenHeight * 0.01),
-                              // soft skill  add button
-                              child: ElevatedButton(
-                                  style: ButtonStyle(
-                                      backgroundColor: WidgetStatePropertyAll(
-                                          ColorManager.backgroundColor)),
-                                  onPressed: () {
-                                    showInputDialog(context,
-                                            title: "Add Skill: ")
-                                        .then((value) {
-                                      if (value is String) {
-                                        cubit.addAiJobsSoftSkill(value);
-                                        cubit.addSoftSkill(value);
-                                      }
-                                    });
-                                  },
-                                  child: const Text("+ Add skill")),
-                            )
-                          ],
-                        ),
-                      )),
-                  FormSeparator(screenHeight: screenHeight),
-                  // end of skill picker
-                  const Divider(),
-                  FormSeparator(screenHeight: screenHeight),
-                  Row(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            GeneralInputFiled(
+                fieldFormKey: fieldFormKey,
+                fieldInput: fieldInput,
+                label: "job title",
+                validateMessageFunction: InputValidator.validateRegularField),
+            FormSeparator(screenHeight: screenHeight),
+            // Hard skill section
+            Text(
+              "Select Hard Skills:",
+              style: Theme.of(context)
+                  .textTheme
+                  .displayMedium!
+                  .copyWith(fontWeight: FontWeight.bold),
+            ),
+            FormSeparator(screenHeight: screenHeight),
+            ConstrainedBox(
+                constraints: BoxConstraints(
+                  minHeight: screenHeight * 0.2,
+                  minWidth: double.maxFinite,
+                ),
+                child: Container(
+                  color: ColorManager.textColorInputBackGround,
+                  child: Wrap(
                     children: [
-                      ElevatedButton(
-                          onPressed: () {
-                            cubit.goBack();
-                          },
-                          child: const Text("Back")),
-                      const Spacer(),
-                      ElevatedButton(
-                          onPressed: () {
-                            if (fieldFormKey.currentState!.validate()) {
-                              cubit.updateJobTitle(fieldInput.text);
-                              cubit.getNextPage();
-                            }
-                          },
-                          child: const Text("Next")),
+                      HardSkillsWrap(
+                          state: state,
+                          screenWidth: screenWidth,
+                          screenHeight: screenHeight,
+                          cubit: cubit),
+                      Padding(
+                        padding: EdgeInsets.symmetric(
+                            horizontal: screenWidth * 0.01,
+                            vertical: screenHeight * 0.01),
+                        child: ElevatedButton(
+                            style: ButtonStyle(
+                                backgroundColor: WidgetStatePropertyAll(
+                                    ColorManager.backgroundColor)),
+                            // add hard skill button
+                            onPressed: () {
+                              showInputDialog(context, title: "Add Skill: ")
+                                  .then((value) {
+                                if (value is String) {
+                                  cubit.addAiJobHardSkill(value);
+                                  cubit.addHardSkill(value);
+                                }
+                              });
+                            },
+                            child: const Text("+ Add skill")),
+                      )
                     ],
                   ),
-                ],
-              ),
+                )),
+            FormSeparator(screenHeight: screenHeight),
+            // soft skill section
+            Text(
+              "Select Soft Skills:",
+              style: Theme.of(context)
+                  .textTheme
+                  .displayMedium!
+                  .copyWith(fontWeight: FontWeight.bold),
+            ),
+            FormSeparator(screenHeight: screenHeight),
+            ConstrainedBox(
+                constraints: BoxConstraints(
+                  minHeight: screenHeight * 0.2,
+                  minWidth: double.maxFinite,
+                ),
+                child: Container(
+                  color: ColorManager.textColorInputBackGround,
+                  child: Wrap(
+                    children: [
+                      SoftSkillWrap(
+                          state: state,
+                          screenWidth: screenWidth,
+                          screenHeight: screenHeight,
+                          cubit: cubit),
+                      Padding(
+                        padding: EdgeInsets.symmetric(
+                            horizontal: screenWidth * 0.01,
+                            vertical: screenHeight * 0.01),
+                        // soft skill  add button
+                        child: ElevatedButton(
+                            style: ButtonStyle(
+                                backgroundColor: WidgetStatePropertyAll(
+                                    ColorManager.backgroundColor)),
+                            onPressed: () {
+                              showInputDialog(context, title: "Add Skill: ")
+                                  .then((value) {
+                                if (value is String) {
+                                  cubit.addAiJobsSoftSkill(value);
+                                  cubit.addSoftSkill(value);
+                                }
+                              });
+                            },
+                            child: const Text("+ Add skill")),
+                      )
+                    ],
+                  ),
+                )),
+            FormSeparator(screenHeight: screenHeight),
+            // end of skill picker
+            const Divider(),
+            FormSeparator(screenHeight: screenHeight),
+            Row(
+              children: [
+                ElevatedButton(
+                    onPressed: () {
+                      cubit.goBack();
+                    },
+                    child: const Text("Back")),
+                const Spacer(),
+                ElevatedButton(
+                    onPressed: () {
+                      if (fieldFormKey.currentState!.validate()) {
+                        cubit.updateJobTitle(fieldInput.text);
+                        cubit.getNextPage();
+                      }
+                    },
+                    child: const Text("Next")),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }

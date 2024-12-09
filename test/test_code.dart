@@ -16,5 +16,4 @@ void main() {
   ]);
   ed.toJson();
 
-  var fj = EducationInfo.fromJson(ed.toJson());
 }

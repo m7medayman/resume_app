@@ -1,11 +1,9 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:injectable/injectable.dart';
 import 'package:resume_app/core/common/widgets/toast/save_file_toast.dart';
 import 'package:resume_app/core/data_classes/data_classes.dart';
 import 'package:resume_app/core/data_classes/pdf_data_class.dart';
 import 'package:resume_app/core/data_classes/user_info.dart';
-import 'package:resume_app/core/doc_manager/docs_manager_and_permission.dart';
 import 'package:resume_app/features/pdf_creator/domain/pdf_creating_use_case.dart';
 import 'package:resume_app/features/pdf_creator/presentation/cubit/pdf_form_state.dart';
 

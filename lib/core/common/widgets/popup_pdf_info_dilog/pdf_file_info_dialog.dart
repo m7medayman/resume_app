@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:pdf/pdf.dart';
 import 'package:resume_app/core/common/widgets/separator.dart';
 import 'package:resume_app/core/doc_manager/doc_path_consts.dart';
 import 'package:resume_app/core/routing/routes_manager.dart';

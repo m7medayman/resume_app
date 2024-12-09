@@ -7,9 +7,8 @@ import 'package:resume_app/core/common/state_renderer/pop_state_dialog_widget.da
 import 'package:resume_app/core/common/widgets/input_dialogs_body/input_dialog.dart';
 import 'package:resume_app/core/common/widgets/separator.dart';
 import 'package:resume_app/core/common/widgets/toast/save_file_toast.dart';
-import 'package:resume_app/core/constants/app_sizes_constants.dart';
 import 'package:resume_app/core/doc_manager/doc_path_consts.dart';
-import 'package:resume_app/core/theme_manager/color_manager.dart';
+
 import 'package:resume_app/features/pdf_creator/presentation/cubit/pdf_cubit.dart';
 import 'package:resume_app/features/pdf_creator/presentation/cubit/pdf_form_state.dart';
 import 'package:resume_app/features/pdf_creator/presentation/view/pdf_presentation/pdf_presentation.dart';
@@ -21,7 +20,6 @@ class PdfView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    bool isLoadign = false;
 
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
@@ -43,7 +41,6 @@ class PdfView extends StatelessWidget {
                 if (state.state is PdfFailure) {
                   PdfFailure failueState = state.state as PdfFailure;
                   if (navigatorKey.currentContext != null) {
-                
                     Navigator.of(navigatorKey.currentContext!).pop();
                   }
                   showFailurePopUpDialog(context, failueState.failure.message);
@@ -53,7 +50,6 @@ class PdfView extends StatelessWidget {
                 }
                 if (state.state is PdfInitState) {
                   if (navigatorKey.currentContext != null) {
-                 
                     Navigator.of(navigatorKey.currentContext!).pop();
                   }
                 }
@@ -109,7 +105,7 @@ class PdfView extends StatelessWidget {
                         Visibility(
                             visible: state.isFileSaved,
                             child: const Center(
-                              child:  Text(
+                              child: Text(
                                   "the file is saved at: Device${DocPathConsts.outPutFolder} "),
                             ))
                       ],

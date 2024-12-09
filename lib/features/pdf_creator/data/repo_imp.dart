@@ -1,7 +1,7 @@
 import 'dart:typed_data';
 
 import 'package:either_dart/src/either.dart';
-import 'package:pdf/src/widgets/document.dart';
+
 
 import 'package:resume_app/core/data_classes/pdf_data_class.dart';
 import 'package:resume_app/core/resources/failure/failure_model.dart';

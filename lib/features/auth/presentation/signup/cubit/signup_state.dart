@@ -1,20 +1,20 @@
 part of 'signup_cubit.dart';
 
 class SighupState extends Equatable {
-  bool extraPhoneFlag;
-  bool linkedInFlag;
-  bool websiteFlag;
-  EducationInfo educationInfo;
-  ContactExtraDetails contactExtraDetails;
-  SignupFormState signupFormState;
-  String email;
-  String password;
-  String userName;
-  String contactEmail;
-  String phone;
-  String address;
+ final bool extraPhoneFlag;
+ final bool linkedInFlag;
+ final bool websiteFlag;
+ final EducationInfo educationInfo;
+ final ContactExtraDetails contactExtraDetails;
+ final SignupFormState signupFormState;
+ final String email;
+ final String password;
+ final String userName;
+ final String contactEmail;
+ final String phone;
+ final String address;
 
-  SighupState({
+  const SighupState({
     this.extraPhoneFlag = false,
     this.linkedInFlag = false,
     this.websiteFlag = false,

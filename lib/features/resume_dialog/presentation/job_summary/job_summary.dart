@@ -6,17 +6,17 @@ import 'package:resume_app/core/resources/helpers/input_fields.dart';
 import 'package:resume_app/features/resume_dialog/presentation/cubit/resume_dialog_cubit.dart';
 
 class JobSummary extends StatelessWidget {
-  JobSummary(
+  const JobSummary(
       {super.key,
       required this.cubit,
       required this.onFinished,
       required this.screenHeight,
       required this.formKey,
       required this.jobDescriptionTextController});
-  TextEditingController jobDescriptionTextController;
-  GlobalKey<FormState> formKey;
-  double screenHeight;
-  ResumeDialogCubit cubit;
+  final TextEditingController jobDescriptionTextController;
+  final GlobalKey<FormState> formKey;
+  final double screenHeight;
+  final ResumeDialogCubit cubit;
   final void Function() onFinished;
   @override
   Widget build(BuildContext context) {

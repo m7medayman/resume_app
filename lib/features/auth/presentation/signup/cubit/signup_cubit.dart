@@ -13,7 +13,7 @@ class SignupCubit extends Cubit<SighupState> {
       : super(SighupState(
             educationInfo: EducationInfo(courses: [], degrees: []),
             contactExtraDetails: ContactExtraDetails(),
-            signupFormState: initSignupFormState())) {
+            signupFormState: InitSignupFormState())) {
     signUpUseCase = getIt<SignUpUseCase>();
   }
   void changeExtraPhoneFiledVisibility() {
@@ -82,7 +82,7 @@ class SignupCubit extends Cubit<SighupState> {
       String? extraPhone,
       String? linkedIn,
       String? Website) async {
-    emit(state.copyWith(signupFormState: loadingSignupFormstate()));
+    emit(state.copyWith(signupFormState: LoadingSignupFormstate()));
     var res = await signUpUseCase.execute(SignUpParameter(
       email: email,
       password: password,
@@ -101,7 +101,6 @@ class SignupCubit extends Cubit<SighupState> {
           signupFormState:
               FailureSignupFormState(errorMessage: failure.message)));
     }, (success) {
-  
       emit(state.copyWith(signupFormState: SuccessSignupFormState()));
     });
   }

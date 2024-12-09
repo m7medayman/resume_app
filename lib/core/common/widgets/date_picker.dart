@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:resume_app/core/common/widgets/my_inputField.dart';
 import 'package:resume_app/core/resources/helpers/input_fields.dart';
 
+// ignore: must_be_immutable
 class DoubleDatePicker extends StatelessWidget {
   DoubleDatePicker({
     super.key,
@@ -16,10 +17,10 @@ class DoubleDatePicker extends StatelessWidget {
     required this.screenWidth,
   });
   DateTime startDateTime;
-  DateTime endDateTime;
-  TextEditingController firstDateInput;
+   DateTime endDateTime;
+  final TextEditingController firstDateInput;
   final GlobalKey<FormState> firstDateFormKey;
-  TextEditingController secondDateInput;
+  final TextEditingController secondDateInput;
   final GlobalKey<FormState> secondDateFormKey;
   final double screenWidth;
   final Function(DateTime?) setStartDate;
@@ -75,8 +76,6 @@ class DoubleDatePicker extends StatelessWidget {
             fieldInput: secondDateInput,
             label: "To: ",
             validateMessageFunction: (value) {
-              print(startDateTime);
-              print(endDateTime);
               if (startDateTime.isAfter(endDateTime) ||
                   startDateTime.isAtSameMomentAs(endDateTime)) {
                 return "the end time should be after the start time";

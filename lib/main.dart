@@ -1,7 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:resume_app/core/Di/di.dart';
-import 'package:resume_app/core/doc_manager/docs_manager_and_permission.dart';
+
 import 'package:resume_app/core/routing/routes_manager.dart';
 import 'package:resume_app/core/screen_manager/screen_service_manager.dart';
 import 'package:resume_app/core/theme_manager/theme_manager.dart';

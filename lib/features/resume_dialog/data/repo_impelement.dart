@@ -28,7 +28,7 @@ class JobRepImp implements JobDialogRepository {
           hardSkills: responseModel.hardSkills ?? [],
           jobTitle: responseModel.jobTitle ?? "empty",
           keyWords: responseModel.punchOfKeyWords ?? ["empty"]));
-    } on ServerException catch (e) {
+    } on ServerException catch (_) {
       return Left(SystemFailureConstants.serverIsBusy);
     } catch (e) {
 
@@ -46,7 +46,7 @@ class JobRepImp implements JobDialogRepository {
       JobSummaryResponse responseModel =
           await serviceProvider.getJobSummary(inputJobSummary, keyWords);
       return (Right(responseModel.jobSummary));
-    } on ServerException catch (e) {
+    } on ServerException catch (_) {
       return Left(SystemFailureConstants.serverIsBusy);
     } catch (e) {
       return Left(Failure(id: 111, message: e.toString()));
@@ -63,7 +63,7 @@ class JobRepImp implements JobDialogRepository {
       JobExperienceResponse responseModel =
           await serviceProvider.getJobExperience(jobExperience);
       return (Right(responseModel.jobExperience));
-    } on ServerException catch (e) {
+    } on ServerException catch (_) {
       return Left(SystemFailureConstants.serverIsBusy);
     } catch (e) {
       return Left(Failure(id: 112, message: e.toString()));
