@@ -15,7 +15,10 @@ void main() async {
 
   initModule();
 
-  runApp(const MyApp());
+  runApp(MediaQuery(
+      data: MediaQueryData.fromView(WidgetsBinding.instance.window)
+          .copyWith(textScaler: const TextScaler.linear(1.0)),
+      child: const MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -34,7 +37,7 @@ class MyApp extends StatelessWidget {
       onGenerateRoute: RouteManager.generateRoute,
       debugShowCheckedModeBanner: false,
       theme: myThemeManager.getTheme(),
-      title: 'Flutter Demo',
+      title: 'AI Resume Boost',
       // home: const JobApplicationViewScreen(),
     );
   }
