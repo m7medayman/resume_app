@@ -133,7 +133,7 @@ class MainHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Container(
+      child: SizedBox(
         width: screenWidth * 0.95,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,

@@ -28,15 +28,14 @@ void initThemeModule(double screenWidth) {
   if (!isInitThemeModule) {
     DeviceManager deviceManager = DeviceManager(screenWidth: screenWidth);
 
-
     getIt.registerLazySingleton<DeviceManager>(() => deviceManager);
-   
+
     getIt.registerLazySingleton<FontStyleManager>(
         () => FontStyleManager(getIt<DeviceManager>()));
-    
+
     getIt.registerLazySingleton<MyTheme>(
         () => MyTheme(fontStyleManager: getIt<FontStyleManager>()));
-   
+
     getIt.registerLazySingleton(() => ScreenSizeService(screenWidth));
   } else {
     //
@@ -132,10 +131,10 @@ void initPdfViewerModule(PdfData data) async {
 
 bool isUserRegisted = false;
 void registUser(MyUserInfo userInfo) {
-  if (isUserRegisted) {
+  if (getIt.isRegistered<MyUserInfo>()) {
     getIt.unregister(instance: getIt<MyUserInfo>());
     getIt.registerLazySingleton(() => userInfo);
-
+    isUserRegisted = false;
     return;
   }
   isUserRegisted = true;

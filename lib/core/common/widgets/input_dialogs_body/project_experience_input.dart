@@ -48,7 +48,7 @@ class _EducationCertificationInputDialogState
     return ConstrainedBox(
       constraints: BoxConstraints(minHeight: widget.screenHeight * 0.5),
       child: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(6.0),
         child: SingleChildScrollView(
           child: Column(
             mainAxisSize: MainAxisSize.min,
@@ -94,7 +94,7 @@ class _EducationCertificationInputDialogState
                   }),
 
               // Spacer(),
-              BigFormSeparator(screenHeight: widget.screenHeight),
+              FormSeparator(screenHeight: widget.screenHeight),
               Align(
                 alignment: Alignment.bottomCenter,
                 child: Row(

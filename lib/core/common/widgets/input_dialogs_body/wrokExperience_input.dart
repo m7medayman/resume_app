@@ -115,7 +115,7 @@ class _EducationCertificationInputDialogState
                   }),
 
               // Spacer(),
-              BigFormSeparator(screenHeight: widget.screenHeight),
+              FormSeparator(screenHeight: widget.screenHeight),
               Align(
                 alignment: Alignment.bottomCenter,
                 child: Row(
