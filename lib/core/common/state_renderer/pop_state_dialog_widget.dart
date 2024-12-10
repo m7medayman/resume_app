@@ -94,9 +94,13 @@ void showLoadingPopUpDialog(context,
   showDialog(
       barrierDismissible: false,
       context: context,
+
       builder: (_) {
-        return LoadingDialog(
-          key: navigatorKey,
+        return PopScope(
+          canPop: false,
+          child: LoadingDialog(
+            key: navigatorKey,
+          ),
         );
       });
 }

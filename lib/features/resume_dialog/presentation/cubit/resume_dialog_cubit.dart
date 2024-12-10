@@ -17,7 +17,7 @@ class ResumeDialogCubit extends Cubit<ResumeDialogState> {
   JobSummaryUseCase jobSummaryUseCase;
   JobExperienceEnhanceUseCase jobExperienceEnhanceUseCase;
   static final iniReumeState = ResumeDialogState(
-      punchOfProjectExperiences: const [],
+      punchOfProjectExperiences: getIt<MyUserInfo>().punchOfProjectExperiences,
       selectedEducationInfo: getIt<MyUserInfo>().educationInfo,
       language: const {},
       jobInfoAi:
@@ -27,9 +27,10 @@ class ResumeDialogCubit extends Cubit<ResumeDialogState> {
       jobSummery: '',
       selectedHardSkills: const {},
       selectedSoftSkills: const {},
-      punchOfWorkExperiences: const [],
-      userInfo: getIt<MyUserInfo>());// there is a bug because of using getit in this static var 
-      // fixing it by passign the row user info in the navigator
+      punchOfWorkExperiences: getIt<MyUserInfo>().punchOfWorkExperiences,
+      userInfo: getIt<
+          MyUserInfo>()); // there is a bug because of using getit in this static var
+  // fixing it by passign the row user info in the navigator
   ResumeDialogCubit(
       {required this.jobDescriptionUseCases,
       required this.jobSummaryUseCase,
@@ -261,7 +262,6 @@ class ResumeDialogCubit extends Cubit<ResumeDialogState> {
           resumeFormState:
               FailureResumeFormState(errorMessage: error.message)));
     }, (data) {
-    
       emit(state.copyWith(
           resumeFormState: SuccessResumeFormState(),
           jobInfoAi: data,

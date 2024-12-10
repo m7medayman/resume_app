@@ -17,10 +17,9 @@ class PdfView extends StatelessWidget {
   PdfView({super.key});
 
   final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
-
+  bool isLoadign = false;
   @override
   Widget build(BuildContext context) {
-
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
@@ -36,28 +35,26 @@ class PdfView extends StatelessWidget {
             child: BlocListener<PdfCubit, PdfState>(
               listener: (context, state) {
                 if (state.state is PdfLoading) {
-                  showLoadingPopUpDialog(context, navigatorKey: navigatorKey);
+                  if (isLoadign) {
+                    showLoadingPopUpDialog(context, navigatorKey: navigatorKey);
+                    isLoadign = false;
+                  }
+                } else {
+                  if (isLoadign) {
+                    Navigator.of(context).pop();
+                  }
                 }
                 if (state.state is PdfFailure) {
                   PdfFailure failueState = state.state as PdfFailure;
-                  if (navigatorKey.currentContext != null) {
-                    Navigator.of(navigatorKey.currentContext!).pop();
-                  }
+
                   showFailurePopUpDialog(context, failueState.failure.message);
                 }
                 if (state.state is PdfShowToast) {
                   showSaveToast();
                 }
-                if (state.state is PdfInitState) {
-                  if (navigatorKey.currentContext != null) {
-                    Navigator.of(navigatorKey.currentContext!).pop();
-                  }
-                }
+                if (state.state is PdfInitState) {}
                 if (state.state is ShowPdfState) {
                   var successState = state.state as ShowPdfState;
-                  if (navigatorKey.currentContext != null) {
-                    Navigator.of(navigatorKey.currentContext!).pop();
-                  }
 
                   Navigator.push(
                       context,

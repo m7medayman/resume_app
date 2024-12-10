@@ -30,7 +30,7 @@ class JobExperiences extends StatelessWidget {
         child: SingleChildScrollView(
       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
         Text(
-          "Certifications and Degrees",
+          "Work Eperiences and Projects",
           style: Theme.of(context)
               .textTheme
               .displayMedium!
