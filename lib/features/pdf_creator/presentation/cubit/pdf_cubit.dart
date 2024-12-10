@@ -27,7 +27,9 @@ class PdfCubit extends Cubit<PdfState> {
                     address: "",
                     contactEmail: "",
                     extraContactDetails: ContactExtraDetails(),
-                    educationInfo: EducationInfo()),
+                    educationInfo: EducationInfo(),
+                    punchOfProjectExperiences: [],
+                    punchOfWorkExperiences: []),
                 selectedHardSkills: [],
                 selectedSoftSkills: [],
                 punchOfWorkExperiences: [],
@@ -57,7 +59,6 @@ class PdfCubit extends Cubit<PdfState> {
         emit(state.copyWith(formState: PdfFailure(failure: error)));
         emit(state.copyWith(formState: PdfInitState()));
       }, (path) {
-
         showSaveToast();
         emit(state.copyWith(formState: PdfInitState(), isSaved: true));
       });

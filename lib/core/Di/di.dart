@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get_it/get_it.dart';
+import 'package:resume_app/core/Di/Ai_module.dart';
 import 'package:resume_app/core/auth_provider/auth_check.dart';
 import 'package:resume_app/core/auth_provider/fire_base_auth/fire_base_auth.dart';
 import 'package:resume_app/core/data_classes/pdf_data_class.dart';
@@ -19,7 +20,7 @@ import 'package:resume_app/features/pdf_creator/data/pdf_save_service.dart';
 import 'package:resume_app/features/pdf_creator/data/repo_imp.dart';
 import 'package:resume_app/features/pdf_creator/domain/pdf_creating_use_case.dart';
 import 'package:resume_app/core/AI_services/gemini_repo/job_details_service_provider.dart';
-import 'package:resume_app/features/resume_dialog/data/repo_impelement.dart';
+import 'package:resume_app/core/AI_services/data/repo_impelement.dart';
 import 'package:resume_app/features/resume_dialog/domain/use_case.dart';
 
 final getIt = GetIt.instance;
@@ -65,7 +66,9 @@ void authRepoInit() {
   isAuthReoInit = true;
   getIt.registerFactory(() => FireBaseAuthService(
       auth: getIt<FirebaseAuth>(), failureHandler: getIt<FailureHandler>()));
+  initAiModule();
   getIt.registerFactory(() => AuthRepositoryImp(
+        AiProvider: getIt(),
         authChecker: getIt<AuthChecker>(),
         serviceProvider: getIt<FireBaseAuthService>(),
         failureHandler: getIt<FailureHandler>(),
@@ -102,14 +105,13 @@ void initResumeDialogModel() {
     return;
   }
   isResumeDialogModelInit = true;
-  getIt.registerFactory(() => AiJobDetailsServiceProvider());
-  getIt.registerFactory(() => JobRepImp(serviceProvider: getIt()));
+  initAiModule();
   getIt.registerFactory(
-      () => JobDescriptionUseCases(repository: getIt<JobRepImp>()));
+      () => JobDescriptionUseCases(repository: getIt<AiRepoImp>()));
   getIt
-      .registerFactory(() => JobSummaryUseCase(repository: getIt<JobRepImp>()));
+      .registerFactory(() => JobSummaryUseCase(repository: getIt<AiRepoImp>()));
   getIt.registerFactory(
-      () => JobExperienceEnhanceUseCase(repository: getIt<JobRepImp>()));
+      () => JobExperienceEnhanceUseCase(repository: getIt<AiRepoImp>()));
 }
 
 bool isPdfViewerInit = false;

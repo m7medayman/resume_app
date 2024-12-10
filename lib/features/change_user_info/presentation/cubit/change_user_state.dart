@@ -11,19 +11,29 @@ class ChangeUserState extends Equatable {
   final String contactEmail;
   final String phone;
   final String address;
-
-  const ChangeUserState({required this.pageState,
-   required this.extraPhoneFlag, required this.linkedInFlag,
-    required this.websiteFlag, required this.educationInfo, 
-    required this.contactExtraDetails,  required this.userName, required this.contactEmail, required this.phone, required this.address});
-
-
+  final List<WorkExperience> punchOfWorkExperiences;
+  final List<ProjectExperience> punchOfProjectExperiences;
+  const ChangeUserState(
+      {required this.punchOfProjectExperiences,
+      required this.punchOfWorkExperiences,
+      required this.pageState,
+      required this.extraPhoneFlag,
+      required this.linkedInFlag,
+      required this.websiteFlag,
+      required this.educationInfo,
+      required this.contactExtraDetails,
+      required this.userName,
+      required this.contactEmail,
+      required this.phone,
+      required this.address});
 
   ChangeUserState copyWith({
     PageState? pageState,
     bool? extraPhoneFlag,
     bool? linkedInFlag,
     bool? websiteFlag,
+       List<WorkExperience>? punchOfWorkExperiences,
+  List<ProjectExperience>? punchOfProjectExperiences,
     EducationInfo? educationInfo,
     ContactExtraDetails? contactExtraDetails,
     String? userName,
@@ -32,6 +42,8 @@ class ChangeUserState extends Equatable {
     String? address,
   }) {
     return ChangeUserState(
+      punchOfProjectExperiences: punchOfProjectExperiences??this.punchOfProjectExperiences,
+      punchOfWorkExperiences: punchOfWorkExperiences??this.punchOfWorkExperiences,
       pageState: pageState ?? this.pageState,
       extraPhoneFlag: extraPhoneFlag ?? this.extraPhoneFlag,
       linkedInFlag: linkedInFlag ?? this.linkedInFlag,
@@ -53,7 +65,6 @@ class ChangeUserState extends Equatable {
         websiteFlag,
         educationInfo,
         contactExtraDetails,
-      
         userName,
         contactEmail,
         phone,

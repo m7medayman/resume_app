@@ -5,4 +5,5 @@ import 'package:resume_app/features/change_user_info/domain/update_user_usecase.
 abstract class UpdateUserRepo {
   Future<Either<Failure, Null>> updateUserData(
       {required String id, required UpdateUserParameters input});
+
 }

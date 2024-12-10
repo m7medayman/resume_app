@@ -6,7 +6,7 @@ import 'package:resume_app/core/AI_services/gemini_repo/Request_model.dart';
 import 'package:resume_app/core/AI_services/gemini_repo/schema_manager.dart';
 import 'package:resume_app/core/AI_services/gemini_repo/response_model.dart';
 
-class AiJobDetailsServiceProvider {
+class GeminiJobDetailsServiceProvider {
   Future<JobDescriptionResponseModel> getSkills(String jobDescription) async {
     final model = Gemini.getModel(SchemaManager.getJobDescriptionSchema());
 

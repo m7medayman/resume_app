@@ -29,7 +29,7 @@ void main() {
     expect(find.text('1'), findsOneWidget);
   });
   test("test gemini api", () async {
-    await AiJobDetailsServiceProvider().getSkills(''' Job description
+    await GeminiJobDetailsServiceProvider().getSkills(''' Job description
 Job Description
 • Designing and developing user-friendly applications
 • Ensuring applications are compatible with multiple platforms

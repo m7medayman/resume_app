@@ -1,4 +1,5 @@
 import 'package:either_dart/src/either.dart';
+import 'package:resume_app/core/AI_services/repository.dart';
 import 'package:resume_app/core/data_classes/data_classes.dart';
 import 'package:resume_app/core/data_classes/project_experience.dart';
 import 'package:resume_app/core/data_classes/work_experience.dart';
@@ -16,6 +17,17 @@ class UpdateUserUsecase extends BaseUseCase<UpdateUerInput, Null> {
     // TODO: implement execute
     return await updateUserRepo.updateUserData(
         id: input.uid, input: input.updateUserParameters);
+  }
+}
+class JobExperienceEnhanceChangeUserUseCase extends BaseUseCase<String, String> {
+  AiRepo repository;
+  JobExperienceEnhanceChangeUserUseCase({
+    required this.repository,
+  });
+  @override
+  Future<Either<Failure, String>> execute(String input) async {
+    // TODO: implement execute
+    return await repository.getJobExperienceEnhance(input);
   }
 }
 

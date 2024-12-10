@@ -1,6 +1,5 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:resume_app/core/Di/injection.dart';
 import 'package:resume_app/core/data_classes/project_experience.dart';
 import 'package:resume_app/core/data_classes/work_experience.dart';
 import 'package:resume_app/core/resources/failure/failure_model.dart';

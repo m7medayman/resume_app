@@ -20,7 +20,7 @@ import 'package:resume_app/features/auth/domain/use_case.dart';
 
 class AuthRepositoryImp extends AuthRepository {
   AuthServiceProvider serviceProvider;
-  AiJobDetailsServiceProvider AiProvider;
+  GeminiJobDetailsServiceProvider AiProvider;
   FailureHandler failureHandler;
   final AuthChecker authChecker;
 

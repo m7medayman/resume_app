@@ -3,10 +3,10 @@ import 'package:either_dart/src/either.dart';
 import 'package:resume_app/core/resources/base_usecase/base_use_case.dart';
 import 'package:resume_app/core/resources/failure/failure_model.dart';
 import 'package:resume_app/features/resume_dialog/domain/entities/job_info.dart';
-import 'package:resume_app/features/resume_dialog/domain/repository.dart';
+import 'package:resume_app/core/AI_services/repository.dart';
 
 class JobDescriptionUseCases extends BaseUseCase<String, JobInfo> {
-  JobDialogRepository repository;
+  AiRepo repository;
   JobDescriptionUseCases({
     required this.repository,
   });
@@ -17,7 +17,7 @@ class JobDescriptionUseCases extends BaseUseCase<String, JobInfo> {
 }
 
 class JobExperienceEnhanceUseCase extends BaseUseCase<String, String> {
-  JobDialogRepository repository;
+  AiRepo repository;
   JobExperienceEnhanceUseCase({
     required this.repository,
   });
@@ -29,7 +29,7 @@ class JobExperienceEnhanceUseCase extends BaseUseCase<String, String> {
 }
 
 class JobSummaryUseCase extends BaseUseCase<JobSummaryInput, String> {
-  JobDialogRepository repository;
+  AiRepo repository;
   JobSummaryUseCase({
     required this.repository,
   });

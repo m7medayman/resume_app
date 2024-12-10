@@ -9,19 +9,24 @@ import 'package:resume_app/core/common/widgets/devider_with_label.dart';
 import 'package:resume_app/core/common/widgets/hidden_button.dart';
 import 'package:resume_app/core/common/widgets/input_dialogs_body/course_certification_input.dart';
 import 'package:resume_app/core/common/widgets/input_dialogs_body/education_certification_input.dart';
+import 'package:resume_app/core/common/widgets/input_dialogs_body/project_experience_input.dart';
+import 'package:resume_app/core/common/widgets/input_dialogs_body/wrokExperience_input.dart';
 import 'package:resume_app/core/common/widgets/my_inputField.dart';
+import 'package:resume_app/core/common/widgets/project_experience_view.dart';
 import 'package:resume_app/core/common/widgets/reveal_widget.dart';
 import 'package:resume_app/core/common/widgets/separator.dart';
+import 'package:resume_app/core/common/widgets/work_experince_view.dart';
 import 'package:resume_app/core/constants/app_string_constats.dart';
 import 'package:resume_app/core/constants/widget_dimensions.dart';
 import 'package:resume_app/core/data_classes/data_classes.dart';
+import 'package:resume_app/core/data_classes/project_experience.dart';
 import 'package:resume_app/core/data_classes/user_info.dart';
+import 'package:resume_app/core/data_classes/work_experience.dart';
 import 'package:resume_app/core/page_states/page_states.dart';
 import 'package:resume_app/core/resources/helpers/input_fields.dart';
 import 'package:resume_app/core/resources/helpers/null_type_extension.dart';
 import 'package:resume_app/features/change_user_info/domain/update_user_usecase.dart';
 import 'package:resume_app/features/change_user_info/presentation/cubit/change_user_cubit.dart';
-
 
 class UpdateUserView extends StatefulWidget {
   const UpdateUserView({super.key});
@@ -54,10 +59,10 @@ class _UpdateUserViewState extends State<UpdateUserView> {
   late double screenWidth;
   late double screenHeight;
   late List<GlobalKey<FormState>> checkPrimaryKeys;
-  late ChangeUserCubit _cubit;
+  late ChangeUserCubit cubit;
   @override
   void dispose() {
-    _cubit.close();
+    cubit.close();
     super.dispose();
   }
 
@@ -70,11 +75,12 @@ class _UpdateUserViewState extends State<UpdateUserView> {
       locationFormKey,
     ];
     super.initState();
-    _cubit = ChangeUserCubit(
+    cubit = ChangeUserCubit(
         userInfo: getIt<MyUserInfo>(),
         auth: getIt<FirebaseAuth>(),
-        usecase: getIt<UpdateUserUsecase>());
-    ChangeUserState state = _cubit.state;
+        usecase: getIt<UpdateUserUsecase>(),
+        jobExperienceEnhanceSignupUseCase: getIt());
+    ChangeUserState state = cubit.state;
     userNameContrller.text = state.userName;
     phoneController.text = state.phone;
     extraPhoneInput.text = state.contactExtraDetails.extraPhone.nullSafety();
@@ -99,7 +105,7 @@ class _UpdateUserViewState extends State<UpdateUserView> {
         ),
       ),
       body: BlocProvider(
-        create: (context) => _cubit,
+        create: (context) => cubit,
         child: SafeArea(
           child: Center(
             child: SizedBox(
@@ -341,7 +347,6 @@ class _UpdateUserViewState extends State<UpdateUserView> {
                           context
                               .read<ChangeUserCubit>()
                               .addDegree(returendValue);
-    
                         }
                       });
                     },
@@ -362,12 +367,76 @@ class _UpdateUserViewState extends State<UpdateUserView> {
                           context
                               .read<ChangeUserCubit>()
                               .addCourse(returendValue);
-     
                         }
                       });
                     },
                     child: const Text("+ add course")),
               ],
+            ),
+            FormSeparator(screenHeight: screenHeight),
+            const DividerWithLabel(label: "Experiences"),
+            FormSeparator(screenHeight: screenHeight),
+            WorkExperienceView(
+                onDelete: cubit.deleteWorkExperience,
+                screenWidth: screenWidth,
+                screenHeight: screenHeight,
+                workExperiences: state.punchOfWorkExperiences),
+            FormSeparator(screenHeight: screenHeight),
+            ProjectExperienceView(
+                onDelete: cubit.deleteProjectExperience,
+                screenWidth: screenWidth,
+                screenHeight: screenHeight,
+                workExperiences: state.punchOfProjectExperiences),
+            FormSeparator(screenHeight: screenHeight),
+            Center(
+              child: Wrap(
+                children: [
+                  ElevatedButton(
+                      onPressed: () {
+                        showDialog(
+                            context: context,
+                            builder: (_) {
+                              return Dialog(
+                                child: WorkExperienceInputDialog(
+                                  screenHeight: screenHeight,
+                                  screenWidth: screenWidth,
+                                  enhanceFunction:
+                                      cubit.getJobExperienceEnhanced,
+                                ),
+                              );
+                            }).then((value) {
+                          WorkExperience? returnedValue =
+                              value as WorkExperience?;
+                          if (returnedValue != null) {
+                            cubit.addWorkExperience(returnedValue);
+                          }
+                        });
+                      },
+                      child: const Text("+ add Work Experience")),
+                  ElevatedButton(
+                      onPressed: () {
+                        showDialog(
+                            context: context,
+                            builder: (_) {
+                              return Dialog(
+                                child: ProjectExperienceInputDialog(
+                                  screenHeight: screenHeight,
+                                  screenWidth: screenWidth,
+                                  enhanceFunction:
+                                      cubit.getJobExperienceEnhanced,
+                                ),
+                              );
+                            }).then((value) {
+                          ProjectExperience? returnedValue =
+                              value as ProjectExperience?;
+                          if (returnedValue != null) {
+                            cubit.addProjectExperience(returnedValue);
+                          }
+                        });
+                      },
+                      child: const Text("+ add project Experience")),
+                ],
+              ),
             ),
             ElevatedButton(
                 onPressed: () {

@@ -1,3 +1,4 @@
+import 'package:resume_app/core/Di/Ai_module.dart';
 import 'package:resume_app/core/Di/injection.dart';
 import 'package:resume_app/core/auth_provider/fire_base_auth/fire_base_auth.dart';
 import 'package:resume_app/features/change_user_info/data/upate_user_repo_imp.dart';
@@ -14,4 +15,7 @@ void updateUserModule() {
   getIt.registerFactory(
       () => UpdateUserUsecase(updateUserRepo: getIt<UpateUserRepoImp>()));
   isUpdateUserModuleIsInit = true;
+  initAiModule();
+  getIt.registerFactory(
+      () => JobExperienceEnhanceChangeUserUseCase(repository: getIt()));
 }

@@ -1,7 +1,7 @@
 import 'package:resume_app/core/AI_services/gemini_repo/job_details_service_provider.dart';
 
 void main() async {
-  await AiJobDetailsServiceProvider().getSkills(''' Job description
+  await GeminiJobDetailsServiceProvider().getSkills(''' Job description
 Job Description
 • Designing and developing user-friendly applications
 • Ensuring applications are compatible with multiple platforms

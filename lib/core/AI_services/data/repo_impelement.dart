@@ -7,11 +7,11 @@ import 'package:resume_app/core/resources/failure/system_failure_const.dart';
 import 'package:resume_app/core/AI_services/gemini_repo/job_details_service_provider.dart';
 import 'package:resume_app/core/AI_services/gemini_repo/response_model.dart';
 import 'package:resume_app/features/resume_dialog/domain/entities/job_info.dart';
-import 'package:resume_app/features/resume_dialog/domain/repository.dart';
+import 'package:resume_app/core/AI_services/repository.dart';
 
-class JobRepImp implements JobDialogRepository {
-  AiJobDetailsServiceProvider serviceProvider;
-  JobRepImp({
+class AiRepoImp implements AiRepo {
+  GeminiJobDetailsServiceProvider serviceProvider;
+  AiRepoImp({
     required this.serviceProvider,
   });
   @override
