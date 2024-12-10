@@ -28,6 +28,17 @@ class AutoLoginUseCase extends BaseUseCase<void, MyUserInfo?> {
     return await authRepository.autoLogin();
   }
 }
+class JobExperienceEnhanceSignupUseCase extends BaseUseCase<String, String> {
+  AuthRepository repository;
+  JobExperienceEnhanceSignupUseCase({
+    required this.repository,
+  });
+  @override
+  Future<Either<Failure, String>> execute(String input) async {
+    // TODO: implement execute
+    return await repository.getJobExperienceEnhance(input);
+  }
+}
 
 class SignUpUseCase extends BaseUseCase<SignUpParameter, MyUserInfo> {
   AuthRepository authRepository;

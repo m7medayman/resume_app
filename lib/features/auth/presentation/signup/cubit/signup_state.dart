@@ -13,8 +13,12 @@ class SighupState extends Equatable {
  final String contactEmail;
  final String phone;
  final String address;
+  final List<WorkExperience> punchOfWorkExperiences;
+ final List<ProjectExperience> punchOfProjectExperiences;
 
   const SighupState({
+    required this.punchOfProjectExperiences,
+    required this.punchOfWorkExperiences,
     this.extraPhoneFlag = false,
     this.linkedInFlag = false,
     this.websiteFlag = false,
@@ -43,8 +47,12 @@ class SighupState extends Equatable {
     String? contactEmail,
     String? phone,
     String? address,
+    List<WorkExperience>? punchOfWorkExperiences,
+    List<ProjectExperience>? punchOfProjectExperiences
   }) {
     return SighupState(
+      punchOfProjectExperiences: punchOfProjectExperiences??this.punchOfProjectExperiences,
+      punchOfWorkExperiences: punchOfWorkExperiences??this.punchOfWorkExperiences,
       extraPhoneFlag: extraPhoneFlag ?? this.extraPhoneFlag,
       linkedInFlag: linkedInFlag ?? this.linkedInFlag,
       websiteFlag: websiteFlag ?? this.websiteFlag,
@@ -62,6 +70,8 @@ class SighupState extends Equatable {
 
   @override
   List<Object?> get props => [
+    punchOfProjectExperiences,
+    punchOfProjectExperiences,
         extraPhoneFlag,
         linkedInFlag,
         websiteFlag,

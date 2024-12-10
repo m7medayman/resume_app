@@ -4,13 +4,13 @@ import 'package:internet_connection_checker_plus/internet_connection_checker_plu
 
 import 'package:resume_app/core/resources/failure/failure_model.dart';
 import 'package:resume_app/core/resources/failure/system_failure_const.dart';
-import 'package:resume_app/features/resume_dialog/data/gemini_repo/job_details_service_provider.dart';
-import 'package:resume_app/features/resume_dialog/data/response_model.dart';
+import 'package:resume_app/core/AI_services/gemini_repo/job_details_service_provider.dart';
+import 'package:resume_app/core/AI_services/gemini_repo/response_model.dart';
 import 'package:resume_app/features/resume_dialog/domain/entities/job_info.dart';
 import 'package:resume_app/features/resume_dialog/domain/repository.dart';
 
 class JobRepImp implements JobDialogRepository {
-  JobDetailsServiceProvider serviceProvider;
+  AiJobDetailsServiceProvider serviceProvider;
   JobRepImp({
     required this.serviceProvider,
   });
@@ -31,7 +31,6 @@ class JobRepImp implements JobDialogRepository {
     } on ServerException catch (_) {
       return Left(SystemFailureConstants.serverIsBusy);
     } catch (e) {
-
       return Left(Failure(id: 110, message: e.toString()));
     }
   }

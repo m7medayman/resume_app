@@ -1,6 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:resume_app/core/Di/injection.dart';
+import 'package:resume_app/core/data_classes/project_experience.dart';
+import 'package:resume_app/core/data_classes/work_experience.dart';
 import 'package:resume_app/core/resources/failure/failure_model.dart';
 import 'package:resume_app/features/auth/domain/use_case.dart';
 import 'signup_form_state.dart';
@@ -8,14 +10,63 @@ import 'package:resume_app/core/data_classes/data_classes.dart';
 part 'signup_state.dart';
 
 class SignupCubit extends Cubit<SighupState> {
-  late SignUpUseCase signUpUseCase;
-  SignupCubit()
+  final SignUpUseCase signUpUseCase;
+  final JobExperienceEnhanceSignupUseCase jobExperienceEnhanceSignupUseCase;
+  SignupCubit(
+      {required this.jobExperienceEnhanceSignupUseCase,
+      required this.signUpUseCase})
       : super(SighupState(
             educationInfo: EducationInfo(courses: [], degrees: []),
             contactExtraDetails: ContactExtraDetails(),
-            signupFormState: InitSignupFormState())) {
-    signUpUseCase = getIt<SignUpUseCase>();
+            signupFormState: InitSignupFormState(),
+            punchOfProjectExperiences: [],
+            punchOfWorkExperiences: []));
+
+  Future<String> getJobExperienceEnhanced(String jobExperience) async {
+    emit(state.copyWith(signupFormState: LoadingSignupFormstate()));
+    var response =
+        await jobExperienceEnhanceSignupUseCase.execute(jobExperience);
+    String returned = jobExperience;
+    response.fold((error) {
+      emit(state.copyWith(
+          signupFormState:
+              FailureSignupFormState(errorMessage: error.message)));
+      emit(state.copyWith(signupFormState: InitSignupFormState()));
+    }, (success) {
+      emit(state.copyWith(signupFormState: InitSignupFormState()));
+      returned = success;
+    });
+    return returned;
   }
+
+  void addWorkExperience(WorkExperience workExperience) {
+    final updatedWorkExperience =
+        List<WorkExperience>.from(state.punchOfWorkExperiences);
+    updatedWorkExperience.add(workExperience);
+    emit(state.copyWith(punchOfWorkExperiences: updatedWorkExperience));
+  }
+
+  void deleteWorkExperience(WorkExperience workExperience) {
+    final updatedWorkExperience =
+        List<WorkExperience>.from(state.punchOfWorkExperiences);
+    updatedWorkExperience.remove(workExperience);
+    emit(state.copyWith(punchOfWorkExperiences: updatedWorkExperience));
+  }
+
+  void addProjectExperience(ProjectExperience project) {
+    final updatedWorkExperience =
+        List<ProjectExperience>.from(state.punchOfProjectExperiences);
+    updatedWorkExperience.add(project);
+    emit(state.copyWith(punchOfProjectExperiences: updatedWorkExperience));
+  }
+
+  void deleteProjectExperience(ProjectExperience project) {
+    final updatedProjectExperience =
+        List<ProjectExperience>.from(state.punchOfProjectExperiences);
+    updatedProjectExperience.remove(project);
+    emit(state.copyWith(punchOfProjectExperiences: updatedProjectExperience));
+  }
+
   void changeExtraPhoneFiledVisibility() {
     emit(state.copyWith(extraPhoneFlag: !state.extraPhoneFlag));
   }
@@ -95,6 +146,8 @@ class SignupCubit extends Cubit<SighupState> {
           linkedIn: checkStringIsNotEmpty(linkedIn) ? linkedIn : null,
           website: checkStringIsNotEmpty(Website) ? Website : null),
       educationInfo: state.educationInfo,
+      punchOfProjectExperienc: state.punchOfProjectExperiences,
+      punchOfWorkingExperience: state.punchOfWorkExperiences,
     ));
     res.fold((Failure failure) {
       emit(state.copyWith(

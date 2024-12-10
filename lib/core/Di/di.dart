@@ -18,7 +18,7 @@ import 'package:resume_app/features/pdf_creator/data/pdf_form.dart';
 import 'package:resume_app/features/pdf_creator/data/pdf_save_service.dart';
 import 'package:resume_app/features/pdf_creator/data/repo_imp.dart';
 import 'package:resume_app/features/pdf_creator/domain/pdf_creating_use_case.dart';
-import 'package:resume_app/features/resume_dialog/data/gemini_repo/job_details_service_provider.dart';
+import 'package:resume_app/core/AI_services/gemini_repo/job_details_service_provider.dart';
 import 'package:resume_app/features/resume_dialog/data/repo_impelement.dart';
 import 'package:resume_app/features/resume_dialog/domain/use_case.dart';
 
@@ -102,7 +102,7 @@ void initResumeDialogModel() {
     return;
   }
   isResumeDialogModelInit = true;
-  getIt.registerFactory(() => JobDetailsServiceProvider());
+  getIt.registerFactory(() => AiJobDetailsServiceProvider());
   getIt.registerFactory(() => JobRepImp(serviceProvider: getIt()));
   getIt.registerFactory(
       () => JobDescriptionUseCases(repository: getIt<JobRepImp>()));

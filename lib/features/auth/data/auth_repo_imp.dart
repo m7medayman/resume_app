@@ -1,6 +1,10 @@
 import 'package:either_dart/src/either.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_generative_ai/google_generative_ai.dart';
 import 'package:internet_connection_checker_plus/internet_connection_checker_plus.dart';
+import 'package:resume_app/core/AI_services/gemini_repo/job_details_service_provider.dart';
+import 'package:resume_app/core/AI_services/gemini_repo/response_model.dart';
+
 import 'package:resume_app/core/Di/di.dart';
 import 'package:resume_app/core/auth_provider/auth_check.dart';
 import 'package:resume_app/core/data_classes/user_info.dart';
@@ -16,14 +20,33 @@ import 'package:resume_app/features/auth/domain/use_case.dart';
 
 class AuthRepositoryImp extends AuthRepository {
   AuthServiceProvider serviceProvider;
+  AiJobDetailsServiceProvider AiProvider;
   FailureHandler failureHandler;
   final AuthChecker authChecker;
 
   AuthRepositoryImp({
-    required this.authChecker,
     required this.serviceProvider,
+    required this.authChecker,
+    required this.AiProvider,
     required this.failureHandler,
   });
+  @override
+  Future<Either<Failure, String>> getJobExperienceEnhance(
+      String jobExperience) async {
+    if (!await InternetConnection().hasInternetAccess) {
+      return Left(SystemFailureConstants.noInternetConnection);
+    }
+    try {
+      JobExperienceResponse responseModel =
+          await AiProvider.getJobExperience(jobExperience);
+      return (Right(responseModel.jobExperience));
+    } on ServerException catch (_) {
+      return Left(SystemFailureConstants.serverIsBusy);
+    } catch (e) {
+      return Left(Failure(id: 112, message: e.toString()));
+    }
+  }
+
   @override
   Future<Either<Failure, MyUserInfo>> login(
       LoginParameter loginParameter) async {
