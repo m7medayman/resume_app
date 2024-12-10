@@ -6,9 +6,15 @@ part of 'request.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-UserInfoDataRequest _$SignUpRequestUserDetailsFromJson(
-        Map<String, dynamic> json) =>
+UserInfoDataRequest _$UserInfoDataApiFromJson(Map<String, dynamic> json) =>
     UserInfoDataRequest(
+      punchOfProjectExperince:
+          (json['punchOfProjectExperince'] as List<dynamic>)
+              .map((e) => e as Map<String, dynamic>)
+              .toList(),
+      punchOfWorkExperince: (json['punchOfWorkExperince'] as List<dynamic>)
+          .map((e) => e as Map<String, dynamic>)
+          .toList(),
       name: json['name'] as String,
       phone: json['phone'] as String,
       address: json['address'] as String,
@@ -17,13 +23,14 @@ UserInfoDataRequest _$SignUpRequestUserDetailsFromJson(
       educationInfo: json['educationInfo'] as Map<String, dynamic>,
     );
 
-Map<String, dynamic> _$SignUpRequestUserDetailsToJson(
-        UserInfoDataRequest instance) =>
+Map<String, dynamic> _$UserInfoDataApiToJson(UserInfoDataRequest instance) =>
     <String, dynamic>{
       'name': instance.name,
       'phone': instance.phone,
       'address': instance.address,
       'contactEmail': instance.contactEmail,
+      'punchOfProjectExperince': instance.punchOfProjectExperince,
+      'punchOfWorkExperince': instance.punchOfWorkExperince,
       'contactDetails': instance.contactDetails,
       'educationInfo': instance.educationInfo,
     };

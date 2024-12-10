@@ -17,9 +17,14 @@ class UserInfoDataRequest {
   String phone;
   String address;
   String contactEmail;
+  List<Map<String, dynamic>> punchOfProjectExperince;
+  List<Map<String, dynamic>> punchOfWorkExperince;
   Map<String, dynamic> contactDetails;
   Map<String, dynamic> educationInfo;
+
   UserInfoDataRequest({
+    required this.punchOfProjectExperince,
+    required this.punchOfWorkExperince,
     required this.name,
     required this.phone,
     required this.address,
@@ -28,9 +33,9 @@ class UserInfoDataRequest {
     required this.educationInfo,
   });
 
-  factory UserInfoDataRequest.fromJson(Map<String, dynamic> json) =>
-      _$SignUpRequestUserDetailsFromJson(json);
-  Map<String, dynamic> toJson() => _$SignUpRequestUserDetailsToJson(this);
+  // factory UserInfoDataApi.fromJson(Map<String, dynamic> json) =>
+  //     _$UserInfoDataApiFromJson(json);
+  Map<String, dynamic> toJson() => _$UserInfoDataApiToJson(this);
 }
 
 @JsonSerializable()

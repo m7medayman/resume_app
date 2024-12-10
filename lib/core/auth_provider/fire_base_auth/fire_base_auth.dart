@@ -24,7 +24,7 @@ class FireBaseAuthService extends AuthServiceProvider {
       String userId = userCredential.user!.uid;
       return getUserAuthInfoWithId(userId);
     } on FirebaseAuthException catch (_) {
-      rethrow ;
+      rethrow;
     } catch (e) {
       rethrow;
     }

@@ -1,7 +1,9 @@
 import 'package:either_dart/src/either.dart';
 
 import 'package:resume_app/core/data_classes/data_classes.dart';
+import 'package:resume_app/core/data_classes/project_experience.dart';
 import 'package:resume_app/core/data_classes/user_info.dart';
+import 'package:resume_app/core/data_classes/work_experience.dart';
 import 'package:resume_app/core/resources/base_usecase/base_use_case.dart';
 import 'package:resume_app/core/resources/failure/failure_model.dart';
 import 'package:resume_app/features/auth/domain/repository.dart';
@@ -22,7 +24,7 @@ class AutoLoginUseCase extends BaseUseCase<void, MyUserInfo?> {
 
   AutoLoginUseCase({required this.authRepository});
   @override
-  Future<Either<Failure, MyUserInfo?>> execute([void input])async {
+  Future<Either<Failure, MyUserInfo?>> execute([void input]) async {
     return await authRepository.autoLogin();
   }
 }
@@ -54,9 +56,13 @@ class SignUpParameter {
   String phone;
   String address;
   String contactEmail;
+  List<WorkExperience> punchOfWorkingExperience;
+  List<ProjectExperience> punchOfProjectExperienc;
   ContactExtraDetails contactDetails;
   EducationInfo educationInfo;
   SignUpParameter({
+    required this.punchOfProjectExperienc,
+    required this.punchOfWorkingExperience,
     required this.email,
     required this.password,
     required this.name,

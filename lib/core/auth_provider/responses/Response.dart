@@ -8,9 +8,13 @@ class AuthResponse {
   String phone;
   String address;
   String contactEmail;
+  List<Map<String, dynamic>> punchOfProjectExperiences;
+  List<Map<String, dynamic>> punchOfWorkExperinces;
   Map<String, dynamic> contactDetails;
   Map<String, dynamic> educationInfo;
   AuthResponse({
+    required this.punchOfWorkExperinces,
+    required this.punchOfProjectExperiences,
     required this.name,
     required this.phone,
     required this.address,
