@@ -137,12 +137,14 @@ class JobSkillPicker extends StatelessWidget {
               children: [
                 ElevatedButton(
                     onPressed: () {
+                      FocusManager.instance.primaryFocus?.unfocus();
                       cubit.goBack();
                     },
                     child: const Text("Back")),
                 const Spacer(),
                 ElevatedButton(
                     onPressed: () {
+                      FocusManager.instance.primaryFocus?.unfocus();
                       if (fieldFormKey.currentState!.validate()) {
                         cubit.updateJobTitle(fieldInput.text);
                         cubit.getNextPage();

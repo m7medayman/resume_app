@@ -159,6 +159,7 @@ class _EducationCertificationInputDialogState
                   children: [
                     OutlinedButton(
                         onPressed: () {
+                          FocusManager.instance.primaryFocus?.unfocus();
                           Navigator.of(context).pop(null);
                         },
                         child: Text(
@@ -170,6 +171,7 @@ class _EducationCertificationInputDialogState
                         )),
                     OutlinedButton(
                         onPressed: () {
+                          FocusManager.instance.primaryFocus?.unfocus();
                           bool fdf =
                               firstDateFormKey.currentState!.validate();
                           bool sdf =

@@ -33,14 +33,19 @@ class FireBaseAuthService extends AuthServiceProvider {
   @override
   Future<AuthResponse> signUp(
       SignUpRequest request, UserInfoDataRequest userDetailsRequest) async {
-    UserCredential userCredential = await _auth.createUserWithEmailAndPassword(
-        email: request.email, password: request.password);
-    if (userCredential.user == null) {
-      throw Exception("Null Auth USer");
+    try {
+      UserCredential userCredential =
+          await _auth.createUserWithEmailAndPassword(
+              email: request.email, password: request.password);
+      if (userCredential.user == null) {
+        throw Exception("Null Auth USer");
+      }
+      String id = userCredential.user!.uid;
+      setUserAuthInfoWithId(id, userDetailsRequest);
+      return getUserAuthInfoWithId(id);
+    } on FirebaseAuthException catch (_) {
+      rethrow;
     }
-    String id = userCredential.user!.uid;
-    setUserAuthInfoWithId(id, userDetailsRequest);
-    return getUserAuthInfoWithId(id);
   }
 
   Future setUserAuthInfoWithId(

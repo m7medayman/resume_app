@@ -88,6 +88,7 @@ class _EducationCertificationInputDialogState
               EnhanceButton(
                   formKey: descriptionFormKey,
                   onPressed: () async {
+                    FocusManager.instance.primaryFocus?.unfocus();
                     String? response = await widget
                         .enhanceFunction(descriptionInputController.text);
                     descriptionInputController.text = response;
@@ -102,6 +103,7 @@ class _EducationCertificationInputDialogState
                   children: [
                     OutlinedButton(
                         onPressed: () {
+                          FocusManager.instance.primaryFocus?.unfocus();
                           Navigator.of(context).pop(null);
                         },
                         child: Text(
@@ -113,6 +115,7 @@ class _EducationCertificationInputDialogState
                         )),
                     OutlinedButton(
                         onPressed: () {
+                          FocusManager.instance.primaryFocus?.unfocus();
                           bool tf = titleFormKey.currentState!.validate();
 
                           bool ss = descriptionFormKey.currentState!.validate();

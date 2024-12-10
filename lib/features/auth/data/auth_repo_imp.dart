@@ -79,6 +79,8 @@ class AuthRepositoryImp extends AuthRepository {
       var userInfo = response.toEntity();
       registUser(userInfo);
       return Right(userInfo);
+    } on FirebaseAuthException catch (e) {
+      return Left(failureHandler.handleFailure(e.code));
     } catch (e) {
       Failure failure = failureHandler.handleFailure(e.toString());
       return Left(failure);

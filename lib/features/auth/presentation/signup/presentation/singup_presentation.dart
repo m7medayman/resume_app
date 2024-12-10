@@ -444,6 +444,7 @@ class _SignUpPresentationState extends State<SignUpPresentation> {
             ),
             ElevatedButton(
                 onPressed: () {
+                  FocusManager.instance.primaryFocus?.unfocus();
                   List<GlobalKey<FormState>> extraKeys =
                       extraFields.values.toList();
                   if (checkAllKeys(checkPrimaryKeys) &

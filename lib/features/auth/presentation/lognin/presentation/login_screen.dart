@@ -164,6 +164,7 @@ class LoginBody extends StatelessWidget {
                 FormSeparator(screenHeight: screenHeight),
                 TextButton(
                     onPressed: () {
+                      FocusManager.instance.primaryFocus?.unfocus();
                       Navigator.pushNamed(context, Routes.signUP);
                     },
                     child: const Text(AppStrings.createNewUser))

@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:resume_app/core/common/widgets/date_picker.dart';
 import 'package:resume_app/core/common/widgets/enhance_button.dart';
@@ -109,6 +108,7 @@ class _EducationCertificationInputDialogState
               EnhanceButton(
                   formKey: descriptionFormKey,
                   onPressed: () async {
+                    FocusManager.instance.primaryFocus?.unfocus();
                     String? response = await widget
                         .enhanceFunction(descriptionInputController.text);
                     descriptionInputController.text = response;
@@ -123,6 +123,7 @@ class _EducationCertificationInputDialogState
                   children: [
                     OutlinedButton(
                         onPressed: () {
+                          FocusManager.instance.primaryFocus?.unfocus();
                           Navigator.of(context).pop(null);
                         },
                         child: Text(
@@ -134,6 +135,7 @@ class _EducationCertificationInputDialogState
                         )),
                     OutlinedButton(
                         onPressed: () {
+                          FocusManager.instance.primaryFocus?.unfocus();
                           bool fdf = firstDateFormKey.currentState!.validate();
                           bool sdf = secondDateFormKey.currentState!.validate();
 

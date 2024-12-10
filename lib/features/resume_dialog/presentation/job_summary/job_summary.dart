@@ -44,6 +44,7 @@ class JobSummary extends StatelessWidget {
         FormSeparator(screenHeight: screenHeight),
         EnhanceButton(
           onPressed: () {
+            FocusManager.instance.primaryFocus?.unfocus();
             cubit.getSummary(jobDescriptionTextController.text);
           },
           formKey: formKey,
@@ -78,12 +79,14 @@ class GoBackAndForward extends StatelessWidget {
       children: [
         ElevatedButton(
             onPressed: () {
+              FocusManager.instance.primaryFocus?.unfocus();
               cubit.goBack();
             },
             child: const Text("Back")),
         const Spacer(),
         ElevatedButton(
             onPressed: () {
+              FocusManager.instance.primaryFocus?.unfocus();
               if (formKey.currentState!.validate()) {
                 cubit.updateJobSummery(jobDescriptionTextController.text);
                 cubit.getNextPage();

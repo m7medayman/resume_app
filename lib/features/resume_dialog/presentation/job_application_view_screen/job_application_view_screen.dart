@@ -133,6 +133,7 @@ class _JobApplicationViewScreenState extends State<JobApplicationViewScreen>
                           children: [
                             JobDescription(
                               onFinished: () {
+                                FocusManager.instance.primaryFocus?.unfocus();
                                 if (formKeyJobDescription.currentState!
                                     .validate()) {
                                   // Access the Cubit within the correct BuildContext
