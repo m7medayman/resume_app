@@ -95,8 +95,11 @@ void initSignupModule() {
   }
   isSignupMoudleInit = true;
   authRepoInit();
+
   getIt.registerFactory(
       () => SignUpUseCase(authRepository: getIt<AuthRepositoryImp>()));
+  getIt.registerFactory(() => JobExperienceEnhanceSignupUseCase(
+      repository: getIt<AuthRepositoryImp>()));
 }
 
 bool isResumeDialogModelInit = false;

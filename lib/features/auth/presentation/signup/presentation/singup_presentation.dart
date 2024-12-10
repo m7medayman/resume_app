@@ -23,6 +23,7 @@ import 'package:resume_app/core/data_classes/project_experience.dart';
 import 'package:resume_app/core/data_classes/work_experience.dart';
 import 'package:resume_app/core/resources/helpers/input_fields.dart';
 import 'package:resume_app/core/routing/routes_manager.dart';
+import 'package:resume_app/features/auth/domain/use_case.dart';
 import 'package:resume_app/features/auth/presentation/signup/cubit/signup_cubit.dart';
 import 'package:resume_app/features/auth/presentation/signup/cubit/signup_form_state.dart';
 
@@ -76,13 +77,15 @@ class _SignUpPresentationState extends State<SignUpPresentation> {
       locationFormKey,
       reeEnterPasswordFormKey,
     ];
-    cubit= SignupCubit(
-          jobExperienceEnhanceSignupUseCase: getIt(),
-          signUpUseCase: getIt(),
-        );
+    cubit = SignupCubit(
+      signUpUseCase: getIt(),
+      jobExperienceEnhanceSignupUseCase:
+          getIt<JobExperienceEnhanceSignupUseCase>(),
+    );
     super.initState();
   }
 
+  bool isLoading = false;
   @override
   Widget build(BuildContext context) {
     screenWidth = MediaQuery.of(context).size.width;
@@ -105,16 +108,22 @@ class _SignUpPresentationState extends State<SignUpPresentation> {
                 child: BlocListener<SignupCubit, SighupState>(
                   listener: (context, state) {
                     if (state.signupFormState is LoadingSignupFormstate) {
-                      _showLoadingPopUpDialog(context);
+                      if (!isLoading) {
+                        _showLoadingPopUpDialog(context);
+                        isLoading = true;
+                      }
+                    } else {
+                      if (isLoading) {
+                        Navigator.of(context).pop();
+                        isLoading = false;
+                      }
                     }
                     if (state.signupFormState is FailureSignupFormState) {
-                      Navigator.of(context).pop();
                       FailureSignupFormState formState =
                           state.signupFormState as FailureSignupFormState;
                       _showFailurePopUpDialog(context, formState.errorMessage);
                     }
                     if (state.signupFormState is SuccessSignupFormState) {
-                      Navigator.of(context).pop();
                       Navigator.pushNamedAndRemoveUntil(
                         context, Routes.home, // The new page to push
                         (Route<dynamic> route) => false, // Remove all routes

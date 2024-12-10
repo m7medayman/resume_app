@@ -1,4 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:resume_app/core/data_classes/project_experience.dart';
+import 'package:resume_app/core/data_classes/work_experience.dart';
 
 part 'Response.g.dart';
 
@@ -8,13 +10,14 @@ class AuthResponse {
   String phone;
   String address;
   String contactEmail;
-  List<Map<String, dynamic>> punchOfProjectExperiences;
-  List<Map<String, dynamic>> punchOfWorkExperinces;
+
   Map<String, dynamic> contactDetails;
   Map<String, dynamic> educationInfo;
+  List<Map<String, dynamic>> punchOfProjectExperience;
+  List<Map<String, dynamic>> punchOfWorkExperience;
   AuthResponse({
-    required this.punchOfWorkExperinces,
-    required this.punchOfProjectExperiences,
+    required this.punchOfWorkExperience,
+    required this.punchOfProjectExperience,
     required this.name,
     required this.phone,
     required this.address,

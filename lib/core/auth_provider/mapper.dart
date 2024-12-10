@@ -19,10 +19,10 @@ extension LoginMapper on LoginParameter {
 extension UserInfoDataRequestsMapper on SignUpParameter {
   UserInfoDataRequest toUserInfoDataRequest() {
     return UserInfoDataRequest(
-        punchOfWorkExperince: punchOfWorkingExperience.map((work) {
+        punchOfWorkExperience: punchOfWorkingExperience.map((work) {
           return work.toJson();
         }).toList(),
-        punchOfProjectExperince: punchOfProjectExperienc.map((project) {
+        punchOfProjectExperience: punchOfProjectExperienc.map((project) {
           return project.toJson();
         }).toList(),
         contactEmail: contactEmail,
@@ -43,10 +43,10 @@ extension SignUpAuthMapper on SignUpParameter {
 extension AuthEntityMapper on AuthResponse {
   MyUserInfo toEntity() {
     return MyUserInfo(
-        punchOfWorkExperiences: punchOfWorkExperinces.map((work) {
+        punchOfWorkExperiences: punchOfWorkExperience.map((work) {
           return WorkExperience.fromJson(work);
         }).toList(),
-        punchOfProjectExperiences: punchOfProjectExperiences.map((project) {
+        punchOfProjectExperiences: punchOfProjectExperience.map((project) {
           return ProjectExperience.fromJson(project);
         }).toList(),
         contactEmail: contactEmail.nullSafety(),
@@ -61,10 +61,10 @@ extension AuthEntityMapper on AuthResponse {
 extension UpdateUserDataMapper on UpdateUserParameters {
   UserInfoDataRequest toUserInfoRequest() {
     return UserInfoDataRequest(
-        punchOfWorkExperince: punchOfWorkingExperience.map((work) {
+        punchOfWorkExperience: punchOfWorkingExperience.map((work) {
           return work.toJson();
         }).toList(),
-        punchOfProjectExperince: punchOfProjectExperienc.map((project) {
+        punchOfProjectExperience: punchOfProjectExperienc.map((project) {
           return project.toJson();
         }).toList(),
         name: name,

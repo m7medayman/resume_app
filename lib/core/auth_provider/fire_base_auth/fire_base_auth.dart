@@ -58,6 +58,7 @@ class FireBaseAuthService extends AuthServiceProvider {
 
       if (documentSnapshot.exists) {
         Map<String, dynamic>? data = documentSnapshot.data();
+        print(data);
         if (data != null) {
           return AuthResponse.fromJson(data);
         } else {

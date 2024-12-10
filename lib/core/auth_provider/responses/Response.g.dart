@@ -7,11 +7,11 @@ part of 'Response.dart';
 // **************************************************************************
 
 AuthResponse _$AuthResponseFromJson(Map<String, dynamic> json) => AuthResponse(
-      punchOfWorkExperinces: (json['punchOfWorkExperinces'] as List<dynamic>)
+      punchOfWorkExperience: (json['punchOfWorkExperience'] as List<dynamic>)
           .map((e) => e as Map<String, dynamic>)
           .toList(),
-      punchOfProjectExperiences:
-          (json['punchOfProjectExperiences'] as List<dynamic>)
+      punchOfProjectExperience:
+          (json['punchOfProjectExperience'] as List<dynamic>)
               .map((e) => e as Map<String, dynamic>)
               .toList(),
       name: json['name'] as String,
@@ -28,8 +28,8 @@ Map<String, dynamic> _$AuthResponseToJson(AuthResponse instance) =>
       'phone': instance.phone,
       'address': instance.address,
       'contactEmail': instance.contactEmail,
-      'punchOfProjectExperiences': instance.punchOfProjectExperiences,
-      'punchOfWorkExperinces': instance.punchOfWorkExperinces,
       'contactDetails': instance.contactDetails,
       'educationInfo': instance.educationInfo,
+      'punchOfProjectExperience': instance.punchOfProjectExperience,
+      'punchOfWorkExperience': instance.punchOfWorkExperience,
     };
