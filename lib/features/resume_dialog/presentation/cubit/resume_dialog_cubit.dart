@@ -16,26 +16,42 @@ class ResumeDialogCubit extends Cubit<ResumeDialogState> {
   JobDescriptionUseCases jobDescriptionUseCases;
   JobSummaryUseCase jobSummaryUseCase;
   JobExperienceEnhanceUseCase jobExperienceEnhanceUseCase;
-  static final iniReumeState = ResumeDialogState(
-      punchOfProjectExperiences: getIt<MyUserInfo>().punchOfProjectExperiences,
-      selectedEducationInfo: getIt<MyUserInfo>().educationInfo,
-      language: const {},
-      jobInfoAi:
-          JobInfo(softSkills: [], hardSkills: [], jobTitle: "", keyWords: []),
-      resumeFormState: InitResumeFormState(),
-      jobTitle: '',
-      jobSummery: '',
-      selectedHardSkills: const {},
-      selectedSoftSkills: const {},
-      punchOfWorkExperiences: getIt<MyUserInfo>().punchOfWorkExperiences,
-      userInfo: getIt<
-          MyUserInfo>()); // there is a bug because of using getit in this static var
+  late ResumeDialogState
+      iniReumeState; // there is a bug because of using getit in this static var
   // fixing it by passign the row user info in the navigator
   ResumeDialogCubit(
       {required this.jobDescriptionUseCases,
       required this.jobSummaryUseCase,
       required this.jobExperienceEnhanceUseCase})
-      : super(iniReumeState);
+      : super(ResumeDialogState(
+            punchOfProjectExperiences:
+                getIt<MyUserInfo>().punchOfProjectExperiences,
+            selectedEducationInfo: getIt<MyUserInfo>().educationInfo,
+            language: const {},
+            jobInfoAi: JobInfo(
+                softSkills: [], hardSkills: [], jobTitle: "", keyWords: []),
+            resumeFormState: InitResumeFormState(),
+            jobTitle: '',
+            jobSummery: '',
+            selectedHardSkills: const {},
+            selectedSoftSkills: const {},
+            punchOfWorkExperiences: getIt<MyUserInfo>().punchOfWorkExperiences,
+            userInfo: getIt<MyUserInfo>())) {
+    iniReumeState = ResumeDialogState(
+        punchOfProjectExperiences:
+            getIt<MyUserInfo>().punchOfProjectExperiences,
+        selectedEducationInfo: getIt<MyUserInfo>().educationInfo,
+        language: const {},
+        jobInfoAi:
+            JobInfo(softSkills: [], hardSkills: [], jobTitle: "", keyWords: []),
+        resumeFormState: InitResumeFormState(),
+        jobTitle: '',
+        jobSummery: '',
+        selectedHardSkills: const {},
+        selectedSoftSkills: const {},
+        punchOfWorkExperiences: getIt<MyUserInfo>().punchOfWorkExperiences,
+        userInfo: getIt<MyUserInfo>());
+  }
   List<T> findUnselectedItems<T>(List<T> mainList, List<T> selectedList) {
     // Use a Set for efficient lookup of selected items
     final selectedSet = Set<T>.from(selectedList);

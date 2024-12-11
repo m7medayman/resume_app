@@ -32,8 +32,8 @@ class ChangeUserState extends Equatable {
     bool? extraPhoneFlag,
     bool? linkedInFlag,
     bool? websiteFlag,
-       List<WorkExperience>? punchOfWorkExperiences,
-  List<ProjectExperience>? punchOfProjectExperiences,
+    List<WorkExperience>? punchOfWorkExperiences,
+    List<ProjectExperience>? punchOfProjectExperiences,
     EducationInfo? educationInfo,
     ContactExtraDetails? contactExtraDetails,
     String? userName,
@@ -42,8 +42,10 @@ class ChangeUserState extends Equatable {
     String? address,
   }) {
     return ChangeUserState(
-      punchOfProjectExperiences: punchOfProjectExperiences??this.punchOfProjectExperiences,
-      punchOfWorkExperiences: punchOfWorkExperiences??this.punchOfWorkExperiences,
+      punchOfProjectExperiences:
+          punchOfProjectExperiences ?? this.punchOfProjectExperiences,
+      punchOfWorkExperiences:
+          punchOfWorkExperiences ?? this.punchOfWorkExperiences,
       pageState: pageState ?? this.pageState,
       extraPhoneFlag: extraPhoneFlag ?? this.extraPhoneFlag,
       linkedInFlag: linkedInFlag ?? this.linkedInFlag,
@@ -59,6 +61,8 @@ class ChangeUserState extends Equatable {
 
   @override
   List<Object> get props => [
+        punchOfProjectExperiences,
+        punchOfWorkExperiences,
         pageState,
         extraPhoneFlag,
         linkedInFlag,

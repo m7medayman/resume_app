@@ -19,7 +19,6 @@ import 'package:resume_app/features/pdf_creator/data/pdf_form.dart';
 import 'package:resume_app/features/pdf_creator/data/pdf_save_service.dart';
 import 'package:resume_app/features/pdf_creator/data/repo_imp.dart';
 import 'package:resume_app/features/pdf_creator/domain/pdf_creating_use_case.dart';
-import 'package:resume_app/core/AI_services/gemini_repo/job_details_service_provider.dart';
 import 'package:resume_app/core/AI_services/data/repo_impelement.dart';
 import 'package:resume_app/features/resume_dialog/domain/use_case.dart';
 
@@ -136,12 +135,19 @@ void initPdfViewerModule(PdfData data) async {
 
 bool isUserRegisted = false;
 void registUser(MyUserInfo userInfo) {
-  if (getIt.isRegistered<MyUserInfo>()) {
+  if (isUserRegisted) {
     getIt.unregister(instance: getIt<MyUserInfo>());
     getIt.registerLazySingleton(() => userInfo);
-    isUserRegisted = false;
+    print(getIt<MyUserInfo>().educationInfo.courses);
     return;
   }
   isUserRegisted = true;
   getIt.registerLazySingleton(() => userInfo);
+}
+
+void unRigister() {
+  if (isUserRegisted) {
+    getIt.unregister(instance: getIt<MyUserInfo>());
+    isUserRegisted = false;
+  }
 }

@@ -1,6 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:resume_app/core/data_classes/project_experience.dart';
-import 'package:resume_app/core/data_classes/work_experience.dart';
+
 
 part 'Response.g.dart';
 

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:resume_app/core/Di/injection.dart';
 import 'package:resume_app/core/common/state_renderer/pop_state_dialog_widget.dart';
+import 'package:resume_app/core/data_classes/user_info.dart';
 import 'package:resume_app/features/resume_dialog/presentation/cubit/resume_dialog_cubit.dart';
 import 'package:resume_app/features/resume_dialog/presentation/cubit/resume_form_state.dart';
 import 'package:resume_app/features/resume_dialog/presentation/job_certification_and_cources/job_certification_and_courses.dart';
@@ -36,6 +37,7 @@ class _JobApplicationViewScreenState extends State<JobApplicationViewScreen>
   late ResumeDialogCubit resumeDialogCubit;
   @override
   void initState() {
+    MyUserInfo info = getIt<MyUserInfo>();
     resumeDialogCubit = ResumeDialogCubit(
         jobDescriptionUseCases: getIt(),
         jobSummaryUseCase: getIt(),

@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:resume_app/core/Di/di.dart';
 import 'package:resume_app/core/auth_provider/requests/request.dart';
 import 'package:resume_app/core/resources/failure/failure_handler.dart';
 import 'package:resume_app/core/auth_provider/responses/Response.dart';
@@ -83,6 +84,7 @@ class FireBaseAuthService extends AuthServiceProvider {
 
   @override
   Future signOut() async {
+    unRigister();
     await _auth.signOut();
   }
 
